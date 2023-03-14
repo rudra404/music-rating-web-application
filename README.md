@@ -1,8 +1,41 @@
-# Getting Started with Create React App
+# v0
+
+## Description
+An online social music rating web application 
+
+## To Do:
+current items to research and implement
+- React frontend twitter-clone implementation for our use
+    - on a new branch
+- database design for the whole app
+- database connection (MS SQL?) for rating database
+- user authentication
+- spotify api implementation for x core features
+
+## Feature List:
+### Core Features: 
+- Song rating system (rating database) 
+- User authentication 
+- Feed 
+- Search function 
+- Social network – follow/unfollow 
+
+### Additional Features: 
+- Comments/reviews (using threaded view) 
+- DM songs 
+- Playlists/song collections 
+- Song previews (Spotify api) 
+- Profile page 
+
+
+***
+## React App Stuff
+
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
@@ -39,7 +72,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
