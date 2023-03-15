@@ -18,11 +18,11 @@ function Sidebar() {
       <TwitterIcon className="sidebar__twitterIcon" />
 
       <SidebarOption active Icon={HomeIcon} text="Home" />
-      <SidebarOption Icon={SearchIcon} text="Explore" />
-      <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
-      <SidebarOption Icon={MailOutlineIcon} text="Messages" />
-      <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
-      <SidebarOption Icon={ListAltIcon} text="Lists" />
+      {/* <SidebarOption Icon={SearchIcon} text="Explore" /> */}
+      {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
+      {/* <SidebarOption Icon={MailOutlineIcon} text="Messages" /> */}
+      <SidebarOption Icon={BookmarkBorderIcon} text="My rates" />
+      {/* <SidebarOption Icon={ListAltIcon} text="Lists" /> */}
       <SidebarOption Icon={PermIdentityIcon} text="Profile" />
       <SidebarOption Icon={MoreHorizIcon} text="More" />
 
