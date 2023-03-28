@@ -1,4 +1,5 @@
 import React from "react";
+import {createBrowserRouter, RouterProvider, Link, Navigate, Route, Routes } from 'react-router-dom'
 import "./Sidebar.css";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import SidebarOption from "./SidebarOption";
@@ -11,25 +12,25 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Button } from "@material-ui/core";
-
+import Home from "./Home";
 function Sidebar() {
   return (
     <div className="sidebar">
-      <TwitterIcon className="sidebar__twitterIcon" />
-
+      {/* <TwitterIcon className="sidebar__twitterIcon" /> */}
+      
       <SidebarOption active Icon={HomeIcon} text="Home" />
       {/* <SidebarOption Icon={SearchIcon} text="Explore" /> */}
       {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
-      {/* <SidebarOption Icon={MailOutlineIcon} text="Messages" /> */}
+      <SidebarOption Icon={MailOutlineIcon} text="Messages" />
       <SidebarOption Icon={BookmarkBorderIcon} text="My rates" />
       {/* <SidebarOption Icon={ListAltIcon} text="Lists" /> */}
       <SidebarOption Icon={PermIdentityIcon} text="Profile" />
       <SidebarOption Icon={MoreHorizIcon} text="More" />
 
       {/* Button -> Tweet */}
-      <Button variant="outlined" className="sidebar__tweet" fullWidth>
+      {/* <Button variant="outlined" className="sidebar__tweet" fullWidth>
         Tweet
-      </Button>
+      </Button> */}
     </div>
   );
 }

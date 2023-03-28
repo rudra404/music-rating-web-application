@@ -20,7 +20,7 @@ function Feed() {
         <h2>Home</h2>
       </div>
 
-      <TweetBox />
+      {/* <TweetBox />
 
       <FlipMove>
         {posts.map((post) => (
@@ -34,7 +34,7 @@ function Feed() {
             image={post.image}
           />
         ))}
-      </FlipMove>
+      </FlipMove> */}
     </div>
   );
 }
