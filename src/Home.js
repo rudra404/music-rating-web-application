@@ -1,12 +1,13 @@
 import React from "react";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
+import "./Home.css";
 
 function Home() {
   return (
-    <div>
-      <Feed />
-      <Widgets />
+    <div className="home">
+      <Feed className="feed" />
+      <Widgets className="widgets" />
     </div>
   );
 }
