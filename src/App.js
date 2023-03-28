@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import Home from "./Home";
 import Messages from "./Messages";
+import MyRates from "./MyRates";
 
 function App() {
   const router = createBrowserRouter(
@@ -19,6 +20,7 @@ function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<Home />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/myrates" element={<MyRates />} />
       </Route>
     )
   );
