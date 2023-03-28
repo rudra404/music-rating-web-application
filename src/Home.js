@@ -4,7 +4,7 @@ import Widgets from "./Widgets";
 
 function Home() {
   return (
-    <div>
+    <div className="app">
       <Feed />
       <Widgets />
     </div>
