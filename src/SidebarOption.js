@@ -1,9 +1,18 @@
 import React from "react";
 import "./SidebarOption.css";
+import { useNavigate } from "react-router-dom";
 
 function SidebarOption({ active, text, Icon, link }) {
+  const navigate = useNavigate();
+  function handleClick() {
+    window.location.href = link;
+  }
+
   return (
-    <div className={`sidebarOption ${active && "sidebarOption--active"}`}>
+    <div
+      onClick={handleClick}
+      className={`sidebarOption ${active && "sidebarOption--active"}`}
+    >
       <Icon />
       <h2>{text}</h2>
     </div>

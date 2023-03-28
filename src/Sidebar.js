@@ -29,18 +29,13 @@ function Sidebar() {
   return (
     <div className="sidebar">
       {/* <TwitterIcon className="sidebar__twitterIcon" /> */}
+      <SidebarOption active Icon={HomeIcon} link="/" text="Home" />
+      <SidebarOption Icon={MailOutlineIcon} link="/messages" text="Messages" />
       <SidebarOption
-        active
-        Icon={HomeIcon}
-        onClick={navigate("/")}
-        text="Home"
+        Icon={BookmarkBorderIcon}
+        text="My rates"
+        link="/myrates"
       />
-      <SidebarOption
-        Icon={MailOutlineIcon}
-        onClick={navigate("messages")}
-        text="Messages"
-      />
-      <SidebarOption Icon={BookmarkBorderIcon} text="My rates" />
       <SidebarOption Icon={PermIdentityIcon} text="Profile" />
       <SidebarOption Icon={MoreHorizIcon} text="More" />
       {/* <SidebarOption Icon={ListAltIcon} text="Lists" /> */}
