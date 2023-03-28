@@ -36,7 +36,7 @@ function Sidebar() {
         text="My rates"
         link="/myrates"
       />
-      <SidebarOption Icon={PermIdentityIcon} text="Profile" />
+      <SidebarOption Icon={PermIdentityIcon} link="profile" text="Profile" />
       <SidebarOption Icon={MoreHorizIcon} text="More" />
       {/* <SidebarOption Icon={ListAltIcon} text="Lists" /> */}
       {/* <SidebarOption Icon={SearchIcon} text="Explore" /> */}

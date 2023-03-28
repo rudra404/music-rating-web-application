@@ -13,6 +13,7 @@ import {
 import Home from "./Home";
 import Messages from "./Messages";
 import MyRates from "./MyRates";
+import Profile from "./Profile";
 
 function App() {
   const router = createBrowserRouter(
@@ -21,6 +22,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/myrates" element={<MyRates />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     )
   );
