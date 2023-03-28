@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 function SidebarOption({ active, text, Icon, link }) {
   const navigate = useNavigate();
   function handleClick() {
-    window.location.href = link;
+    if (link) {
+      window.location.href = link;
+    }
   }
 
   return (

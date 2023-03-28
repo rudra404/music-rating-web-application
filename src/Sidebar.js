@@ -42,10 +42,10 @@ function Sidebar() {
       {/* <SidebarOption Icon={SearchIcon} text="Explore" /> */}
       {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
 
-      {/* Button -> Tweet
+      {/* Button -> Tweet */}
       <Button variant="outlined" className="sidebar__tweet" fullWidth>
-        Tweet
-      </Button> */}
+        Log in
+      </Button>
     </div>
   );
 }
