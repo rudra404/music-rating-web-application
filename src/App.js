@@ -14,6 +14,7 @@ import Home from "./Home";
 import Messages from "./Messages";
 import MyRates from "./MyRates";
 import Profile from "./Profile";
+import Login from "./Login";
 
 function App() {
   const router = createBrowserRouter(
@@ -23,6 +24,7 @@ function App() {
         <Route path="/messages" element={<Messages />} />
         <Route path="/myrates" element={<MyRates />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
       </Route>
     )
   );
