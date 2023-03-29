@@ -43,7 +43,7 @@ function Sidebar() {
       {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
 
       {/* Button -> Tweet */}
-      <Button variant="outlined" className="sidebar__tweet" fullWidth>
+      <Button href= "/login" variant="outlined" className="sidebar__tweet" fullWidth>
         Log in
       </Button>
     </div>
