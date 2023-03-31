@@ -84,7 +84,7 @@ function Login() {
         </Button>
         <div class="container signin">
           <p>
-            Already have an account? <a href="/login">Sign in</a>.
+            Don't  have an account? <a href="/register">Register</a>.
           </p>
         </div>
         {/* <div className="button-container">
