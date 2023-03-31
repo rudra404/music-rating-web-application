@@ -1,10 +1,11 @@
-import React from 'react'
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
+import { Button } from "@material-ui/core";
 import "./Login.css";
 import "./Home.css";
 
 function Login() {
-    // React States
+  // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -12,17 +13,17 @@ function Login() {
   const database = [
     {
       username: "user1",
-      password: "pass1"
+      password: "pass1",
     },
     {
       username: "user2",
-      password: "pass2"
-    }
+      password: "pass2",
+    },
   ];
 
   const errors = {
     uname: "invalid username",
-    pass: "invalid password"
+    pass: "invalid password",
   };
 
   const handleSubmit = (event) => {
@@ -68,28 +69,40 @@ function Login() {
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
-        <div className="button-container">
+        <Button
+          href="/login"
+          variant="outlined"
+          className="sidebar__tweet"
+          fullWidth
+        >
+          Log in
+        </Button>
+        {/* <div className="button-container">
           <input type="submit" />
-        </div>
+        </div> */}
       </form>
     </div>
   );
   return (
     <div className="home">
-    <div className="login">
-      <div className="login__header">
-        <h2>Login</h2>
-      
-    <div className="apps">
-      <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+      <div className="login">
+        <div className="login__header">
+          <h2>Login</h2>
+
+          <div className="apps">
+            <div className="login-form">
+              <div className="title">Log In</div>
+              {isSubmitted ? (
+                <div>User is successfully logged in</div>
+              ) : (
+                renderForm
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-      </div>
-      </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
