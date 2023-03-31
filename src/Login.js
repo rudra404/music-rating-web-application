@@ -77,6 +77,7 @@ function Login() {
         >
           Log in
         </Button>
+        <p>Please register <a href ="/register">here</a></p>
         {/* <div className="button-container">
           <input type="submit" />
         </div> */}

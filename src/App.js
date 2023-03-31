@@ -15,6 +15,7 @@ import Messages from "./Messages";
 import MyRates from "./MyRates";
 import Profile from "./Profile";
 import Login from "./Login";
+import Register from "./Register";
 
 function App() {
   const router = createBrowserRouter(
@@ -25,6 +26,7 @@ function App() {
         <Route path="/myrates" element={<MyRates />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Route>
     )
   );
