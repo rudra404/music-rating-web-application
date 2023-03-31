@@ -70,10 +70,10 @@ function Login() {
           {renderErrorMessage("pass")}
         </div>
         <Button
-          href="/login"
           variant="outlined"
           className="sidebar__tweet"
           fullWidth
+          input type="submit"
         >
           Log in
         </Button>
