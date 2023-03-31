@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,11 +20,14 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Button } from "@material-ui/core";
+import { AuthContext } from "./helpers/AuthContext";
 
 function Sidebar() {
   const navigate = useNavigate();
-  function handleClick() {
-    navigate("/home");
+  const { authState, logout } = useContext(AuthContext);
+  function handleLogout() {
+    logout();
+    navigate("/login");
   }
   return (
     <div className="sidebar">
@@ -43,9 +46,26 @@ function Sidebar() {
       {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
 
       {/* Button -> Tweet */}
-      <Button href= "/login" variant="outlined" className="sidebar__tweet" fullWidth>
-        Log in
-      </Button>
+      {authState ? (
+        <Button
+          // href="/login"
+          variant="outlined"
+          className="sidebar__tweet"
+          onClick={handleLogout}
+          fullWidth
+        >
+          Log out
+        </Button>
+      ) : (
+        <Button
+          href="/login"
+          variant="outlined"
+          className="sidebar__tweet"
+          fullWidth
+        >
+          Log in
+        </Button>
+      )}
     </div>
   );
 }

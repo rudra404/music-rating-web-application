@@ -1,8 +1,7 @@
 .register {
   /* flex: 0.4; */
   border-right: 1px solid var(--twitter-background);
-  min-width: 40vw;
-  margin: 50px;
+  min-width: 60vw;
 }
 
 .register__header {
@@ -72,6 +71,5 @@ a {
 
 /* Set a grey background color and center the text of the "sign in" section */
 .signin {
-  background-color: #f1f1f1;
   text-align: center;
 }

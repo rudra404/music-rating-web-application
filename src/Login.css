@@ -1,8 +1,8 @@
 .login {
-  flex: 0.4;
+  /* flex: 0.4; */
   border-right: 1px solid var(--twitter-background);
   /* min-width: fit-content; */
-  min-width: 40vw;
+  min-width: 60vw;
 }
 
 .login__header {
