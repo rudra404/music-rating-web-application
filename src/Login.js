@@ -61,7 +61,7 @@ function Login() {
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label>Username </label>
-          <input type="text" name="uname" required />
+          <input type="email" name="uname" required />
           {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
@@ -73,11 +73,14 @@ function Login() {
           variant="outlined"
           className="sidebar__tweet"
           fullWidth
-          input type="submit"
+          input
+          type="submit"
         >
           Log in
         </Button>
-        <p>Please register <a href ="/register">here</a></p>
+        <p>
+          Please register <a href="/register">here</a>
+        </p>
         {/* <div className="button-container">
           <input type="submit" />
         </div> */}

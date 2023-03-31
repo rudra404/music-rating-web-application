@@ -1,25 +1,25 @@
 .register {
-    flex: 0.4;
-    border-right: 1px solid var(--twitter-background);
-    min-width: 40vw;
-  }
-  
+  /* flex: 0.4; */
+  border-right: 1px solid var(--twitter-background);
+  min-width: 40vw;
+  margin: 50px;
+}
 
-  .register__header {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    border: 1px solid var(--twitter-background);
-    padding: 15px 20px;
-  }
-  
-  .register__header > h2 {
-    font-size: 20px;
-    font-weight: 800;
-  }
-  
-  /* * {box-sizing: border-box} */
+.register__header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  border: 1px solid var(--twitter-background);
+  padding: 15px 20px;
+}
+
+.register__header > h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* * {box-sizing: border-box} */
 
 /* Add padding to containers */
 .container {
@@ -27,8 +27,9 @@
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
+input[type="email"],
+input[type="password"] {
+  width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
@@ -36,7 +37,8 @@ input[type=text], input[type=password] {
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type="email"]:focus,
+input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -49,7 +51,7 @@ hr {
 
 /* Set a style for the submit/register button */
 .registerbtn {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
   padding: 16px 20px;
   margin: 8px 0;
@@ -60,7 +62,7 @@ hr {
 }
 
 .registerbtn:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Add a blue text color to links */
