@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  user-microservice:
+    build: ./userMicroservice
+    container_name: userMicroservice_c
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./userMicroservice:/app
+
+  # front-end:
+  #   build: ./
+  #   container_name: best_listens_c
+  #   ports:
+  #     - "3000:3000"
+  #   stdin_open: true
+  #   tty: true

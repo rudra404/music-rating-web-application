@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/userMicroservice/node_modules
 /.pnp
 .pnp.js
 package.json
