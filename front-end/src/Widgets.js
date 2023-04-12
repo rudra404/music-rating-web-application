@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Widgets.css";
 import {
   TwitterTimelineEmbed,
@@ -6,17 +6,44 @@ import {
   TwitterTweetEmbed,
 } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
+import axios from "axios";
 
 function Widgets() {
+  const [searchValue, setSearchValue] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  function search(searchValue) {
+    setSearchValue(searchValue);
+    axios
+      .get(`http://localhost:5000/search2/?search=${searchValue}`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.error) {
+          // setAuthState(false);
+        } else {
+          // setAuthState(true);
+        }
+      });
+  }
+
   return (
     <div className="widgets">
       <div className="widgets__input">
         <SearchIcon className="widgets__searchIcon" />
-        <input placeholder="" type="text" />
+        <input
+          value={searchValue}
+          onChange={(event) => search(event.target.value)}
+          placeholder=""
+          type="text"
+        />
       </div>
 
       {/* <div className="widgets__widgetContainer"> */}
-        {/* <h2>What's happening</h2>
+      {/* <h2>What's happening</h2>
 
         <TwitterTweetEmbed tweetId={"858551177860055040"} />
 
@@ -30,7 +57,7 @@ function Widgets() {
           url={"https://facebook.com/cleverprogrammer"}
           options={{ text: "#reactjs is awesome", via: "cleverqazi" }}
         /> */}
-      </div>
+    </div>
     // </div>
   );
 }
