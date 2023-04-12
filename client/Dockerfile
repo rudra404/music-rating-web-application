@@ -2,7 +2,7 @@ FROM node:14 as Production
 
 WORKDIR /app
 
-run npm install -g serve 
+RUN npm install -g serve 
 
 COPY package.json . 
 
