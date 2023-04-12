@@ -51,10 +51,6 @@ def search_tracks2():
         conn.close()
         return [tracks, artists, albums]
 
-    if request.method == 'POST':
-        query  = request.get_json()
-        return query
-
 
 
 @app.route('/search_id/<track_id>')
