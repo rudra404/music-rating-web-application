@@ -3,6 +3,6 @@ postgres-db
 /userMicroservice/node_modules
 /userMicroservice/package.json
 
-/client/node_modules
-/client/package.json
-/client/build
+/front-end/node_modules
+/front-end/package.json
+/front-end/build
