@@ -43,16 +43,12 @@ function Widgets() {
             <li key={index}>{JSON.stringify(song)}</li>
           ))}
         </ul>
-      </div>
-      <div>
         <h2>Artists</h2>
         <ul>
           {searchResults.artists.map((artist, index) => (
             <li key={index}>{JSON.stringify(artist)}</li>
           ))}
         </ul>
-      </div>
-      <div>
         <h2>Albums</h2>
         <ul>
           {searchResults.albums.map((album, index) => (
