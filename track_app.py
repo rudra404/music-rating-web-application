@@ -1,26 +1,61 @@
-from flask import Flask
+from flask import Flask, request
 import sqlite3
 from sqlite3 import Error
 app = Flask(__name__)
-
-if __name__ == '__main__':
-   app.run()
 
 @app.route('/')
 def hello_world():
    return 'Hello World'
 
+#@app.route('/search/<query>')
+#def search_tracks(query):
+
+#    conn = sqlite3.connect('Best_Listens.db')
+#    cursor = conn.cursor()
+#
+#    cursor.execute("SELECT * FROM tracks WHERE name LIKE ? OR artist LIKE ? OR album LIKE ?",('%' + query + '%', '%' + query + '%', '%' + query + '%'))
+#    tracks = cursor.fetchall()
+#
+#    conn.close()
+#    return tracks
 @app.route('/search/<query>')
 def search_tracks(query):
 
+
     conn = sqlite3.connect('Best_Listens.db')
     cursor = conn.cursor()
-
-    cursor.execute("SELECT * FROM tracks WHERE name LIKE ? OR artist LIKE ? OR album LIKE ?",('%' + query + '%', '%' + query + '%', '%' + query + '%'))
+    cursor.execute("SELECT * FROM tracks WHERE name LIKE ?", ('%' + query + '%',))
     tracks = cursor.fetchall()
+    cursor.execute("SELECT * FROM tracks WHERE artist LIKE ?", ('%' + query + '%',))
+    artists = cursor.fetchall()
+    cursor.execute("SELECT * FROM tracks WHERE album LIKE ?", ('%' + query + '%',))
+    albums = cursor.fetchall()
 
     conn.close()
-    return tracks
+    return [tracks, artists, albums]
+
+@app.route('/search2/', methods=['POST', 'GET'])
+def search_tracks2():
+
+    if request.method == 'GET':
+        query  = request.args.get('search')
+        conn = sqlite3.connect('Best_Listens.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM tracks WHERE name LIKE ?", ('%' + query + '%',))
+        tracks = cursor.fetchall()
+        cursor.execute("SELECT * FROM tracks WHERE artist LIKE ?", ('%' + query + '%',))
+        artists = cursor.fetchall()
+        cursor.execute("SELECT * FROM tracks WHERE album LIKE ?", ('%' + query + '%',))
+        albums = cursor.fetchall()
+
+        conn.close()
+        return [tracks, artists, albums]
+
+    if request.method == 'POST':
+        query  = request.get_json()
+        return query
+
+
 
 @app.route('/search_id/<track_id>')
 def search_tracks_by_id(track_id):
@@ -60,3 +95,6 @@ def add_rating(user_id, track_id, rating):
 
     conn.commit()
     conn.close()
+
+if __name__ == '__main__':
+    app.run()
