@@ -1,10 +1,13 @@
 FROM node:14 as Production
 
-# RUN npm install -g nodemon
+ENV NODE_ENV=development
 
 WORKDIR /app
 
-COPY package.json package-lock*.json ./
+RUN npm install -g nodemon
+
+COPY package.json .
+COPY package-lock.json .
 
 RUN npm install
 
@@ -13,4 +16,5 @@ COPY . .
 EXPOSE 3002
 # required for docker desktop port mapping
 
-CMD ["npm", "start"]
+# RUN npm start
+CMD ["npm", "run", "dev"]

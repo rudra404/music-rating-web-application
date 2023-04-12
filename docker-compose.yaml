@@ -1,17 +1,37 @@
 version: "3.8"
 services:
+  postgres:
+    image: postgres:11.5
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=best-listens
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-db:/var/lib/postgresql/data
+
   user-microservice:
-    build: ./userMicroservice
+    build:
+      context: userMicroservice
+      dockerfile: Dockerfile
+    restart: unless-stopped
     container_name: userMicroservice_c
     ports:
       - "3002:3002"
     volumes:
       - ./userMicroservice:/app
+    depends_on:
+      - postgres
 
-  # front-end:
-  #   build: ./
-  #   container_name: best_listens_c
-  #   ports:
-  #     - "3000:3000"
-  #   stdin_open: true
-  #   tty: true
+  front-end:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    container_name: best_listens_c
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - user-microservice

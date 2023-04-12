@@ -1,10 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "best-listens-users",
-    "host": "localhost",
-    "dialect": "mysql",
-    "port": "3307"
+    "username": "postgres",
+    "password": "password",
+    "database": "best-listens",
+    "host": "postgres",
+    "dialect": "postgres",
+    "port": "5432"
   }
 }
