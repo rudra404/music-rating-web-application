@@ -10,14 +10,18 @@ import axios from "axios";
 
 function Widgets() {
   const [searchValue, setSearchValue] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState({ songs: [], artists: [], albums: [] });
 
   function search(searchValue) {
     setSearchValue(searchValue);
     axios
       .get(`http://localhost:5000/search2/?search=${searchValue}`)
       .then((response) => {
-        console.log(response);
+        setSearchResults({
+          songs: response.data[0] || [],
+          artists: response.data[1] || [],
+          albums: response.data[2] || []
+        });
       });
   }
 
@@ -32,25 +36,33 @@ function Widgets() {
           type="text"
         />
       </div>
-
-      {/* <div className="widgets__widgetContainer"> */}
-      {/* <h2>What's happening</h2>
-
-        <TwitterTweetEmbed tweetId={"858551177860055040"} />
-
-        <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName="cleverqazi"
-          options={{ height: 400 }}
-        />
-
-        <TwitterShareButton
-          url={"https://facebook.com/cleverprogrammer"}
-          options={{ text: "#reactjs is awesome", via: "cleverqazi" }}
-        /> */}
+      <div className="widgets__widgetContainer">
+      <h2>Songs</h2>
+        <ul>
+          {searchResults.songs.map((song, index) => (
+            <li key={index}>{JSON.stringify(song)}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Artists</h2>
+        <ul>
+          {searchResults.artists.map((artist, index) => (
+            <li key={index}>{JSON.stringify(artist)}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Albums</h2>
+        <ul>
+          {searchResults.albums.map((album, index) => (
+            <li key={index}>{JSON.stringify(album)}</li>
+          ))}
+        </ul>
     </div>
-    // </div>
+    </div>
   );
+  
 }
 
 export default Widgets;

@@ -1,6 +1,4 @@
 postgres-db
 
-/userMicroservice/node_modules
-
 /front-end/node_modules
 /front-end/build
