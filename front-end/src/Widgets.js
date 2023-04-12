@@ -15,18 +15,9 @@ function Widgets() {
   function search(searchValue) {
     setSearchValue(searchValue);
     axios
-      .get(`http://localhost:5000/search2/?search=${searchValue}`, {
-        headers: {
-          accessToken: localStorage.getItem("accessToken"),
-        },
-      })
+      .get(`http://localhost:5000/search2/?search=${searchValue}`)
       .then((response) => {
         console.log(response);
-        if (response.data.error) {
-          // setAuthState(false);
-        } else {
-          // setAuthState(true);
-        }
       });
   }
 
