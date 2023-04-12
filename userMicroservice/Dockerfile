@@ -5,6 +5,7 @@ ENV NODE_ENV=development
 WORKDIR /app
 
 RUN npm install -g nodemon
+RUN npm install -g express
 
 COPY package.json .
 COPY package-lock.json .
