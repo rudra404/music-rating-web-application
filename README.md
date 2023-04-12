@@ -6,6 +6,9 @@ This is the version of Best Listens with user auth containerized within docker.
 
 Ensure you have [Docker Desktop downloaded](https://docs.docker.com/compose/install/#:~:text=Scenario%20one%3A%20Install%20Docker%20Desktop,Linux) and open to connect containers and images
 
+## `pip install flask`
+## `pip install -U flask-cors`
+
 You will need Flask library installed for python (pip install flask)
 
 ## Start the app using Docker
