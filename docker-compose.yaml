@@ -26,7 +26,7 @@ services:
 
   front-end:
     build:
-      context: client
+      context: front-end
       dockerfile: Dockerfile
     container_name: best_listens_c
     ports:
