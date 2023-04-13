@@ -7,7 +7,7 @@ import axios from "axios";
 function Song() {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState({ title: [], artist: [], album: [], genre: [] });
-  
+  const [ratingResult, setRatingResult] = useState({ rating: []});
   function getSongInfo(id) {
       axios
         .get(`http://localhost:5000/search_id/${id}`)
@@ -20,8 +20,22 @@ function Song() {
           });
         });
     }
+  function getSongRating(id) {
+      axios
+        .get(`http://localhost:5000/av_rating/${id}`)
+        .then((response) => {
+          setRatingResult({
+            rating: response.data || [],
+          });
+        });
+    }
     useEffect(() => {
-      getSongInfo(id);
+      getSongInfo(id)
+      ;
+    }, [id]);
+    useEffect(() => {
+      getSongRating(id)
+      ;
     }, [id]);
   return (
     <div className="home">
@@ -32,8 +46,9 @@ function Song() {
         <p>Title: {searchResults.title}</p>
         <p>Artist: {searchResults.artist}</p>
         <p>Album: {searchResults.album}</p>
-        <p>Genres: {searchResults.genre}  </p>
+        <p>Genres: {searchResults.genre}</p>
         <p> ______  </p>
+        <p>Average rating: {ratingResult.rating}</p>
         </div>
       </div>
         <Widgets className="widgets" />
