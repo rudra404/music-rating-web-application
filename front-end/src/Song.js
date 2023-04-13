@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./Song.css";
 import "./Home.css";
 import Widgets from "./Widgets";
+import StarRating from "./StarRating";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+
 function Song() {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState({ title: [], artist: [], album: [], genre: [] });
   const [ratingResult, setRatingResult] = useState({ rating: []});
+
   function getSongInfo(id) {
       axios
         .get(`http://localhost:5000/search_id/${id}`)
@@ -49,11 +52,15 @@ function Song() {
         <p>Genres: {searchResults.genre}</p>
         <p> ______  </p>
         <p>Average rating: {ratingResult.rating}</p>
+        <p> ______  </p>
+        <p> Rate it:  </p>
+        <StarRating />
+
         </div>
       </div>
         <Widgets className="widgets" />
       </div>
-  )
+  );
 }
 
-export default Song
+export default Song;
