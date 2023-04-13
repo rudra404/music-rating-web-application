@@ -1,9 +1,11 @@
-FROM python:3.4-alpine
+FROM python:3
 
-ADD . /code
+WORKDIR /app
 
-WORKDIR /code 
+COPY . /app
 
-RUN pip install -r 
+EXPOSE 5000
 
-CMD ["python", "track_app.py"]
+RUN pip install -r requirements.txt
+
+CMD ["python", "app.py"]
