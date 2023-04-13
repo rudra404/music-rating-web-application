@@ -76,7 +76,7 @@ def get_average_rating(track_id):
     if average_rating == None:
         average_rating = 'Not rated yet'
 
-    return average_rating
+    return str(average_rating)
 
 
 @app.route('/add_rating')
