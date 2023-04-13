@@ -7,7 +7,7 @@ import {
 } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 function Widgets() {
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState({ songs: [], artists: [], albums: [] });
@@ -28,7 +28,14 @@ function Widgets() {
       setSearchResults({ songs: [], artists: [], albums: [] });
     }
   }
-  
+  function SearchResultItem({ result }) {
+    return (
+      <div>
+        <p>{result[1]}, {result[2]}, {result[3]}</p>
+        {/* Add any other fields you want to display here */}
+      </div>
+    );
+  }
 
   return (
     <div className="widgets">
@@ -45,20 +52,26 @@ function Widgets() {
       <h2>Songs</h2>
         <ul>
           {searchResults.songs.map((song, index) => (
-            <li key={index}>{JSON.stringify(song)}</li>
-          ))}
+           <Link to={`/song/${song[0]}`} key={index}>
+           <SearchResultItem result={song} />
+         </Link>
+       ))}
         </ul>
         <h2>Artists</h2>
         <ul>
-          {searchResults.artists.map((artist, index) => (
-            <li key={index}>{JSON.stringify(artist)}</li>
-          ))}
+        {searchResults.artists.map((artist, index) => (
+           <Link to={`/song/${artist[0]}`} key={index}>
+           <SearchResultItem result={artist} />
+         </Link>
+       ))}
         </ul>
         <h2>Albums</h2>
         <ul>
-          {searchResults.albums.map((album, index) => (
-            <li key={index}>{JSON.stringify(album)}</li>
-          ))}
+        {searchResults.albums.map((album, index) => (
+           <Link to={`/song/${album[0]}`} key={index}>
+           <SearchResultItem result={album} />
+         </Link>
+       ))}
         </ul>
     </div>
     </div>
