@@ -14,16 +14,21 @@ function Widgets() {
 
   function search(searchValue) {
     setSearchValue(searchValue);
-    axios
-      .get(`http://localhost:5000/search2/?search=${searchValue}`)
-      .then((response) => {
-        setSearchResults({
-          songs: response.data[0] || [],
-          artists: response.data[1] || [],
-          albums: response.data[2] || []
+    if (searchValue.trim() !== "") { // Check if searchValue is not blank
+      axios
+        .get(`http://localhost:5000/search2/?search=${searchValue}`)
+        .then((response) => {
+          setSearchResults({
+            songs: response.data[0] || [],
+            artists: response.data[1] || [],
+            albums: response.data[2] || []
+          });
         });
-      });
+    } else { // If searchValue is blank, clear the search results
+      setSearchResults({ songs: [], artists: [], albums: [] });
+    }
   }
+  
 
   return (
     <div className="widgets">
