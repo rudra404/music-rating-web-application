@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
-import Feed from "./Feed";
-import Widgets from "./Widgets";
 import "./App.css";
 import {
   createBrowserRouter,
@@ -55,7 +53,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/song" element={<Song />} />
+        <Route path="/song/:id" element={<Song />} />
       </Route>
     )
   );
