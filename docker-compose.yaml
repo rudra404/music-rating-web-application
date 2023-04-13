@@ -11,18 +11,18 @@ services:
     volumes:
       - ./postgres-db:/var/lib/postgresql/data
 
-  music-microservice:
-    web:
-      build:
-        context: musicMicroservice
-        dockerfile: Dockerfile
-      ports:
-        - 5000:5000
-    restart: unless-stopped
-    redis:
-      image: "redis:alpine"
-    volumes:
-      - ./musicMicroservice/best_listens.db
+  # music-microservice:
+  #   web:
+  #     build:
+  #       context: musicMicroservice
+  #       dockerfile: Dockerfile
+  #     ports:
+  #       - 5000:5000
+  #   restart: unless-stopped
+  #   redis:
+  #     image: "redis:alpine"
+  #   volumes:
+  #     - ./musicMicroservice/best_listens.db
 
   user-microservice:
     build:

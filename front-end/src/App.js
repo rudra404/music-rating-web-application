@@ -18,7 +18,7 @@ import MyRates from "./MyRates";
 import Profile from "./Profile";
 import Login from "./Login";
 import Register from "./Register";
-
+import Song from "./Song";
 function App() {
   const [authState, setAuthState] = useState(false);
 
@@ -55,6 +55,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/song" element={<Song />} />
       </Route>
     )
   );
