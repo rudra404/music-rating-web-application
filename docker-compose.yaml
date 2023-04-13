@@ -7,19 +7,20 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=best-listens
     ports:
-      - 5432:5432
+      - "5432:5432"
+    container_name: postgresDB_c
     volumes:
-      - ./postgres-db:/var/lib/postgresql/data
+      - ./userMicroservice/postgres-db:/var/lib/postgresql/data
 
-  music-microservice:
-    build:
-      context: musicMicroservice
-      dockerfile: Dockerfile
-    ports:
-      - 5000:5000
-    restart: unless-stopped
-    volumes:
-      - ./musicMicroservice/best_listens.db:/app
+  # music-microservice:
+  #   build:
+  #     context: musicMicroservice
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5000:5000"
+  #   restart: unless-stopped
+  # volumes:
+  #   - ./musicMicroservice:/app
 
   user-microservice:
     build:
@@ -39,6 +40,7 @@ services:
       context: front-end
       dockerfile: Dockerfile
     container_name: best_listens_c
+    restart: unless-stopped
     ports:
       - "3000:3000"
     stdin_open: true

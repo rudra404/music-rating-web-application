@@ -24,7 +24,7 @@ def hello_world():
 def search_tracks(query):
 
 
-    conn = sqlite3.connect('musicMicroservice/best_listens.db')
+    conn = sqlite3.connect('best_listens.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tracks WHERE name LIKE ?", ('%' + query + '%',))
     tracks = cursor.fetchall()
@@ -41,7 +41,7 @@ def search_tracks2():
 
     if request.method == 'GET':
         query  = request.args.get('search')
-        conn = sqlite3.connect('musicMicroservice/best_listens.db')
+        conn = sqlite3.connect('best_listens.db')
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM tracks WHERE name LIKE ?", ('%' + query + '%',))
         tracks = cursor.fetchall()
@@ -58,7 +58,7 @@ def search_tracks2():
 @app.route('/search_id/<track_id>')
 def search_tracks_by_id(track_id):
 
-    conn = sqlite3.connect('musicMicroservice/best_listens.db')
+    conn = sqlite3.connect('best_listens.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tracks WHERE Track_id=?", (track_id ,))
     tracks = cursor.fetchall()
@@ -68,7 +68,7 @@ def search_tracks_by_id(track_id):
 @app.route('/av_rating/<track_id>')
 def get_average_rating(track_id):
 
-    conn = sqlite3.connect('musicMicroservice/best_listens.db')
+    conn = sqlite3.connect('best_listens.db')
     cursor = conn.cursor()
     cursor.execute("SELECT AVG(rating) FROM ratings WHERE track_id=?", (track_id,))
     average_rating = cursor.fetchone()[0]
@@ -82,7 +82,7 @@ def get_average_rating(track_id):
 @app.route('/add_rating')
 def add_rating(user_id, track_id, rating):
     
-    conn = sqlite3.connect('musicMicroservice/best_listens.db')
+    conn = sqlite3.connect('best_listens.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM ratings WHERE user_id=? AND track_id=?", (user_id, track_id))
     existing_rating = cursor.fetchone()
