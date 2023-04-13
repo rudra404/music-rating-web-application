@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
-import Feed from "./Feed";
-import Widgets from "./Widgets";
 import "./App.css";
 import {
   createBrowserRouter,
@@ -18,7 +16,7 @@ import MyRates from "./MyRates";
 import Profile from "./Profile";
 import Login from "./Login";
 import Register from "./Register";
-
+import Song from "./Song";
 function App() {
   const [authState, setAuthState] = useState(false);
 
@@ -55,6 +53,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/song/:id" element={<Song />} />
       </Route>
     )
   );
