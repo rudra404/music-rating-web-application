@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Song.css";
 import "./Home.css";
 import Widgets from "./Widgets";
-import StarRating from "./StarRating";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "./helpers/AuthContext";
 
 function Song() {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState({ title: [], artist: [], album: [], genre: [] });
   const [ratingResult, setRatingResult] = useState({ rating: []});
-
+  const {authState, setAuthState, setUserID } = useContext(AuthContext);
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [submitClicked, setSubmitClicked] = useState(false);
+  
+  console.log(authState);
   function getSongInfo(id) {
       axios
         .get(`http://localhost:5000/search_id/${id}`)
@@ -23,6 +28,7 @@ function Song() {
           });
         });
     }
+
   function getSongRating(id) {
       axios
         .get(`http://localhost:5000/av_rating/${id}`)
@@ -32,17 +38,28 @@ function Song() {
           });
         });
     }
+  
+    function sendRating(id, rating, authState) {
+      axios
+        .get(`http://localhost:5000/add_rating?id=${id}&rating=${rating}&userID=${authState.UserID}`)
+        .then((response) => {
+          setSubmitClicked(true);
+        });
+    }
+
     useEffect(() => {
       getSongInfo(id)
       ;
     }, [id]);
+
     useEffect(() => {
       getSongRating(id)
       ;
     }, [id]);
+
   return (
     <div className="home">
-            <div className="song__header">
+        <div className="song__header">
         <h2>Song</h2>
         <div className="song">
         <p> _____  </p>
@@ -52,10 +69,29 @@ function Song() {
         <p>Genres: {searchResults.genre}</p>
         <p> ______  </p>
         <p>Average rating: {ratingResult.rating}</p>
+        <p>Your rating:</p>
         <p> ______  </p>
         <p> Rate it:  </p>
-        <StarRating />
-
+        <div className="star-rating">
+          {[...Array(5)].map((star, index) => {
+            index += 1;
+            return (
+              <button
+                type="button"
+                key={index}
+                className={index <= (hover || rating) ? "on" : "off"}
+                onClick={() => setRating(index)}
+                onMouseEnter={() => setHover(index)}
+                onMouseLeave={() => setHover(rating)}
+              >
+                <span className="star">&#9733;</span>
+              </button>
+            );
+          })}
+        </div>
+        <button className="submit-button" type="submit" onClick={sendRating}>
+            Submit Rating
+          </button>
         </div>
       </div>
         <Widgets className="widgets" />
