@@ -25,7 +25,7 @@ function Song() {
             title: response.data[0][1] || [],
             artist: response.data[0][2] || [],
             album: response.data[0][3] || [],
-            genre: response.data[0][4] || []
+            genre: JSON.parse(response.data[0][4].replace(/'/g, '"')) || []
           });
         });
     }
@@ -42,7 +42,7 @@ function Song() {
 
     function checkUserRating(id) {
 
-      if (authState == false) { // Check user is logged in
+      if (authState === false) { // Check user is logged in
         setUserRatingResult({
           rating: "Not logged in",
         });
@@ -91,7 +91,7 @@ function Song() {
         <p>Title: {searchResults.title}</p>
         <p>Artist: {searchResults.artist}</p>
         <p>Album: {searchResults.album}</p>
-        <p>Genres: {searchResults.genre}</p>
+        <p>Genres: {searchResults.genre.join(', ')}</p>
         <p> ______  </p>
         <p>Average rating: {ratingResult.rating}</p>
         <p>Your rating: {UserRatingResult.rating}</p>
