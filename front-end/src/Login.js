@@ -14,7 +14,7 @@ function Login() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   // const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
-  const { authState, setAuthState } = useContext(AuthContext);
+  const { authState, setAuthState, setUserID } = useContext(AuthContext);
 
   const login = (username, password) => {
     const data = { username: username, password: password };
@@ -26,7 +26,7 @@ function Login() {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("userID", response.data.userID);
         setAuthState(true);
-        setUserID(localStorage.getItem("userID"));
+        setUserID(response.data.userID);
         setIsSubmitted(true);
         navigate("/");
       }
