@@ -79,20 +79,41 @@ def get_average_rating(track_id):
     return str(average_rating)
 
 
-@app.route('/add_rating')
-def add_rating(user_id, track_id, rating):
-    
-    conn = sqlite3.connect('best_listens.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM ratings WHERE user_id=? AND track_id=?", (user_id, track_id))
-    existing_rating = cursor.fetchone()
-    if existing_rating is None:
-        cursor.execute("INSERT INTO ratings (user_id, track_id, rating) VALUES (?, ?, ?)", (user_id, track_id, rating))
-    else:
-        cursor.execute("UPDATE ratings SET rating=? WHERE id=?", (rating, existing_rating[0]))
+@app.route('/add_rating', methods=['GET'])
+def add_rating():
+    if request.method == 'GET':
+        songID  = request.args.get('songID')
+        userID  = request.args.get('userID')
+        rating  = request.args.get('rating')
+        conn = sqlite3.connect('best_listens.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM ratings WHERE user_id=? AND track_id=?", (userID, songID))
+        existing_rating = cursor.fetchone()
+        if existing_rating is None:
+            cursor.execute("INSERT INTO ratings (user_id, track_id, rating) VALUES (?, ?, ?)", (userID, songID, rating))
+        else:
+            cursor.execute("UPDATE ratings SET rating=? WHERE id=?", (rating, existing_rating[0]))
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
+        return 'Rating added'
+
+@app.route('/check_rating/', methods=['GET'])
+def check_rating():
+    if request.method == 'GET':
+        songID  = request.args.get('songID')
+        userID  = request.args.get('userID')
+        conn = sqlite3.connect('best_listens.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM ratings WHERE user_id=? AND track_id=?", (userID, songID))
+        existing_rating = cursor.fetchone()
+        conn.close()
+    if existing_rating == None:
+        rating = 'Not rated yet'
+    else:
+        rating = existing_rating[3]
+    return str(rating)
+       
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000)

@@ -10,6 +10,7 @@ function Song() {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState({ title: [], artist: [], album: [], genre: [] });
   const [ratingResult, setRatingResult] = useState({ rating: []});
+  const [UserRatingResult, setUserRatingResult] = useState({ rating: []});
   const {authState, setAuthState, setUserID } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -38,10 +39,28 @@ function Song() {
           });
         });
     }
+
+    function checkUserRating(id) {
+
+      if (authState == false) { // Check user is logged in
+        setUserRatingResult({
+          rating: "Not logged in",
+        });
+      } else { 
+        axios
+        .get(`http://localhost:5000/check_rating/?songID=${id}&userID=${authState.UserID}`)
+        .then((response) => {
+          setUserRatingResult({
+            rating: response.data || [],
+          });
+        });
+      }
+      
+    }
   
     function sendRating(id, rating, authState) {
       axios
-        .get(`http://localhost:5000/add_rating?id=${id}&rating=${rating}&userID=${authState.UserID}`)
+        .get(`http://localhost:5000/add_rating?songID=${id}&rating=${rating}&userID=${authState.UserID}`)
         .then((response) => {
           setSubmitClicked(true);
         });
@@ -57,6 +76,12 @@ function Song() {
       ;
     }, [id]);
 
+    useEffect(() => {
+      checkUserRating(id)
+      ;
+    }, [id]);
+
+
   return (
     <div className="home">
         <div className="song__header">
@@ -69,7 +94,8 @@ function Song() {
         <p>Genres: {searchResults.genre}</p>
         <p> ______  </p>
         <p>Average rating: {ratingResult.rating}</p>
-        <p>Your rating:</p>
+        <p>Your rating: {UserRatingResult.rating}</p>
+
         <p> ______  </p>
         <p> Rate it:  </p>
         <div className="star-rating">
