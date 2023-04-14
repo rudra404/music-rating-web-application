@@ -1,4 +1,6 @@
-/postgres-db
-
 /front-end/node_modules
 /front-end/build
+
+/userMicroservice/node_modules
+
+.vscode/settings.json
