@@ -1,11 +1,12 @@
 FROM python:3
 
-WORKDIR /app
+WORKDIR /app 
 
 COPY . /app
 
-EXPOSE 5000
+RUN pip install flask
+RUN pip install flask-cors
 
-RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 5000
 
 CMD ["python", "app.py"]

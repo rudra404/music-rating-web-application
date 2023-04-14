@@ -12,15 +12,16 @@ services:
     volumes:
       - ./userMicroservice/postgres-db:/var/lib/postgresql/data
 
-  # music-microservice:
-  #   build:
-  #     context: musicMicroservice
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5000:5000"
-  #   restart: unless-stopped
-  # volumes:
-  #   - ./musicMicroservice:/app
+  music-microservice:
+    build:
+      context: musicMicroservice
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    container_name: musicMicroservice_c
+    restart: unless-stopped
+    volumes:
+      - ./musicMicroservice:/app
 
   user-microservice:
     build:
