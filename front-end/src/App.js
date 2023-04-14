@@ -19,6 +19,7 @@ import Register from "./Register";
 import Song from "./Song";
 function App() {
   const [authState, setAuthState] = useState(false);
+  const [userID, setUserID] = useState(false);
 
   useEffect(() => {
     axios
@@ -36,12 +37,15 @@ function App() {
       });
     if (localStorage.getItem("accessToken")) {
       setAuthState(true);
+      setUserID(localStorage.getItem("userID"));
     }
   }, []);
 
   const logout = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("userID");
     setAuthState(false);
+    setUserID("");
   };
 
   const router = createBrowserRouter(
@@ -61,7 +65,9 @@ function App() {
   return (
     // BEM
     <div className="app">
-      <AuthContext.Provider value={{ authState, setAuthState, logout }}>
+      <AuthContext.Provider
+        value={{ authState, setAuthState, logout, userID, setUserID }}
+      >
         <RouterProvider router={router} />
       </AuthContext.Provider>
       {/* <Sidebar /> */}

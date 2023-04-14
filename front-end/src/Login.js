@@ -22,9 +22,11 @@ function Login() {
       if (response.data.error) {
         alert(response.data.error);
       } else {
-        console.log(response);
-        localStorage.setItem("accessToken", response.data);
+        console.log(response.data);
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("userID", response.data.userID);
         setAuthState(true);
+        setUserID(localStorage.getItem("userID"));
         setIsSubmitted(true);
         navigate("/");
       }
@@ -84,7 +86,7 @@ function Login() {
         </Button>
         <div class="container signin">
           <p>
-            Don't  have an account? <a href="/register">Register</a>.
+            Don't have an account? <a href="/register">Register</a>.
           </p>
         </div>
         {/* <div className="button-container">

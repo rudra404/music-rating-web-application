@@ -65,6 +65,7 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await Users.findOne({ where: { username: username } });
   let accessToken;
+  let userID = user.id;
   if (user == null) {
     // res.json({ error: "User does not exist" });
   } else {
@@ -79,7 +80,7 @@ router.post("/login", async (req, res) => {
         });
         if (decryptedPassword == password) {
           accessToken = sign({ username: user.username, id: user.id }, secret);
-          res.json(accessToken);
+          res.json({ accessToken: accessToken, userID: userID });
         }
       });
     if (accessToken == null) {
