@@ -113,7 +113,17 @@ def check_rating():
     else:
         rating = existing_rating[3]
     return str(rating)
-       
+
+@app.route('/all_ratings/', methods=['GET'])
+def check_rating():
+    if request.method == 'GET':
+        userID  = request.args.get('userID')
+        conn = sqlite3.connect('best_listens.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT track_id, rating FROM ratings WHERE user_id=? ", (userID))
+        ratings = cursor.cursor.fetchall()
+        conn.close()
+    return ratings    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000)
