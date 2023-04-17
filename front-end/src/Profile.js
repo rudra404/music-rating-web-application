@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from "react";
 import "./Profile.css";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
@@ -8,15 +8,29 @@ function Profile() {
   const { authState, userID, setAuthState, setUserID } = useContext(AuthContext);
   const [allRatings, setAllRatings] = useState({ ratings: [] });
   const [searchResults, setSearchResults] = useState({
-    title: "",
-    artist: "",
-    album: "",
-    genre: [],
+    title: [],
+    artist: [],
+    album: [],
   });
+  var updatedRatings = [1,1,1,0]
 
-  useEffect(() => {
-    getRatings(userID);
-  }, []);
+
+
+  async function getRatings(userID) {
+    const response = await axios.get(`http://localhost:5000/all_ratings/?userID=${userID}`);
+    const ratings = response.data || [];
+    const updatedRatings = [];
+    for (let i = 0; i < ratings.length; i++) {
+      const id = ratings[i][0];
+      const rating = ratings[i][1];
+      const songInfoResponse = await axios.get(`http://localhost:5000/search_id/${id}`);
+      const songInfo = songInfoResponse.data[0];
+      updatedRatings.push([songInfo[1], songInfo[2], songInfo[3], rating]);
+    }
+    setAllRatings({
+      ratings: updatedRatings,
+    });
+  }
 
   function getSongInfo(id) {
     axios.get(`http://localhost:5000/search_id/${id}`).then((response) => {
@@ -24,18 +38,13 @@ function Profile() {
         title: response.data[0][1] || "",
         artist: response.data[0][2] || "",
         album: response.data[0][3] || "",
-        genre: JSON.parse(response.data[0][4].replace(/'/g, '"')) || [],
       });
     });
   }
 
-  function getRatings(userID) {
-    axios.get(`http://localhost:5000/all_ratings/?userID=${userID}`).then((response) => {
-      setAllRatings({
-        ratings: response.data || [],
-      });
-    });
-  }
+  useEffect(() => {
+    getRatings(userID);
+  }, [userID]);
 
   return (
     <div className="home">
@@ -44,17 +53,14 @@ function Profile() {
           <h2>Profile</h2>
         </div>
         <div className="profile__ratings">
-          {allRatings.ratings.map((rating) => (
-            <div className="profile__rating" key={rating[0]}>
-              <div className="profile__song-info">
-                <h3>{searchResults.title}</h3>
-                <p>{searchResults.artist}</p>
-                <p>{searchResults.album}</p>
-                <p>{searchResults.genre.join(", ")}</p>
-              </div>
-              <div className="profile__rating-score">{rating[1]}</div>
-            </div>
-          ))}
+          <h3>Ratings:</h3>
+          <ul>
+            {allRatings.ratings.map((rating, index) => (
+              <li key={index}>
+                {rating[0]} - {rating[1]} - {rating[2]} | Rating: {rating[3]}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
