@@ -31,10 +31,20 @@
     border: none;
     outline: none;
     cursor: pointer;
+    padding: 15px 5px;
   }
   .on {
     color: #000;
   }
   .off {
     color: #ccc;
+  }
+  .submit-button {
+    background-color: var(--twitter-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
   }
