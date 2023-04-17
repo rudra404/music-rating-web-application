@@ -3,18 +3,9 @@ import "./Profile.css";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 
-
 function Profile() {
   const { authState, userID, setAuthState, setUserID } = useContext(AuthContext);
   const [allRatings, setAllRatings] = useState({ ratings: [] });
-  const [searchResults, setSearchResults] = useState({
-    title: [],
-    artist: [],
-    album: [],
-  });
-  var updatedRatings = [1,1,1,0]
-
-
 
   async function getRatings(userID) {
     const response = await axios.get(`http://localhost:5000/all_ratings/?userID=${userID}`);
@@ -29,16 +20,6 @@ function Profile() {
     }
     setAllRatings({
       ratings: updatedRatings,
-    });
-  }
-
-  function getSongInfo(id) {
-    axios.get(`http://localhost:5000/search_id/${id}`).then((response) => {
-      setSearchResults({
-        title: response.data[0][1] || "",
-        artist: response.data[0][2] || "",
-        album: response.data[0][3] || "",
-      });
     });
   }
 
