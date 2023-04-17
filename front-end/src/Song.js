@@ -60,11 +60,16 @@ function Song() {
     }
   
     function sendRating() {
-      axios
-        .get(`http://localhost:5000/add_rating?songID=${id}&rating=${rating}&userID=${userID}`)
-        .then((response) => {
-          setSubmitClicked(true);
-        });
+      if (authState === false) { // Check user is logged in
+        alert("You must log in or register before you can rate songs");
+      } 
+      else {
+        axios
+          .get(`http://localhost:5000/add_rating?songID=${id}&rating=${rating}&userID=${userID}`)
+          .then((response) => {
+            setSubmitClicked(true);
+          });
+      }
     }
 
     useEffect(() => {
