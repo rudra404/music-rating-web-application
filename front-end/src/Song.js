@@ -11,12 +11,12 @@ function Song() {
   const [searchResults, setSearchResults] = useState({ title: [], artist: [], album: [], genre: [] });
   const [ratingResult, setRatingResult] = useState({ rating: []});
   const [UserRatingResult, setUserRatingResult] = useState({ rating: []});
-  const {authState, setAuthState, setUserID } = useContext(AuthContext);
+  
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
-  
-  console.log(authState);
+  const {authState, userID, setAuthState, setUserID } = useContext(AuthContext);
+  console.log(userID);
   function getSongInfo(id) {
       axios
         .get(`http://localhost:5000/search_id/${id}`)
@@ -40,15 +40,16 @@ function Song() {
         });
     }
 
-    function checkUserRating(id) {
+    function checkUserRating() {
 
       if (authState === false) { // Check user is logged in
         setUserRatingResult({
           rating: "Not logged in",
         });
-      } else { 
+      } 
+      else { 
         axios
-        .get(`http://localhost:5000/check_rating/?songID=${id}&userID=${authState.UserID}`)
+        .get(`http://localhost:5000/check_rating/?songID=${id}&userID=${userID}`)
         .then((response) => {
           setUserRatingResult({
             rating: response.data || [],
@@ -58,9 +59,9 @@ function Song() {
       
     }
   
-    function sendRating(id, rating, authState) {
+    function sendRating() {
       axios
-        .get(`http://localhost:5000/add_rating?songID=${id}&rating=${rating}&userID=${authState.UserID}`)
+        .get(`http://localhost:5000/add_rating?songID=${id}&rating=${rating}&userID=${userID}`)
         .then((response) => {
           setSubmitClicked(true);
         });
@@ -76,10 +77,10 @@ function Song() {
       ;
     }, [id]);
 
-    useEffect(() => {
-      checkUserRating(id)
+    useEffect((userID) => {
+      checkUserRating(userID)
       ;
-    }, [id]);
+    }, [userID]);
 
 
   return (
