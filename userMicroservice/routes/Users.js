@@ -35,12 +35,13 @@ const decrypt = (encryption) => {
 };
 
 router.post("/createUser", async (req, res) => {
-  const { username } = req.body;
-  const userCount = await Users.count({ where: { username: username } });
+  const { username, email } = req.body;
+  const userCount = await Users.count({ where: { email: email } });
   console.log(userCount);
   if (userCount == 0) {
     await Users.create({
       username: username,
+      email: email,
     });
     res.json("Success, user created");
   } else {
