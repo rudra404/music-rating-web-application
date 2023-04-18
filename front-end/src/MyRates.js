@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./MyRates.css";
 import "./Home.css";
+import Widgets from "./Widgets";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 
@@ -30,6 +31,7 @@ function MyRates() {
   useEffect(() => {
     getRatings();
   });
+  
   return (
     <div className="home">
       <div className="profile">
@@ -47,6 +49,7 @@ function MyRates() {
           </ul>
         </div>
       </div>
+      <Widgets className="widgets" />
     </div>
   );
 }
