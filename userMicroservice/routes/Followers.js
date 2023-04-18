@@ -67,8 +67,4 @@ router.post("/getFollowings", validateToken, async (req, res) => {
   }
 });
 
-// router.get("/followings", validateToken, (req, res) => {
-//   res.json(req.user);
-// });
-
 module.exports = router;
