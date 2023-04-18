@@ -51,19 +51,15 @@ router.post("/unfollow", validateToken, async (req, res) => {
 });
 
 router.post("/getFollowings", validateToken, async (req, res) => {
-  const { username } = req.body;
-  const user = await Users.findOne({ where: { username: username } });
-  if (user == null) {
-    res.json({ error: "User or users does not exist" });
+  const { userID } = req.body;
+  const user = await Users.findOne({ where: { id: userID } });
+  if (user != null) {
+    const followers = await Followers.findAll({
+      where: { user: `${user.id}` },
+    });
+    res.json(followers);
   } else {
-    if (followers != null) {
-      const followers = await Followers.findAll({
-        where: { user: `${user.id}` },
-      });
-      res.json(followers);
-    } else {
-      res.json({ error: "No followers" });
-    }
+    res.json({ error: "User or users does not exist" });
   }
 });
 

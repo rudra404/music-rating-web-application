@@ -100,11 +100,21 @@ router.post("/login", async (req, res) => {
       });
       if (decryptedPassword == password) {
         accessToken = sign({ username: user.username, id: user.id }, secret);
-        res.json({ accessToken: accessToken, userID: userID });
+        res.json({ accessToken: accessToken, userID: user.id });
       }
     });
   if (accessToken == null) {
     res.json({ error: "Wrong username and password combination" });
+  }
+});
+
+router.get("/profile", validateToken, async (req, res) => {
+  const { userID } = req.body;
+  const user = await Users.findOne({ where: { id: userID } });
+  if (user != null) {
+    res.json(user);
+  } else {
+    res.json({ error: "404: User not found" });
   }
 });
 
