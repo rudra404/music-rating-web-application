@@ -121,18 +121,23 @@ router.post("/getUser", validateToken, async (req, res) => {
 router.post("/changeUsername", validateToken, async (req, res) => {
   const { userID, username } = req.body;
   const user = await Users.findOne({ where: { id: userID } });
-  if (user != null) {
-    await Users.update(
-      {
-        username: username,
-      },
-      {
-        where: { id: userID },
-      }
-    );
-    res.json("Successfully updated username");
+  const checkUsername = await Users.count({ where: { username: username } });
+  if (checkUsername == 0) {
+    if (user != null) {
+      await Users.update(
+        {
+          username: username,
+        },
+        {
+          where: { id: userID },
+        }
+      );
+      res.json("Successfully updated username");
+    } else {
+      res.json({ error: "404: User not found" });
+    }
   } else {
-    res.json({ error: "404: User not found" });
+    res.json({ error: "Username already in use" });
   }
 });
 
