@@ -27,6 +27,23 @@ function Profile() {
       });
   }
 
+  async function changeUsername() {
+    const data = { userID: userID, username: "newUsername" };
+    axios
+      .post("http://localhost:3002/auth/changeUsername", data, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          console.log(response.data);
+        }
+      });
+  }
+
   async function getUser() {
     const data = { userID: userID };
     axios
