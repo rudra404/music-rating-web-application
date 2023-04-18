@@ -10,7 +10,7 @@ services:
       - "5432:5432"
     container_name: postgresDB_c
     volumes:
-      - ./userMicroservice/postgres-db:/var/lib/postgresql/data
+      - ./userMicroservice/postgres-db:/var/lib/postgresql
 
   music-microservice:
     build:

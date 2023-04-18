@@ -35,16 +35,26 @@ const decrypt = (encryption) => {
 };
 
 router.post("/createUser", async (req, res) => {
-  const { username } = req.body;
-  const userCount = await Users.count({ where: { username: username } });
-  console.log(userCount);
-  if (userCount == 0) {
+  const { username, email } = req.body;
+  const emailCount = await Users.count({ where: { email: email } });
+  const usernameCount = await Users.count({ where: { username: username } });
+  console.log(usernameCount);
+  if (usernameCount == 0 && emailCount == 0) {
     await Users.create({
       username: username,
+      email: email,
     });
     res.json("Success, user created");
+  } else if (usernameCount > 0) {
+    res.json({
+      error: "Failure to create user, username already in use, try another",
+    });
+  } else if (emailCount > 0) {
+    res.json({
+      error: "Failure to create user, user with this email already exists",
+    });
   } else {
-    res.json({ error: "Failure to create user, username already exists" });
+    res.json({ error: "Failure to create user" });
   }
 });
 
@@ -63,29 +73,48 @@ router.post("/addPassword", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await Users.findOne({ where: { username: username } });
+  const userByUsername = await Users.count({ where: { username: username } });
+  const userByEmail = await Users.count({ where: { email: username } });
   let accessToken;
-  let userID = user.id;
-  if (user == null) {
-    // res.json({ error: "User does not exist" });
+  let userID = "";
+  let user;
+
+  if (userByUsername > 0) {
+    userID = userByUsername.id;
+    user = await Users.findOne({ where: { username: username } });
+  } else if (userByEmail > 0) {
+    userID = userByEmail.id;
+    user = await Users.findOne({ where: { email: username } });
   } else {
-    const passwords = await Passwords.findAll({ where: { UserId: user.id } });
-    passwords.length > 0 &&
-      passwords.forEach((pwd) => {
-        console.log(pwd);
-        console.log(accessToken);
-        const decryptedPassword = decrypt({
-          password: pwd.password,
-          iv: pwd.iv,
-        });
-        if (decryptedPassword == password) {
-          accessToken = sign({ username: user.username, id: user.id }, secret);
-          res.json({ accessToken: accessToken, userID: userID });
-        }
+    res.json({ error: "User does not exist" });
+  }
+
+  const passwords = await Passwords.findAll({ where: { UserId: user.id } });
+  passwords.length > 0 &&
+    passwords.forEach((pwd) => {
+      console.log(pwd);
+      console.log(accessToken);
+      const decryptedPassword = decrypt({
+        password: pwd.password,
+        iv: pwd.iv,
       });
-    if (accessToken == null) {
-      res.json({ error: "Wrong username and password combination" });
-    }
+      if (decryptedPassword == password) {
+        accessToken = sign({ username: user.username, id: user.id }, secret);
+        res.json({ accessToken: accessToken, userID: user.id });
+      }
+    });
+  if (accessToken == null) {
+    res.json({ error: "Wrong username and password combination" });
+  }
+});
+
+router.get("/profile", validateToken, async (req, res) => {
+  const { userID } = req.body;
+  const user = await Users.findOne({ where: { id: userID } });
+  if (user != null) {
+    res.json(user);
+  } else {
+    res.json({ error: "404: User not found" });
   }
 });
 

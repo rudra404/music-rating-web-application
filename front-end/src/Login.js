@@ -56,7 +56,7 @@ function Login() {
         <div className="input-container">
           <label>Username </label>
           <input
-            type="email"
+            type="text"
             name="uname"
             // value={username}
             // onChange={(event) => setUsername(event.target.value)}
