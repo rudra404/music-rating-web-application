@@ -14,22 +14,22 @@ router.post("/follow", validateToken, async (req, res) => {
       user: mainUser.id,
       follower: follower.id,
     });
-    res.json("Success, followers added");
+    res.json("Success, follower added");
   }
 });
 
 router.post("/unfollow", validateToken, async (req, res) => {
-  const { follower, followee } = req.body;
+  const { user, follower } = req.body;
+  const mainUser = await Users.findOne({ where: { username: user } });
   const followerUser = await Users.findOne({ where: { username: follower } });
-  const followeeUser = await Users.findOne({ where: { username: followee } });
-  if (followerUser == null || followeeUser == null) {
-    res.json({ error: "User does not exist" });
+  if (followerUser == null || mainUser == null) {
+    res.json({ error: "User or users do not exist" });
   } else {
     await Followers.create({
-      follower: followerUser.id,
-      followee: followeeUser.id,
+      user: mainUser.id,
+      follower: follower.id,
     });
-    res.json("Success, followers added");
+    res.json("Success, follower removed");
   }
 });
 

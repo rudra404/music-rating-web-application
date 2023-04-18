@@ -10,17 +10,22 @@ import { useNavigate } from "react-router-dom";
 function Register() {
   const navigate = useNavigate();
   const initialValues = {
-    username: "", //email
+    username: "",
+    email: "",
     password: "",
   };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string()
+    email: Yup.string()
       .email("Must be a valid email")
       .required("Email is required"),
+    username: Yup.string()
+      .min(3, "Username too short")
+      .max(50, "Username too long")
+      .required("Username is required"),
     password: Yup.string()
-      .min(8)
-      .max(25)
+      .min(8, "Password must be at least 8 charachters long")
+      .max(50)
       .required("Password is required"),
     passwordConfirm: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -34,7 +39,12 @@ function Register() {
 
   const onSubmit = (data) => {
     let uname = validateUsername(data.username);
-    let addInitialPass = { username: uname, password: data.password };
+    let email = validateUsername(data.email);
+    let addInitialPass = {
+      username: uname,
+      email: email,
+      password: data.password,
+    };
 
     addUser(addInitialPass);
   };
@@ -77,16 +87,36 @@ function Register() {
             validationSchema={validationSchema}
           >
             <Form className="formContainer">
+              <label for="username">
+                <b>Username</b>
+              </label>
+              <br />
+              <ErrorMessage
+                className="font-color-red"
+                name="username"
+                component="span"
+              />
+              <Field
+                autoComplete="off"
+                id="username"
+                name="username"
+                type="text"
+                placeholder="john123"
+              />
               <label for="email">
                 <b>Email</b>
               </label>
               <br />
-              <ErrorMessage name="username" component="span" />
+              <ErrorMessage
+                className="font-color-red"
+                name="email"
+                component="span"
+              />
               {/* <label>Email: </label> */}
               <Field
                 autoComplete="off"
                 id="email"
-                name="username"
+                name="email"
                 type="email"
                 placeholder="me@example.com"
               />
@@ -94,7 +124,11 @@ function Register() {
                 <b>Password</b>
               </label>
               <br />
-              <ErrorMessage name="password" component="span" />
+              <ErrorMessage
+                className="font-color-red"
+                name="password"
+                component="span"
+              />
               <Field
                 autoComplete="off"
                 type="password"
@@ -106,7 +140,11 @@ function Register() {
                 <b>Confrim Password</b>
               </label>
               <br />
-              <ErrorMessage name="passwordConfirm" component="span" />
+              <ErrorMessage
+                className="font-color-red"
+                name="passwordConfirm"
+                component="span"
+              />
               <Field
                 autoComplete="off"
                 type="password"
