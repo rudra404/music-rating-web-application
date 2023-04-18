@@ -15,7 +15,9 @@ router.post("/follow", validateToken, async (req, res) => {
     const following = await Followers.count({
       where: { user: `${mainUser.id}`, follower: `${followerUser.id}` },
     });
-    if (following == 0) {
+    if (mainUser.id == followerUser.id) {
+      res.json({ error: "Cannot follow yourself" });
+    } else if (following == 0) {
       await Followers.create({
         user: mainUser.id,
         follower: followerUser.id,
