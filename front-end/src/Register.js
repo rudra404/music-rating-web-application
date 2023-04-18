@@ -103,7 +103,7 @@ function Register() {
                 placeholder="********"
               />
               <label for="passwordConfirm">
-                <b>Confrim Password</b>
+                <b>Confirm Password</b>
               </label>
               <br />
               <ErrorMessage name="passwordConfirm" component="span" />
