@@ -13,14 +13,14 @@ router.post("/follow", validateToken, async (req, res) => {
     const mainUser = await Users.findOne({ where: { username: user } });
     const followerUser = await Users.findOne({ where: { username: follower } });
     const following = await Followers.count({
-      where: { user: `${mainUser.id}`, follower: `${followerUser.id}` },
+      where: { userID: `${mainUser.id}`, followerID: `${followerUser.id}` },
     });
     if (mainUser.id == followerUser.id) {
       res.json({ error: "Cannot follow yourself" });
     } else if (following == 0) {
       await Followers.create({
-        user: mainUser.id,
-        follower: followerUser.id,
+        userID: mainUser.id,
+        followerID: followerUser.id,
       });
       res.json("Success, follower added");
     } else {
@@ -39,7 +39,7 @@ router.post("/unfollow", validateToken, async (req, res) => {
     const mainUser = await Users.findOne({ where: { username: user } });
     const followerUser = await Users.findOne({ where: { username: follower } });
     const following = await Followers.findOne({
-      where: { user: `${mainUser.id}`, follower: `${followerUser.id}` },
+      where: { userID: `${mainUser.id}`, followerID: `${followerUser.id}` },
     });
     if (following != null) {
       await Followers.destroy({
@@ -57,7 +57,7 @@ router.post("/getFollowings", validateToken, async (req, res) => {
   const user = await Users.findOne({ where: { id: userID } });
   if (user != null) {
     const followers = await Followers.findAll({
-      where: { user: `${user.id}` },
+      where: { userID: `${user.id}` },
     });
     res.json(followers);
   } else {

@@ -1,11 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Followers = sequelize.define("Followers", {
-    user: {
+    userID: {
       // person app user wants to follows uname
       type: DataTypes.STRING,
       allowNull: false,
     },
-    follower: {
+    followerID: {
       // app users uname
       type: DataTypes.STRING,
       allowNull: false,

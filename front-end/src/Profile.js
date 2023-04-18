@@ -7,6 +7,7 @@ import ProfileCard from "./ProfileCard";
 function Profile() {
   const { userID } = useContext(AuthContext);
   const [followers, setFollowers] = useState([]);
+  const [user, setUser] = useState();
 
   async function getFollowers() {
     const data = { userID: userID };
@@ -20,14 +21,34 @@ function Profile() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
+          setFollowers(response.data);
+          console.log(response.data);
+        }
+      });
+  }
+
+  async function getUser() {
+    const data = { userID: userID };
+    axios
+      .post("http://localhost:3002/auth/getUser", data, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
           console.log(response);
+          setUser(response.data);
         }
       });
   }
 
   useEffect(() => {
     getFollowers();
-  });
+    getUser();
+  }, [userID]);
 
   return (
     <div className="home">
@@ -36,7 +57,7 @@ function Profile() {
           <h2>Profile</h2>
         </div>
 
-        <ProfileCard username={"tamim1"} followers={followers} />
+        <ProfileCard user={user} followers={followers} />
       </div>
     </div>
   );

@@ -108,11 +108,29 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/profile", validateToken, async (req, res) => {
+router.post("/getUser", validateToken, async (req, res) => {
   const { userID } = req.body;
   const user = await Users.findOne({ where: { id: userID } });
   if (user != null) {
     res.json(user);
+  } else {
+    res.json({ error: "404: User not found" });
+  }
+});
+
+router.post("/changeUsername", validateToken, async (req, res) => {
+  const { userID, username } = req.body;
+  const user = await Users.findOne({ where: { id: userID } });
+  if (user != null) {
+    await Users.update(
+      {
+        username: username,
+      },
+      {
+        where: { id: userID },
+      }
+    );
+    res.json("Successfully updated username");
   } else {
     res.json({ error: "404: User not found" });
   }
