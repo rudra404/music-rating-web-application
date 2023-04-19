@@ -53,8 +53,8 @@ function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<Home />} />
         <Route path="/messages" element={<Messages />} />
-        <Route path="/myrates" element={<MyRates />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/myRates" element={<MyRates />} />
+        <Route path="/myProfile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/song/:id" element={<Song />} />

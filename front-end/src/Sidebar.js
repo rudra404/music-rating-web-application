@@ -24,7 +24,9 @@ import { AuthContext } from "./helpers/AuthContext";
 
 function Sidebar() {
   const navigate = useNavigate();
+  const pathname = window.location.pathname; //returns the current url minus the domain name
   const { authState, logout } = useContext(AuthContext);
+  console.log(pathname);
   function handleLogout() {
     logout();
     navigate("/login");
@@ -32,15 +34,30 @@ function Sidebar() {
   return (
     <div className="sidebar">
       {/* <TwitterIcon className="sidebar__twitterIcon" /> */}
-      <SidebarOption active Icon={HomeIcon} link="/" text="Home" />
-      <SidebarOption Icon={MailOutlineIcon} link="/messages" text="Messages" />
       <SidebarOption
-        Icon={BookmarkBorderIcon}
-        text="My rates"
-        link="/myrates"
+        active={pathname == "/"}
+        Icon={HomeIcon}
+        link="/"
+        text="Home"
       />
-      <SidebarOption Icon={PermIdentityIcon} link="/profile" text="Profile" />
-      <SidebarOption Icon={MoreHorizIcon} text="More" />
+      {/* <SidebarOption Icon={MailOutlineIcon} link="/messages" text="Messages" /> */}
+      {authState && (
+        <>
+          <SidebarOption
+            active={pathname == "/myRates"}
+            Icon={BookmarkBorderIcon}
+            text="My rates"
+            link="/myRates"
+          />
+          <SidebarOption
+            active={pathname == "/myProfile"}
+            Icon={PermIdentityIcon}
+            link="/myProfile"
+            text="My profile"
+          />
+        </>
+      )}
+      {/* <SidebarOption Icon={MoreHorizIcon} text="More" /> */}
       {/* <SidebarOption Icon={ListAltIcon} text="Lists" /> */}
       {/* <SidebarOption Icon={SearchIcon} text="Explore" /> */}
       {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
