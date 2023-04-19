@@ -7,9 +7,9 @@ export default function ProfileCard(props) {
   console.log(props);
   return (
     <>
-      {user.username}
+      {user && user.username}
       <br />
-      {user.email}
+      {user && user.email}
       <br />
       Followers: {numOfFolowers}
     </>
