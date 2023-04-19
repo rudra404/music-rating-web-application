@@ -28,9 +28,9 @@ def getFeed():
        print(followers)
        
        followersID = []
-        for i in range (len(followers)):
-            followersID.append(followers[i]['followerID'])
-            print(followersID)
+       for i in range (len(followers)):
+          followersID.append(followers[i]['followerID'])
+       print(followersID)
 
    # userID
 
