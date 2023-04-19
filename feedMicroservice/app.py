@@ -21,16 +21,33 @@ def getFeed():
        data = {
             "userID": userID,
         }
-       followers = requests.post('http://localhost:3002/followings/getFollowings', 
+       followers = (requests.post('http://localhost:3002/followings/getFollowings', 
                                  json=data, 
-                                 headers=headers) 
-       followers = followers.json()
+                                 headers=headers)).json()
        print(followers)
        
        followersID = []
        for i in range (len(followers)):
-          followersID.append(followers[i]['followerID'])
+          followersID.append(followers[i]['userID'])
        print(followersID)
+
+       ratingsFeed = []
+
+       for i in range (len(followersID)):
+          id = int(followersID[i])
+          followerRatings = (requests.get(f'http://localhost:5050/all_ratings?userID={id}')).json()
+          print(followerRatings)
+          feedInfo = []
+          for i in range (len(followerRatings)):
+             song = (requests.get(f'http://localhost:5050/search_id/{followerRatings[i][0]}')).json()
+             feedInfo.append(song) #song, rating, user infos
+             print(feedInfo)
+          ratingsFeed.append(followerRatings)
+        
+        # for i in range (len(ratingsFeed)):
+          
+
+       print(ratingsFeed)
 
    # userID
 

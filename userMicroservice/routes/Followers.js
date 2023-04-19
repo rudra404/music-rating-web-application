@@ -52,12 +52,25 @@ router.post("/unfollow", validateToken, async (req, res) => {
   }
 });
 
-router.post("/getFollowings", validateToken, async (req, res) => {
+router.post("/getFollowers", validateToken, async (req, res) => {
   const { userID } = req.body;
   const user = await Users.findOne({ where: { id: userID } });
   if (user != null) {
     const followers = await Followers.findAll({
       where: { userID: `${user.id}` },
+    });
+    res.json(followers);
+  } else {
+    res.json({ error: "User or users does not exist" });
+  }
+});
+
+router.post("/getFollowings", validateToken, async (req, res) => {
+  const { userID } = req.body;
+  const user = await Users.findOne({ where: { id: userID } });
+  if (user != null) {
+    const followers = await Followers.findAll({
+      where: { followerID: `${user.id}` },
     });
     res.json(followers);
   } else {
