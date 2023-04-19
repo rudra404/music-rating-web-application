@@ -26,7 +26,6 @@ function Sidebar() {
   const navigate = useNavigate();
   const pathname = window.location.pathname; //returns the current url minus the domain name
   const { authState, logout } = useContext(AuthContext);
-  console.log(pathname);
   function handleLogout() {
     logout();
     navigate("/login");
