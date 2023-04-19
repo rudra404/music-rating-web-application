@@ -16,7 +16,7 @@ function Widgets() {
     setSearchValue(searchValue);
     if (searchValue.trim() !== "") { // Check if searchValue is not blank
       axios
-        .get(`http://localhost:5000/search2/?search=${searchValue}`)
+        .get(`http://localhost:5050/search2/?search=${searchValue}`)
         .then((response) => {
           setSearchResults({
             songs: response.data[0] || [],

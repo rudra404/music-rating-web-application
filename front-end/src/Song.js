@@ -19,7 +19,7 @@ function Song() {
   console.log(userID);
   function getSongInfo(id) {
       axios
-        .get(`http://localhost:5000/search_id/${id}`)
+        .get(`http://localhost:5050/search_id/${id}`)
         .then((response) => {
           setSearchResults({
             title: response.data[0][1] || [],
@@ -32,7 +32,7 @@ function Song() {
 
   function getSongRating(id) {
       axios
-        .get(`http://localhost:5000/av_rating/${id}`)
+        .get(`http://localhost:5050/av_rating/${id}`)
         .then((response) => {
           setRatingResult({
             rating: response.data || [],
@@ -49,7 +49,7 @@ function Song() {
       } 
       else { 
         axios
-        .get(`http://localhost:5000/check_rating/?songID=${id}&userID=${userID}`)
+        .get(`http://localhost:5050/check_rating/?songID=${id}&userID=${userID}`)
         .then((response) => {
           setUserRatingResult({
             rating: response.data || [],
@@ -65,7 +65,7 @@ function Song() {
       } 
       else {
         axios
-          .get(`http://localhost:5000/add_rating?songID=${id}&rating=${rating}&userID=${userID}`)
+          .get(`http://localhost:5050/add_rating?songID=${id}&rating=${rating}&userID=${userID}`)
           .then((response) => {
             setSubmitClicked(true);
           });
