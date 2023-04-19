@@ -38,15 +38,15 @@ services:
     depends_on:
       - postgres
 
-  # front-end:
-  #   build:
-  #     context: front-end
-  #     dockerfile: Dockerfile
-  #   container_name: front-end_c
-  #   restart: always
-  #   ports:
-  #     - "3000:3000"
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on:
-  #     - user-microservice
+  front-end:
+    build:
+      context: front-end
+      dockerfile: Dockerfile
+    container_name: front-end_c
+    restart: always
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - user-microservice
