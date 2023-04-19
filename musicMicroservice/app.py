@@ -7,7 +7,7 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-   return 'musicMicroservice is running on port 5000'
+   return 'musicMicroservice is running on port 5050'
 
 #@app.route('/search/<query>')
 #def search_tracks(query):
@@ -126,4 +126,4 @@ def all_ratings():
     return ratings    
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=5000)
+    app.run(host='0.0.0.0',port=5050)
