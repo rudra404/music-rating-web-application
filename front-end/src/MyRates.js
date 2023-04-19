@@ -30,7 +30,7 @@ function MyRates() {
   }
   useEffect(() => {
     getRatings();
-  });
+  },[userID]);
   
   return (
     <div className="home">
