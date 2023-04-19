@@ -13,34 +13,38 @@ def hello_world():
 def getFeed():
    if request.method == 'GET':
        userID = request.args.get('userID')
-       accessToken = request.headers.get('accessToken')
-       accessToken = str(accessToken)
-       print(accessToken)
+       accessToken = str(request.headers.get('accessToken'))
 
        headers = {"accessToken": accessToken}
-       data = {
-            "userID": userID,
-        }
-       followers = (requests.post('http://localhost:3002/followings/getFollowings', 
-                                 json=data, 
+
+       followings = (requests.post('http://localhost:3002/followings/getFollowings', 
+                                 json={"userID": userID}, 
                                  headers=headers)).json()
-       print(followers)
-       
-       followersID = []
-       for i in range (len(followers)):
-          followersID.append(followers[i]['userID'])
-       print(followersID)
+       print(followings)
+       # followings = people that you are following
+       # followingsID = ids of people you are following
+       followingsID = []
+       for i in range (len(followings)):
+          followingsID.append(followings[i]['userID'])
+       print(followingsID)
 
-       ratingsFeed = []
+       ratingsFeed = [] # song info, rating, user who rated
 
-       for i in range (len(followersID)):
-          id = int(followersID[i])
+       for i in range (len(followingsID)):
+          id = int(followingsID[i]) # person your followings ID
+          # followerRatings = that users all ratings for all songs
           followerRatings = (requests.get(f'http://localhost:5050/all_ratings?userID={id}')).json()
           print(followerRatings)
+
+          user = (requests.post(f'http://localhost:3002/getUser', json={"userID": id}, headers=headers)).json()
+          print(user)
+
           feedInfo = []
-          for i in range (len(followerRatings)):
-             song = (requests.get(f'http://localhost:5050/search_id/{followerRatings[i][0]}')).json()
-             feedInfo.append(song) #song, rating, user infos
+          # followerRatings [{songID, rating}, {}, {}]
+          for j in range (len(followerRatings)):
+             song = (requests.get(f'http://localhost:5050/search_id/{followerRatings[j][0]}')).json()
+            #  song.append(list(followerRatings[j][1]) + list(followingsID[i]))
+             feedInfo.append(song) 
              print(feedInfo)
           ratingsFeed.append(followerRatings)
         
