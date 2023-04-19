@@ -71,6 +71,11 @@ function Song() {
           });
       }
     }
+    async function button() {
+      sendRating();
+      getSongRating(id);
+      checkUserRating(userID);
+    }
 
     useEffect(() => {
       getSongInfo(id)
@@ -121,7 +126,7 @@ function Song() {
             );
           })}
         </div>
-        <button className="submit-button" type="submit" onClick={sendRating}>
+        <button className="submit-button" type="submit" onClick={button}>
             Submit Rating
           </button>
         </div>
