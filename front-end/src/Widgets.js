@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Widgets.css";
-import {
-  TwitterTimelineEmbed,
-  TwitterShareButton,
-  TwitterTweetEmbed,
-} from "react-twitter-embed";
+// import {
+//   TwitterTimelineEmbed,
+//   TwitterShareButton,
+//   TwitterTweetEmbed,
+// } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 import { Link } from "react-router-dom";
