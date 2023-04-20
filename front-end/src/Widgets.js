@@ -49,31 +49,44 @@ function Widgets() {
         />
       </div>
       <div className="widgets__widgetContainer">
-      <h2>Songs</h2>
-        <ul>
-          {searchResults.songs.map((song, index) => (
-           <Link to={`/song/${song[0]}`} key={index}>
-           <SearchResultItem result={song} />
-         </Link>
-       ))}
-        </ul>
-        <h2>Artists</h2>
-        <ul>
-        {searchResults.artists.map((artist, index) => (
-           <Link to={`/song/${artist[0]}`} key={index}>
-           <SearchResultItem result={artist} />
-         </Link>
-       ))}
-        </ul>
-        <h2>Albums</h2>
-        <ul>
-        {searchResults.albums.map((album, index) => (
-           <Link to={`/song/${album[0]}`} key={index}>
-           <SearchResultItem result={album} />
-         </Link>
-       ))}
-        </ul>
-    </div>
+        <div className="widget_container">
+          <h2>Songs</h2>
+          {/* <ul>
+            <li><a href="#">Dummy Link 1</a></li>
+            <li><a href="#">Dummy Link 2 knef kjnf skejnf ksjefksjnef skefjn skejnfkse</a></li>
+            <li><a href="#">Dummy Link 3</a></li>
+          </ul> */}
+
+          <ul>
+            {searchResults.songs.map((song, index) => (
+              <Link to={`/song/${song[0]}`} key={index} className="search-result-links">
+                <SearchResultItem result={song} className="search-result-items"/>
+              </Link>
+            ))}
+          </ul>
+        </div>
+        <div className="widget_container">
+          <h2>Artists</h2>
+          <ul>
+            {searchResults.artists.map((artist, index) => (
+              <Link to={`/song/${artist[0]}`} key={index} className="search-result-links">
+                <SearchResultItem result={artist} />
+              </Link>
+            ))}
+          </ul>
+        </div>
+        <div className="widget_container">
+          <h2>Albums</h2>
+          <ul>
+            {searchResults.albums.map((album, index) => (
+              <Link to={`/song/${album[0]}`} key={index} className="search-result-links">
+                <SearchResultItem result={album} />
+              </Link>
+            ))}
+          </ul>
+        </div>
+      </div>
+
     </div>
   );
   
