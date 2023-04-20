@@ -7,7 +7,7 @@ import Header from './Header';
 function Home() {
   return (
     <div className="home">
-      <Header className="header" />
+      <Header className="main_header" />
       <Feed className="feed" />
       <Widgets className="widgets" />
     </div>

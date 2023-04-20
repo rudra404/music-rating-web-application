@@ -11,9 +11,17 @@
     align-items: center;
     justify-content: space-between;
     color: white;
+    z-index: 100;
   }
   
-  .main_header img {
-    height: 30px;
-    margin-right: 10px;
+  .header_content {
+    display: flex;
+    align-items: center;
   }
+  
+  .header_content img {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+ 
