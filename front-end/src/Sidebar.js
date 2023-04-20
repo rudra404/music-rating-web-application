@@ -63,7 +63,7 @@ function Sidebar() {
       {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
 
       {/* Button -> Tweet */}
-      {authState ? (
+      {/* {authState ? (
         <Button
           // href="/login"
           variant="outlined"
@@ -82,7 +82,7 @@ function Sidebar() {
         >
           Log in
         </Button>
-      )}
+      )} */}
     </div>
   );
 }
