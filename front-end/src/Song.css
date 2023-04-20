@@ -1,50 +1,89 @@
 .song {
-    flex: 0.4;
-    border-right: 1px solid var(--twitter-background);
-    min-width: fit-content;
-    min-width: 35vw;
-  }
+  flex: 0.4;
+  border-right: 1px solid var(--twitter-background);
+  min-width: fit-content;
+  min-width: 35vw;
+}
 
-  .song__header {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    border: 1px solid var(--twitter-background);
-    padding: 15px 20px;
-  }
-  
-  .song__header > h2 {
-    font-size: 20px;
-    font-weight: 800;
-  }
+.song__header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  border: 1px solid var(--twitter-background);
+  padding: 15px 20px;
+}
 
-  .song_info {
-    min-width: 40vw;
-  }
+.song__header > h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
 
-  .widgets {
-    min-width: 30vw;
-  }
-  button {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 15px 5px;
-  }
-  .on {
-    color: #000;
-  }
-  .off {
-    color: #ccc;
-  }
-  .submit-button {
-    background-color: var(--twitter-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.song_info {
+  min-width: 40vw;
+}
+
+.widgets {
+  min-width: 30vw;
+}
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 15px 5px;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}
+.submit-button {
+  background-color: var(--twitter-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.card {
+  margin-top: 64px;
+  min-width: 35vw;
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.songtitle {
+  padding-top: 30%;
+  padding-bottom: 30%;
+  text-align: center;
+  background-color: lightgrey;
+  color: black;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.description {
+  text-align: center;
+}
+
+.tag {
+  background-color: blue;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 20px;
+}

@@ -18,11 +18,12 @@ function Song() {
   const [UserRatingResult, setUserRatingResult] = useState({ rating: [] });
 
   const [rating, setRating] = useState(0);
+  let rate = 0;
   const [hover, setHover] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
   const { authState, userID } = useContext(AuthContext);
-  console.log(userID);
-  function getSongInfo(id) {
+  // console.log(userID);
+  function getSongInfo() {
     axios.get(`http://localhost:5050/search_id/${id}`).then((response) => {
       setSearchResults({
         title: response.data[0][1] || [],
@@ -33,7 +34,7 @@ function Song() {
     });
   }
 
-  function getSongRating(id) {
+  function getSongRating() {
     axios.get(`http://localhost:5050/av_rating/${id}`).then((response) => {
       setRatingResult({
         rating: response.data || [],
@@ -56,8 +57,18 @@ function Song() {
           setUserRatingResult({
             rating: response.data || [],
           });
+          setRating(response.data);
+          rate = response.data;
         });
     }
+  }
+
+  async function handleRatingChange(index) {
+    rate = index;
+    sendRating();
+    getSongRating();
+    checkUserRating();
+    // button();
   }
 
   function sendRating() {
@@ -67,9 +78,10 @@ function Song() {
     } else {
       axios
         .get(
-          `http://localhost:5050/add_rating?songID=${id}&rating=${rating}&userID=${userID}`
+          `http://localhost:5050/add_rating?songID=${id}&rating=${rate}&userID=${userID}`
         )
         .then((response) => {
+          console.log(response);
           setSubmitClicked(true);
         });
     }
@@ -77,28 +89,72 @@ function Song() {
   async function button() {
     sendRating();
     getSongRating(id);
-    checkUserRating(userID);
+    checkUserRating();
   }
 
   useEffect(() => {
-    getSongInfo(id);
-  }, [id]);
+    getSongInfo();
+    getSongRating();
+    setSubmitClicked(false);
+  }, [id, submitClicked]);
 
   useEffect(() => {
-    getSongRating(id);
-  }, [id]);
-
-  useEffect(
-    (userID) => {
-      checkUserRating(userID);
-    },
-    [userID]
-  );
+    checkUserRating();
+    setSubmitClicked(false);
+  }, [userID, submitClicked]);
 
   return (
     <div className="home">
       <div className="song__header">
-        <h2>Song</h2>
+        <div className="card">
+          {/* <img src="img_avatar.png" alt="Avatar" style="width:100%"> */}
+          <div className="container">
+            <div className="songtitle">
+              <h2>{searchResults.title}</h2>
+            </div>
+            <div className="description">
+              <p>
+                <strong>{searchResults.artist}</strong>
+              </p>
+              <p>{searchResults.album}</p>
+
+              {searchResults.genre &&
+                searchResults.genre.forEach((item) => {
+                  return <div className="tag">{item}</div>;
+                })}
+
+              <p>
+                {ratingResult.rating != "Not rated yet" && (
+                  <>{ratingResult.rating} ★</>
+                )}
+              </p>
+
+              {authState && (
+                <>
+                  <div className="star-rating">
+                    {[...Array(5)].map((star, index) => {
+                      index += 1;
+                      return (
+                        <button
+                          type="button"
+                          key={index}
+                          className={index <= (hover || rating) ? "on" : "off"}
+                          onClick={() => handleRatingChange(index)}
+                          onMouseEnter={() => setHover(index)}
+                          onMouseLeave={() => setHover(rating)}
+                        >
+                          <span className="star">&#9733;</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* <h2>Song</h2>
         <div className="song">
           <p> _____ </p>
           <p>Title: {searchResults.title}</p>
@@ -135,7 +191,7 @@ function Song() {
               </button>
             </>
           )}
-        </div>
+        </div> */}
       </div>
       <Widgets className="widgets" />
     </div>
