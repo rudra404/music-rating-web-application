@@ -51,11 +51,6 @@ function Widgets() {
       <div className="widgets__widgetContainer">
         <div className="widget_container">
           <h2>Songs</h2>
-          {/* <ul>
-            <li><a href="#">Dummy Link 1</a></li>
-            <li><a href="#">Dummy Link 2 knef kjnf skejnf ksjefksjnef skefjn skejnfkse</a></li>
-            <li><a href="#">Dummy Link 3</a></li>
-          </ul> */}
 
           <ul>
             {searchResults.songs.map((song, index) => (

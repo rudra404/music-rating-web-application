@@ -48,3 +48,7 @@
     font-size: 16px;
     cursor: pointer;
   }
+
+  .submit-button:hover {
+    background-color: #5c40ebbf;
+  }

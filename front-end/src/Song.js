@@ -5,6 +5,7 @@ import Widgets from "./Widgets";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
+import Header from './Header';
 
 function Song() {
   const { id } = useParams();
@@ -90,6 +91,7 @@ function Song() {
 
   return (
     <div className="home">
+        <Header className="main_header" /> 
         <div className="song__header">
         <h2>Song</h2>
         <div className="song">
