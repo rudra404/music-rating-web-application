@@ -25,3 +25,15 @@
     height: 40px;
   }
  
+  .login__button {
+    background-color: white !important;
+    border: none !important;
+    color: var(--twitter-color) !important;
+    font-weight: 900 !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    width: 100px !important;
+    height: 40px !important;
+    margin-right: 30px !important;
+    /* margin-top: 20px !important; */
+  }
