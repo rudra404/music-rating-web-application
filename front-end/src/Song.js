@@ -125,7 +125,10 @@ function Song() {
 
               <p>
                 {ratingResult.rating != "Not rated yet" && (
-                  <>{ratingResult.rating} ★</>
+                  <>
+                    {ratingResult.rating} <br />
+                    <i data-star={ratingResult.rating}></i>
+                  </>
                 )}
               </p>
 
