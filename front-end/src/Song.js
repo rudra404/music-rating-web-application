@@ -5,6 +5,7 @@ import Widgets from "./Widgets";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
+import Header from './Header';
 
 function Song() {
   const { id } = useParams();
@@ -90,40 +91,42 @@ function Song() {
 
   return (
     <div className="home">
+        <Header className="main_header" /> 
         <div className="song__header">
-        <h2>Song</h2>
-        <div className="song">
-        <p> _____  </p>
-        <p>Title: {searchResults.title}</p>
-        <p>Artist: {searchResults.artist}</p>
-        <p>Album: {searchResults.album}</p>
-        <p>Genres: {searchResults.genre.join(', ')}</p>
-        <p> ______  </p>
-        <p>Average rating: {ratingResult.rating}</p>
-        <p>Your rating: {UserRatingResult.rating}</p>
-
-        <p> ______  </p>
-        <p> Rate it:  </p>
-        <div className="star-rating">
-          {[...Array(5)].map((star, index) => {
-            index += 1;
-            return (
-              <button
-                type="button"
-                key={index}
-                className={index <= (hover || rating) ? "on" : "off"}
-                onClick={() => setRating(index)}
-                onMouseEnter={() => setHover(index)}
-                onMouseLeave={() => setHover(rating)}
-              >
-                <span className="star">&#9733;</span>
-              </button>
-            );
-          })}
-        </div>
-        <button className="submit-button" type="submit" onClick={sendRating}>
-            Submit Rating
-          </button>
+        {/* <h2>Song</h2> */}
+        <div className="song__container">
+          <div className="song">
+          <p className="title">{searchResults.title}</p>
+          <p className="album">{searchResults.album}</p>
+          <p className="artist">{searchResults.artist}</p>
+          {/* <p>Genres: {searchResults.genre.join(', ')}</p> */}
+          <p className="genres">Genres: {searchResults.genre.map((genre, index) => <span key={index}>{genre}</span>)}</p>
+          <hr />
+          <p>Average rating: {ratingResult.rating}</p>
+          <p>Your rating: {UserRatingResult.rating}</p>
+          <hr />
+          <p> Rate it:  </p>
+          <div className="star-rating">
+            {[...Array(5)].map((star, index) => {
+              index += 1;
+              return (
+                <button
+                  type="button"
+                  key={index}
+                  className={index <= (hover || rating) ? "on" : "off"}
+                  onClick={() => setRating(index)}
+                  onMouseEnter={() => setHover(index)}
+                  onMouseLeave={() => setHover(rating)}
+                >
+                  <span className="star">&#9733;</span>
+                </button>
+              );
+            })}
+          </div>
+          <button className="submit-button" type="submit" onClick={sendRating}>
+              Submit Rating
+            </button>
+          </div>
         </div>
       </div>
         <Widgets className="widgets" />
