@@ -1,24 +1,86 @@
+
 .song {
-    flex: 0.4;
-    border-right: 1px solid var(--twitter-background);
-    min-width: fit-content;
-    min-width: 35vw;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  min-width: fit-content;
+  min-width: 35vw;
+}
+
+.song p {
+  margin: 5px 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.song .title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.song .artist {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.song .album {
+  font-size: 18px;
+  font-weight: 500;
+  color: lightslategray;
+}
+
+.genres {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.genres span {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  background-color: var(--twitter-color);
+  color: whitesmoke;
+  border-radius: 20px;
+}
+
+.song hr {
+  border: none;
+  border-top: 2px solid var(--twitter-color);
+  width: 100%;
+  margin: 20px 0;
+}
+
 
   .song__header {
     position: sticky;
     top: 0;
     background-color: white;
-    z-index: 100;
-    border: 1px solid var(--twitter-background);
-    padding: 15px 20px;
+    z-index: 10;
+    /* border: 1px solid red; */
+    padding: 0px 20px;
+    width: 40vw;
   }
   
-  .song__header > h2 {
+  /* .song__header > h2 {
     font-size: 20px;
     font-weight: 800;
-  }
+  } */
 
+  .song__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--twitter-background);
+    border: 2px solid var(--twitter-color);
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    margin-top: 10px;
+  }
+  
   .song_info {
     min-width: 40vw;
   }
@@ -39,14 +101,41 @@
   .off {
     color: #ccc;
   }
+
+  .star-rating {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+  }
+  
+  .star-rating button {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .star-rating .star {
+    font-size: 18px;
+    margin: 0 3px;
+  }
+  
+  .star-rating button.on .star {
+    color: var(--twitter-color);
+  }
+  
+  .star-rating button.off .star {
+    color: #ccc;
+  }
+  
+
   .submit-button {
     background-color: var(--twitter-color);
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 20px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 20px;
   }
 
   .submit-button:hover {
