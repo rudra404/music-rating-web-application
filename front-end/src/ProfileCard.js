@@ -5,7 +5,6 @@ import { Button } from "@material-ui/core";
 export default function ProfileCard(props) {
   const numOfFolowers = props.followers.length;
   const user = props.user;
-  console.log(props);
   return (
     <div className="container">
       <div className="profilecard">
