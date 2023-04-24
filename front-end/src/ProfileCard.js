@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ProfileCard.css";
+import { Button } from "@material-ui/core";
 
 export default function ProfileCard(props) {
   const numOfFolowers = props.followers.length;
@@ -18,6 +19,15 @@ export default function ProfileCard(props) {
           <div>Followers</div>
         </div>
       </div>
+      {/* <Button
+        variant="outlined"
+        className="bestButtonLight"
+        fullWidth
+        input
+        type="submit"
+      >
+        Change username
+      </Button> */}
     </div>
   );
 }

@@ -1,9 +1,10 @@
 .container {
   width: 90%;
   /* height: 100vh; */
-  display: flex;
   align-items: center;
   justify-content: center;
+  caret-color: transparent;
+  max-width: 320px;
 }
 
 .profilecard {

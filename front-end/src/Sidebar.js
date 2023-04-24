@@ -67,7 +67,7 @@ function Sidebar() {
         <Button
           // href="/login"
           variant="outlined"
-          className="sidebar__tweet"
+          className="bestButton"
           onClick={handleLogout}
           fullWidth
         >
@@ -77,7 +77,7 @@ function Sidebar() {
         <Button
           href="/login"
           variant="outlined"
-          className="sidebar__tweet"
+          className="bestButton"
           fullWidth
         >
           Log in

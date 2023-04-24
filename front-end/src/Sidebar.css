@@ -14,7 +14,7 @@
   margin-bottom: 20px;
 }
 
-.sidebar__tweet {
+.bestButton {
   background-color: var(--twitter-color) !important;
   border: none !important;
   color: white !important;
@@ -25,7 +25,23 @@
   margin-top: 20px !important;
 }
 
-.sidebar__tweet:hover {
+.bestButton:hover {
   background-color: var(--twitter-color-light) !important;
   color: var(--twitter-color) !important;
+}
+
+.bestButtonLight {
+  background-color: var(--twitter-color-background) !important;
+  border: none !important;
+  color: var(--twitter-color-light) !important;
+  font-weight: 900 !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
+}
+
+.bestButtonLight:hover {
+  background-color: var(--twitter-color) !important;
+  color: white !important;
 }

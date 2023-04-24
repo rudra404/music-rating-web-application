@@ -154,7 +154,7 @@ function Register() {
               />
               <Button
                 variant="outlined"
-                className="sidebar__tweet"
+                className="bestButton"
                 fullWidth
                 input
                 type="submit"

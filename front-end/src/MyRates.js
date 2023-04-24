@@ -4,7 +4,7 @@ import "./Home.css";
 import Widgets from "./Widgets";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
-import Header from './Header';
+import Header from "./Header";
 
 function MyRates() {
   const { userID } = useContext(AuthContext);
@@ -31,14 +31,14 @@ function MyRates() {
   }
   useEffect(() => {
     getRatings();
-  },[userID]);
-  
+  }, [userID]);
+
   return (
     <div className="home">
       <Header className="main_header" />
       <div className="profile">
         <div className="profile__header">
-          <h2>Profile</h2>
+          <h2>My rates</h2>
         </div>
         <div className="profile__ratings">
           <h3>Ratings:</h3>
