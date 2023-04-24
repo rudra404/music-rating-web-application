@@ -27,7 +27,7 @@ def getFeed():
        for i in range (len(followings)):
           followingsID.append(followings[i]['userID'])
 
-       ratingsFeed = [] # array containing an array for each person you follow which contains an array with song info, rating,
+       ratingsFeed = [] # array containing an array for each person you follow which contains an array with song info, rating, datetime for rating,
                         # user who rated for every song they have rated
 
        for i in range (len(followingsID)):
@@ -40,10 +40,11 @@ def getFeed():
           for j in range (len(followerRatings)):
              song = (requests.get(f'http://localhost:5050/search_id/{followerRatings[j][0]}')).json()
              song.append(followerRatings[j][1])
+             song.append(followerRatings[j][2])
              song.append(name)
              ratingsFeed.append(song)   
-
-   return ratingsFeed
+       sortedFeed = sorted(ratingsFeed, key=lambda x: x[2], reverse=True)
+   return sortedFeed
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5051)

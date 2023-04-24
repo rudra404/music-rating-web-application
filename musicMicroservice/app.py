@@ -120,7 +120,7 @@ def all_ratings():
         userID  = request.args.get('userID')
         conn = sqlite3.connect('best_listens.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT track_id, rating FROM ratings WHERE user_id=? ", (userID))
+        cursor.execute("SELECT track_id, rating, updated_at FROM ratings WHERE user_id=? ", (userID))
         ratings = cursor.fetchall()
         conn.close()
     return ratings    
