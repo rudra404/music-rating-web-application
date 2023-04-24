@@ -41,7 +41,7 @@
   /* background-color: var(--twitter-background); */
   color: white;
   border-radius: 20px;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .widgets__widgetContainer > h2 {
