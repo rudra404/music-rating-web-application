@@ -1,4 +1,3 @@
-
 .song {
   display: flex;
   flex-direction: column;
@@ -28,7 +27,6 @@
 .song .album {
   font-size: 18px;
   font-weight: 500;
-  color: lightslategray;
 }
 
 .genres {
@@ -53,91 +51,90 @@
   margin: 20px 0;
 }
 
+.song__header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 10;
+  /* border: 1px solid red; */
+  padding: 0px 20px;
+  width: 40vw;
+}
 
-  .song__header {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 10;
-    /* border: 1px solid red; */
-    padding: 0px 20px;
-    width: 40vw;
-  }
-  
-  /* .song__header > h2 {
+/* .song__header > h2 {
     font-size: 20px;
     font-weight: 800;
   } */
 
-  .song__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: var(--twitter-background);
-    border: 2px solid var(--twitter-color);
-    border-radius: 20px;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-    margin-top: 10px;
-  }
-  
-  .song_info {
-    min-width: 40vw;
-  }
+.song__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--twitter-color-light);
+  /* border: 2px solid var(--twitter-color); */
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  caret-color: transparent;
+}
 
-  .widgets {
-    min-width: 30vw;
-  }
-  button {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 15px 5px;
-  }
-  .on {
-    color: #000;
-  }
-  .off {
-    color: #ccc;
-  }
+.song_info {
+  min-width: 40vw;
+}
 
-  .star-rating {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-  }
-  
-  .star-rating button {
-    background-color: transparent;
-    padding: 0;
-  }
-  
-  .star-rating .star {
-    font-size: 18px;
-    margin: 0 3px;
-  }
-  
-  .star-rating button.on .star {
-    color: var(--twitter-color);
-  }
-  
-  .star-rating button.off .star {
-    color: #ccc;
-  }
-  
+.widgets {
+  min-width: 30vw;
+}
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 15px 5px;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}
 
-  .submit-button {
-    background-color: var(--twitter-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
+.star-rating {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
 
-  .submit-button:hover {
-    background-color: #5c40ebbf;
-  }
+.star-rating button {
+  background-color: transparent;
+  padding: 0;
+}
+
+.star-rating .star {
+  font-size: 18px;
+  margin: 0 3px;
+}
+
+.star-rating button.on .star {
+  color: var(--twitter-color);
+}
+
+.star-rating button.off .star {
+  color: #ccc;
+}
+
+.submit-button {
+  background-color: var(--twitter-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #5c40ebbf;
+}
