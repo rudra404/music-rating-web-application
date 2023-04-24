@@ -17,6 +17,7 @@ import Profile from "./Profile";
 import Login from "./Login";
 import Register from "./Register";
 import Song from "./Song";
+import Header from "./Header";
 function App() {
   const [authState, setAuthState] = useState(false);
   const [userID, setUserID] = useState(false);
@@ -80,13 +81,9 @@ function App() {
 const Root = () => {
   return (
     <>
-      <div>
-        <Sidebar />
-      </div>
-
-      <div>
-        <Outlet />
-      </div>
+      <Header />
+      <Sidebar />
+      <Outlet />
     </>
   );
 };

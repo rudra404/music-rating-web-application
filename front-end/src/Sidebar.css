@@ -24,3 +24,8 @@
   height: 50px !important;
   margin-top: 20px !important;
 }
+
+.sidebar__tweet:hover {
+  background-color: #c0c0ff !important;
+  color: var(--twitter-color) !important;
+}

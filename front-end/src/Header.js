@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
-import './Header.css';
-import logo from './logo.png';
+import "./Header.css";
+import logo from "./logo.png";
 import { Button } from "@material-ui/core";
 import { AuthContext } from "./helpers/AuthContext";
 
 import { useNavigate } from "react-router-dom";
 // import "./Sidebar.css";
-
-
 
 function Header() {
   const navigate = useNavigate();
@@ -21,12 +19,12 @@ function Header() {
 
   return (
     <div className="main_header">
-      <div className="header_content">
-        <img src={logo} alt="BestListens logo" />
+      <div className="header_content" onClick={() => navigate("/")}>
+        <img className="logo" src={logo} alt="BestListens logo" />
         <h1>BestListens</h1>
       </div>
       {/* <div>Other header content here</div> */}
-      
+
       {authState ? (
         <Button
           // href="/login"
@@ -50,6 +48,5 @@ function Header() {
     </div>
   );
 }
-
 
 export default Header;
