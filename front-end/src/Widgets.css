@@ -25,7 +25,7 @@
   margin-top: 15px;
   margin-left: 20px;
   padding: 5px;
-  background-color: var(--twitter-color);
+  background-color: var(--twitter-background);
   border-radius: 20px;
 }
 
@@ -38,23 +38,24 @@
 .widget_container {
   height: 150px; /* Set the height of the container to the desired value */
   overflow-y: scroll; /* Enable vertical scrolling */
-  background-color: var(--twitter-background);
+  /* background-color: var(--twitter-background); */
   color: white;
   border-radius: 20px;
   margin-top: 10px;
 }
 
-.widget_container > h2 {
+.widgets__widgetContainer > h2 {
   font-size: 18px;
   font-weight: 800;
   margin-left: 5px;
   height: 30px;
   width: 100px;
   margin-top: 5px;
-  background-color: var(--twitter-color);
+  /* background-color: var(--twitter-color-light); */
+  color: var(--twitter-color);
   border-radius: 15px;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -63,9 +64,9 @@
   padding: 2px;
   list-style: none;
 }
-  
+
 .search-result-links {
-  background-color: #5c40eb51;
+  background-color: var(--twitter-color-light);
   border-radius: 10px;
   font-weight: 300;
   color: black; /* set the color of the link text */
@@ -78,7 +79,7 @@
 }
 
 .search-result-links:hover {
-  background-color: #5c40eb2d;
+  background-color: #a4a4ff;
   border-radius: 10px;
   font-weight: 300;
   color: black; /* set the color of the link text */
@@ -89,6 +90,3 @@
   padding-left: 10px;
   padding-right: 10px;
 }
-
-
-

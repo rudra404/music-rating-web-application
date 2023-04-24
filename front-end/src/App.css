@@ -1,6 +1,7 @@
 body {
   --twitter-color: #5d40eb;
   --twitter-background: #f4f8fa;
+  --twitter-color-light: #c0c0ff;
 }
 
 .app {
@@ -10,4 +11,18 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding: 0 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--twitter-color);
 }

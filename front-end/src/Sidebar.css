@@ -26,6 +26,6 @@
 }
 
 .sidebar__tweet:hover {
-  background-color: #c0c0ff !important;
+  background-color: var(--twitter-color-light) !important;
   color: var(--twitter-color) !important;
 }

@@ -21,7 +21,7 @@
 
 .header_content:hover {
   cursor: pointer;
-  color: #c0c0ff;
+  color: var(--twitter-color-light);
 }
 
 .header_content img {
@@ -51,5 +51,5 @@
 }
 
 .login__button:hover {
-  background-color: #c0c0ff !important;
+  background-color: var(--twitter-color-light) !important;
 }

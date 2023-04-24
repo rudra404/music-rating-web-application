@@ -10,28 +10,36 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 function Widgets() {
   const [searchValue, setSearchValue] = useState("");
-  const [searchResults, setSearchResults] = useState({ songs: [], artists: [], albums: [] });
+  const [searchResults, setSearchResults] = useState({
+    songs: [],
+    artists: [],
+    albums: [],
+  });
 
   function search(searchValue) {
     setSearchValue(searchValue);
-    if (searchValue.trim() !== "") { // Check if searchValue is not blank
+    if (searchValue.trim() !== "") {
+      // Check if searchValue is not blank
       axios
         .get(`http://localhost:5050/search2/?search=${searchValue}`)
         .then((response) => {
           setSearchResults({
             songs: response.data[0] || [],
             artists: response.data[1] || [],
-            albums: response.data[2] || []
+            albums: response.data[2] || [],
           });
         });
-    } else { // If searchValue is blank, clear the search results
+    } else {
+      // If searchValue is blank, clear the search results
       setSearchResults({ songs: [], artists: [], albums: [] });
     }
   }
   function SearchResultItem({ result }) {
     return (
       <div>
-        <p>{result[1]}, {result[2]}, {result[3]}</p>
+        <p>
+          {result[1]}, {result[2]}, {result[3]}
+        </p>
         {/* Add any other fields you want to display here */}
       </div>
     );
@@ -49,42 +57,54 @@ function Widgets() {
         />
       </div>
       <div className="widgets__widgetContainer">
+        <h2>Songs</h2>
         <div className="widget_container">
-          <h2>Songs</h2>
-
           <ul>
             {searchResults.songs.map((song, index) => (
-              <Link to={`/song/${song[0]}`} key={index} className="search-result-links">
-                <SearchResultItem result={song} className="search-result-items"/>
+              <Link
+                to={`/song/${song[0]}`}
+                key={index}
+                className="search-result-links"
+              >
+                <SearchResultItem
+                  result={song}
+                  className="search-result-items"
+                />
               </Link>
             ))}
           </ul>
         </div>
+        <h2>Artists</h2>
         <div className="widget_container">
-          <h2>Artists</h2>
           <ul>
             {searchResults.artists.map((artist, index) => (
-              <Link to={`/song/${artist[0]}`} key={index} className="search-result-links">
+              <Link
+                to={`/song/${artist[0]}`}
+                key={index}
+                className="search-result-links"
+              >
                 <SearchResultItem result={artist} />
               </Link>
             ))}
           </ul>
         </div>
+        <h2>Albums</h2>
         <div className="widget_container">
-          <h2>Albums</h2>
           <ul>
             {searchResults.albums.map((album, index) => (
-              <Link to={`/song/${album[0]}`} key={index} className="search-result-links">
+              <Link
+                to={`/song/${album[0]}`}
+                key={index}
+                className="search-result-links"
+              >
                 <SearchResultItem result={album} />
               </Link>
             ))}
           </ul>
         </div>
       </div>
-
     </div>
   );
-  
 }
 
 export default Widgets;
