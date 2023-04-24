@@ -68,6 +68,7 @@
 .search-result-links {
   background-color: var(--twitter-color-light);
   border-radius: 10px;
+  width: 90%;
   font-weight: 300;
   color: black; /* set the color of the link text */
   display: inline-block;
@@ -89,4 +90,12 @@
   margin-top: 2px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.songtitle {
+  font-weight: bold;
+}
+
+.album {
+  font-style: italic;
 }

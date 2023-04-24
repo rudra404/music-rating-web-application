@@ -1,0 +1,23 @@
+.list-song {
+  background-color: var(--twitter-color-light);
+  width: 90%;
+  border-radius: 10px;
+  font-weight: 300;
+  color: black; /* set the color of the link text */
+  display: inline-block;
+  padding: 2px; /* add some padding around the link */
+  text-decoration: none; /* remove the underline */
+  margin-top: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  caret-color: transparent;
+}
+
+.list-song:hover {
+  background-color: #a4a4ff;
+  cursor: pointer;
+}
+
+.songtitle {
+  font-weight: bold;
+}
