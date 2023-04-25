@@ -22,19 +22,23 @@
 .song .artist {
   font-size: 20px;
   font-weight: 600;
+  margin: 0;
 }
 
 .song .album {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
+  margin: 0;
 }
 
 .genres {
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 12px;
+  margin: 0;
 }
 
 .genres span {
+  font-size: 12px;
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -121,7 +125,7 @@ button {
 }
 
 .star-rating button.off .star {
-  color: #ccc;
+  color: white;
 }
 
 .submit-button {
