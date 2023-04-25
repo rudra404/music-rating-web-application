@@ -22,6 +22,7 @@ function Song() {
   const [hover, setHover] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
   const { authState, userID } = useContext(AuthContext);
+
   function getSongInfo() {
     axios.get(`http://localhost:5050/search_id/${id}`).then((response) => {
       setSearchResults({
@@ -78,6 +79,12 @@ function Song() {
     }
   }
 
+  async function button() {
+    sendRating();
+    getSongRating(id);
+    checkUserRating();
+  }
+
   async function handleRatingChange(index) {
     rate = index;
     sendRating();
@@ -92,6 +99,11 @@ function Song() {
     setSubmitClicked(false);
   }, [id, submitClicked]);
 
+  useEffect(() => {
+    checkUserRating();
+    setSubmitClicked(false);
+  }, [userID, submitClicked]);
+
   return (
     <div className="home">
       <Header className="main_header" />
@@ -99,23 +111,27 @@ function Song() {
         {/* <h2>Song</h2> */}
         <div className="song__container">
           <div className="song">
-            <p className="title">{searchResults.title}</p>
-            <p className="album">{searchResults.album}</p>
+            <p className="ratesongtitle">{searchResults.title}</p>
             <p className="artist">{searchResults.artist}</p>
-            {/* <p>Genres: {searchResults.genre.join(', ')}</p> */}
+            <p className="album">{searchResults.album}</p>
             <p className="genres">
               Genres:{" "}
               {searchResults.genre.map((genre, index) => (
                 <span key={index}>{genre.toUpperCase()}</span>
               ))}
             </p>
-            <p>Average rating: {ratingResult.rating}</p>
-            {authState && (
+            {ratingResult.rating !== "Not rated yet" && (
               <>
-                {console.log(UserRatingResult.rating.size)}
-                <p>Your rating: {UserRatingResult.rating}</p>
+                <p>Average rating: {ratingResult.rating}</p>
               </>
             )}
+            {/* {authState && (
+              <>
+                {UserRatingResult.rating !== "Not rated yet" && (
+                  <p>Your rating: {UserRatingResult.rating}</p>
+                )}
+              </>
+            )} */}
             {authState && (
               <>
                 <p> Rate it: </p>
