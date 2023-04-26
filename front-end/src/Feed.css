@@ -29,3 +29,37 @@
   font-size: 20px;
   font-weight: 800;
 }
+
+.feedcontainer {
+  margin: 10px;
+}
+
+.postDate {
+  font-size: small;
+  float: right;
+}
+
+.postUser {
+  font-weight: 700;
+}
+
+.postRating {
+  margin: 0 !important;
+  margin-left: 20px !important;
+}
+
+.userRating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.userPostProfile {
+  width: auto !important;
+  padding: 0 !important;
+  margin-right: 20px !important;
+  background-color: transparent !important;
+}

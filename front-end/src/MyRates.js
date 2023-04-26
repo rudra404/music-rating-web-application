@@ -59,7 +59,7 @@ function MyRates() {
         <div className="profile__header">
           <h2>My rates</h2>
         </div>
-        <div className="profile__ratings">
+        <div className="myRatings">
           <div className="ratingHeadings">
             <h3>Songs</h3>
             <h3>Ratings</h3>

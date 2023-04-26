@@ -72,24 +72,16 @@
   font-weight: 300;
   color: black; /* set the color of the link text */
   display: inline-block;
-  padding: 2px; /* add some padding around the link */
+  padding: 10px; /* add some padding around the link */
   text-decoration: none; /* remove the underline */
   margin-top: 2px;
   padding-left: 10px;
   padding-right: 10px;
+  margin-bottom: 5px;
 }
 
 .search-result-links:hover {
   background-color: #a4a4ff;
-  border-radius: 10px;
-  font-weight: 300;
-  color: black; /* set the color of the link text */
-  display: inline-block;
-  padding: 2px; /* add some padding around the link */
-  text-decoration: none; /* remove the underline */
-  margin-top: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 .songtitle {
