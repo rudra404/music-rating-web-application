@@ -15,6 +15,7 @@ function Home() {
 
   return (
     <div className="home">
+      <Header className="main_header" />
       <Feed className="feed" />
       <Widgets className="widgets" />
     </div>

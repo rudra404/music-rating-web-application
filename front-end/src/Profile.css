@@ -2,13 +2,14 @@
   flex: 0.4;
   border-right: 1px solid var(--twitter-background);
   min-width: 40vw;
+  caret-color: transparent;
 }
 
 .profile__header {
   position: sticky;
   top: 0;
   background-color: white;
-  z-index: 100;
+  z-index: 10;
   border: 1px solid var(--twitter-background);
   padding: 15px 20px;
 }

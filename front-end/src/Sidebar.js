@@ -62,11 +62,11 @@ function Sidebar() {
       {/* <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" /> */}
 
       {/* Button -> Tweet */}
-      {authState ? (
+      {/* {authState ? (
         <Button
           // href="/login"
           variant="outlined"
-          className="sidebar__tweet"
+          className="bestButton"
           onClick={handleLogout}
           fullWidth
         >
@@ -76,12 +76,12 @@ function Sidebar() {
         <Button
           href="/login"
           variant="outlined"
-          className="sidebar__tweet"
+          className="bestButton"
           fullWidth
         >
           Log in
         </Button>
-      )}
+      )} */}
     </div>
   );
 }

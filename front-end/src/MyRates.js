@@ -4,6 +4,8 @@ import "./Home.css";
 import Widgets from "./Widgets";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
+import { Link } from "react-router-dom";
+import Header from "./Header";
 
 function MyRates() {
   const { userID } = useContext(AuthContext);
@@ -30,23 +32,52 @@ function MyRates() {
   }
   useEffect(() => {
     getRatings();
-  },[userID]);
-  
+  }, [userID]);
+
+  function ListSong({ result }) {
+    return (
+      <>
+        <div className="songtitle">
+          <h4>{result[0]}</h4>
+        </div>
+        <div className="artist">By {result[1]}</div>
+        <div className="album">{result[2]}</div>
+      </>
+    );
+  }
+
   return (
     <div className="home">
+      <Header className="main_header" />
       <div className="profile">
         <div className="profile__header">
-          <h2>Profile</h2>
+          <h2>My rates</h2>
         </div>
         <div className="profile__ratings">
-          <h3>Ratings:</h3>
-          <ul>
-            {allRatings.ratings.map((rating, index) => (
-              <li key={index}>
-                {rating[0]} - {rating[1]} - {rating[2]} | Rating: {rating[3]}
-              </li>
-            ))}
-          </ul>
+          <div className="ratingHeadings">
+            <h3>Songs</h3>
+            <h3>Ratings</h3>
+          </div>
+
+          {allRatings.ratings.map((rating, index) => (
+            <div className="listRatings">
+              <Link
+                to={`/song/${rating[0]}`}
+                key={index}
+                className="search-result-links"
+              >
+                <ListSong result={rating} />
+                {/* <SearchResultItem
+                        result={song}
+                        className="search-result-items"
+                      /> */}
+              </Link>
+              <div className="rating">{rating[3]}</div>
+            </div>
+            // <li key={index}>
+            //   {rating[0]} - {rating[1]} - {rating[2]} | Rating: {rating[3]}
+            // </li>
+          ))}
         </div>
       </div>
       <Widgets className="widgets" />

@@ -5,6 +5,7 @@ import Widgets from "./Widgets";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
+import Header from "./Header";
 
 function Song() {
   const { id } = useParams();
@@ -16,13 +17,13 @@ function Song() {
   });
   const [ratingResult, setRatingResult] = useState({ rating: [] });
   const [UserRatingResult, setUserRatingResult] = useState({ rating: [] });
-
+  let rate = 0;
   const [rating, setRating] = useState(0);
   let rate = 0;
   const [hover, setHover] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
   const { authState, userID } = useContext(AuthContext);
-  // console.log(userID);
+
   function getSongInfo() {
     axios.get(`http://localhost:5050/search_id/${id}`).then((response) => {
       setSearchResults({
@@ -63,14 +64,6 @@ function Song() {
     }
   }
 
-  async function handleRatingChange(index) {
-    rate = index;
-    sendRating();
-    getSongRating();
-    checkUserRating();
-    // button();
-  }
-
   function sendRating() {
     if (authState === false) {
       // Check user is logged in
@@ -86,10 +79,19 @@ function Song() {
         });
     }
   }
+
   async function button() {
     sendRating();
     getSongRating(id);
     checkUserRating();
+  }
+
+  async function handleRatingChange(index) {
+    rate = index;
+    sendRating();
+    getSongRating();
+    checkUserRating();
+    // button();
   }
 
   useEffect(() => {
@@ -105,96 +107,80 @@ function Song() {
 
   return (
     <div className="home">
+      <Header className="main_header" />
       <div className="song__header">
-        <div className="card">
-          {/* <img src="img_avatar.png" alt="Avatar" style="width:100%"> */}
-          <div className="container">
-            <div className="songtitle">
-              <h2>{searchResults.title}</h2>
-            </div>
-            <div className="description">
-              <p>
-                <strong>{searchResults.artist}</strong>
-              </p>
-              <p>{searchResults.album}</p>
-
-              {searchResults.genre &&
-                searchResults.genre.forEach((item) => {
-                  return <div className="tag">{item}</div>;
-                })}
-
-              <p>
-                {ratingResult.rating != "Not rated yet" && (
-                  <>
-                    {ratingResult.rating} <br />
-                    <i data-star={ratingResult.rating}></i>
-                  </>
+        {/* <h2>Song</h2> */}
+        <div className="song__container">
+          <div className="song">
+            <p className="ratesongtitle">{searchResults.title}</p>
+            <p className="artist">{searchResults.artist}</p>
+            <p className="album">{searchResults.album}</p>
+            <p className="genres">
+              Genres:{" "}
+              {searchResults.genre.map((genre, index) => (
+                <span key={index}>{genre.toUpperCase()}</span>
+              ))}
+            </p>
+            {ratingResult.rating !== "Not rated yet" && (
+              <>
+                <p>Average rating: {ratingResult.rating}</p>
+              </>
+            )}
+            {/* {authState && (
+              <>
+                {UserRatingResult.rating !== "Not rated yet" && (
+                  <p>Your rating: {UserRatingResult.rating}</p>
                 )}
-              </p>
-
-              {authState && (
-                <>
-                  <div className="star-rating">
-                    {[...Array(5)].map((star, index) => {
-                      index += 1;
-                      return (
-                        <button
-                          type="button"
-                          key={index}
-                          className={index <= (hover || rating) ? "on" : "off"}
-                          onClick={() => handleRatingChange(index)}
-                          onMouseEnter={() => setHover(index)}
-                          onMouseLeave={() => setHover(rating)}
-                        >
-                          <span className="star">&#9733;</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </>
-              )}
+              </>
+            )} */}
+            {authState && (
+              <>
+                <p> Rate it: </p>
+                <div className="star-rating">
+                  {[...Array(5)].map((star, index) => {
+                    index += 1;
+                    return (
+                      <button
+                        type="button"
+                        key={index}
+                        className={index <= (hover || rating) ? "on" : "off"}
+                        onClick={() => handleRatingChange(index)}
+                        onMouseEnter={() => setHover(index)}
+                        onMouseLeave={() => setHover(rating)}
+                      >
+                        <span className="star">&#9733;</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+            {/* <div className="star-rating">
+              {[...Array(5)].map((star, index) => {
+                index += 1;
+                return (
+                  <button
+                    type="button"
+                    key={index}
+                    className={index <= (hover || rating) ? "on" : "off"}
+                    onClick={() => setRating(index)}
+                    onMouseEnter={() => setHover(index)}
+                    onMouseLeave={() => setHover(rating)}
+                  >
+                    <span className="star">&#9733;</span>
+                  </button>
+                );
+              })}
             </div>
+            <button
+              className="submit-button"
+              type="submit"
+              onClick={sendRating}
+            >
+              Submit Rating
+            </button> */}
           </div>
         </div>
-
-        {/* <h2>Song</h2>
-        <div className="song">
-          <p> _____ </p>
-          <p>Title: {searchResults.title}</p>
-          <p>Artist: {searchResults.artist}</p>
-          <p>Album: {searchResults.album}</p>
-          <p>Genres: {searchResults.genre.join(", ")}</p>
-          <p> ______ </p>
-          <p>Average rating: {ratingResult.rating}</p>
-          {authState && <p>Your rating: {UserRatingResult.rating}</p>}
-
-          {authState && (
-            <>
-              <p> ______ </p>
-              <p> Rate it: </p>
-              <div className="star-rating">
-                {[...Array(5)].map((star, index) => {
-                  index += 1;
-                  return (
-                    <button
-                      type="button"
-                      key={index}
-                      className={index <= (hover || rating) ? "on" : "off"}
-                      onClick={() => setRating(index)}
-                      onMouseEnter={() => setHover(index)}
-                      onMouseLeave={() => setHover(rating)}
-                    >
-                      <span className="star">&#9733;</span>
-                    </button>
-                  );
-                })}
-              </div>
-              <button className="submit-button" type="submit" onClick={button}>
-                Submit Rating
-              </button>
-            </>
-          )}
-        </div> */}
       </div>
       <Widgets className="widgets" />
     </div>

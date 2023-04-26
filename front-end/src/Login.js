@@ -38,8 +38,6 @@ function Login() {
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
-    console.log(uname.value);
-    console.log(pass.value);
     login(uname.value, pass.value);
   };
 
@@ -77,7 +75,7 @@ function Login() {
         </div>
         <Button
           variant="outlined"
-          className="sidebar__tweet"
+          className="bestButton"
           fullWidth
           input
           type="submit"

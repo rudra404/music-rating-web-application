@@ -3,6 +3,7 @@ import "./Profile.css";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 import ProfileCard from "./ProfileCard";
+import Header from "./Header";
 
 function Profile() {
   const { userID } = useContext(AuthContext);
@@ -69,9 +70,10 @@ function Profile() {
 
   return (
     <div className="home">
+      <Header className="main_header" />
       <div className="profile">
         <div className="profile__header">
-          <h2>Profile</h2>
+          <h2>My profile</h2>
         </div>
 
         <ProfileCard user={user} followers={followers} />

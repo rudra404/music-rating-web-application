@@ -38,7 +38,6 @@ router.post("/createUser", async (req, res) => {
   const { username, email } = req.body;
   const emailCount = await Users.count({ where: { email: email } });
   const usernameCount = await Users.count({ where: { username: username } });
-  console.log(usernameCount);
   if (usernameCount == 0 && emailCount == 0) {
     await Users.create({
       username: username,
@@ -92,8 +91,8 @@ router.post("/login", async (req, res) => {
   const passwords = await Passwords.findAll({ where: { UserId: user.id } });
   passwords.length > 0 &&
     passwords.forEach((pwd) => {
-      console.log(pwd);
-      console.log(accessToken);
+      // console.log(pwd);
+      // console.log(accessToken);
       const decryptedPassword = decrypt({
         password: pwd.password,
         iv: pwd.iv,

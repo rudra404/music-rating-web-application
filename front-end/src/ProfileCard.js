@@ -1,17 +1,32 @@
 import React, { useState } from "react";
 import "./ProfileCard.css";
+import { Button } from "@material-ui/core";
 
 export default function ProfileCard(props) {
   const numOfFolowers = props.followers.length;
   const user = props.user;
-  console.log(props);
   return (
-    <>
-      {user && user.username}
-      <br />
-      {user && user.email}
-      <br />
-      Followers: {numOfFolowers}
-    </>
+    <div className="container">
+      <div className="profilecard">
+        <div
+          data-initials={user && user.username.charAt(0).toUpperCase()}
+        ></div>
+        <div>
+          <h3>{user && user.username}</h3>
+          <div className="email">{user && user.email}</div>
+          <div className="followers">{numOfFolowers}</div>
+          <div>Followers</div>
+        </div>
+      </div>
+      {/* <Button
+        variant="outlined"
+        className="bestButtonLight"
+        fullWidth
+        input
+        type="submit"
+      >
+        Change username
+      </Button> */}
+    </div>
   );
 }
