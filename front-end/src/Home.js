@@ -5,7 +5,6 @@ import "./Home.css";
 import { AuthContext } from "./helpers/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
 
 function Home() {
   const navigate = useNavigate();
@@ -16,7 +15,6 @@ function Home() {
 
   return (
     <div className="home">
-      <Header className="main_header" />
       <Feed className="feed" />
       <Widgets className="widgets" />
     </div>

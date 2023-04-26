@@ -5,7 +5,6 @@ import Widgets from "./Widgets";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 import { Link } from "react-router-dom";
-import Header from "./Header";
 
 function MyRates() {
   const { userID } = useContext(AuthContext);
@@ -54,7 +53,6 @@ function MyRates() {
 
   return (
     <div className="home">
-      <Header className="main_header" />
       <div className="profile">
         <div className="profile__header">
           <h2>My rates</h2>
