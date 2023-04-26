@@ -9,7 +9,7 @@ CORS(app)
 def hello_world():
    return 'musicMicroservice is running on port 5051'
 
-@app.route('/getFeed', methods=['POST', 'GET'])
+@app.route('/getFeed', methods=['GET'])
 def getFeed():
    if request.method == 'GET':
        userID = request.args.get('userID')
@@ -45,6 +45,11 @@ def getFeed():
              ratingsFeed.append(song)   
        sortedFeed = sorted(ratingsFeed, key=lambda x: x[2], reverse=True)
        return sortedFeed
+@app.route('/getFeedGeneric', methods=['GET'])
+def getFeedGeneric():
+   return
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5051)
