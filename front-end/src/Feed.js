@@ -103,6 +103,20 @@ function Feed() {
     );
   }
 
+  function GenericPost({ result }) {
+    return (
+      <>
+        {/* <h4>{result[0]}</h4> */}
+        <ListSong result={result[0]} />
+
+        <div className="userRating">
+          <div className="postUser">Rated by listeners</div>
+          <div className="postRating" data-initials={result[1]}></div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <div className="feed">
       <div className="feed__header">
@@ -114,7 +128,11 @@ function Feed() {
           feedData.map((post) => {
             return (
               <div className="search-result-links">
-                <ListPost result={post} />
+                {authState == true ? (
+                  <ListPost result={post} />
+                ) : (
+                  <GenericPost result={post} />
+                )}
               </div>
             );
           })}
