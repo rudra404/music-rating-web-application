@@ -139,10 +139,10 @@ def top_ratings():
     # Create a list of dictionaries to store the results
     top_tracks = []
     for result in results:
-        track_dict = {'track_id': result[0], 'avg_rating': result[1]}
+        track_dict = [result[0], result[1]]
         top_tracks.append(track_dict)
     conn.close()
-    return jsonify({'top_tracks': top_tracks})
+    return jsonify(top_tracks)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5050)
