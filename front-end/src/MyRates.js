@@ -24,7 +24,13 @@ function MyRates() {
         `http://localhost:5050/search_id/${id}`
       );
       const songInfo = songInfoResponse.data[0];
-      updatedRatings.push([songInfo[1], songInfo[2], songInfo[3], rating]);
+      updatedRatings.push([
+        songInfo[0],
+        songInfo[1],
+        songInfo[2],
+        songInfo[3],
+        rating,
+      ]);
     }
     setAllRatings({
       ratings: updatedRatings,
@@ -38,10 +44,10 @@ function MyRates() {
     return (
       <>
         <div className="songtitle">
-          <h4>{result[0]}</h4>
+          <h4>{result[1]}</h4>
         </div>
-        <div className="artist">By {result[1]}</div>
-        <div className="album">{result[2]}</div>
+        <div className="artist">By {result[2]}</div>
+        <div className="album">{result[3]}</div>
       </>
     );
   }
@@ -72,7 +78,7 @@ function MyRates() {
                         className="search-result-items"
                       /> */}
               </Link>
-              <div className="rating">{rating[3]}</div>
+              <div className="rating">{rating[4]}</div>
             </div>
             // <li key={index}>
             //   {rating[0]} - {rating[1]} - {rating[2]} | Rating: {rating[3]}
