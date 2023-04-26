@@ -19,6 +19,7 @@ function Song() {
   const [UserRatingResult, setUserRatingResult] = useState({ rating: [] });
   let rate = 0;
   const [rating, setRating] = useState(0);
+  let rate = 0;
   const [hover, setHover] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
   const { authState, userID } = useContext(AuthContext);

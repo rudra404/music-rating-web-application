@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS 
 import sqlite3
 from sqlite3 import Error
+from flask import jsonify
 app = Flask(__name__)
 CORS(app)
 
@@ -120,10 +121,28 @@ def all_ratings():
         userID  = request.args.get('userID')
         conn = sqlite3.connect('best_listens.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT track_id, rating FROM ratings WHERE user_id=? ", (userID))
+        cursor.execute("SELECT track_id, rating, updated_at FROM ratings WHERE user_id=? ", (userID))
         ratings = cursor.fetchall()
         conn.close()
-    return ratings    
+    return ratings
+
+@app.route('/top_ratings/')
+def top_ratings():
+
+    conn = sqlite3.connect('best_listens.db')
+    cursor = conn.cursor()
+
+# Execute SQL query to group ratings by track_id and calculate average rating
+    cursor.execute("SELECT track_id, AVG(rating) as avg_rating FROM ratings GROUP BY track_id ORDER BY avg_rating DESC LIMIT 10")
+    results = cursor.fetchall()
+
+    # Create a list of dictionaries to store the results
+    top_tracks = []
+    for result in results:
+        track_dict = {'track_id': result[0], 'avg_rating': result[1]}
+        top_tracks.append(track_dict)
+    conn.close()
+    return jsonify({'top_tracks': top_tracks})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5050)

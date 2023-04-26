@@ -1,18 +1,39 @@
-import React, { useState, useEffect } from "react";
-import TweetBox from "./TweetBox";
-import Post from "./Post";
+import React, { useState, useEffect, useContext } from "react";
 import "./Feed.css";
-import db from "./firebase";
-import FlipMove from "react-flip-move";
+import { AuthContext } from "./helpers/AuthContext";
+import axios from "axios";
 
 function Feed() {
-  const [posts, setPosts] = useState([]);
+  const { userID, authState } = useContext(AuthContext);
+  const [feedData, setFeedData] = useState([]);
 
   useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) =>
-      setPosts(snapshot.docs.map((doc) => doc.data()))
-    );
-  }, []);
+    if (authState == true) {
+      axios
+        .get(`http://localhost:5051/getFeed?userID=${userID}`, {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            console.log(response.data);
+            setFeedData(response.data);
+          }
+        });
+    } else {
+      axios.get(`http://localhost:5051/getFeedGeneric`).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          console.log(response.data);
+          setFeedData(response.data);
+        }
+      });
+    }
+  }, [authState]);
 
   return (
     <div className="feed">
@@ -20,21 +41,18 @@ function Feed() {
         <h2>Home</h2>
       </div>
 
-      {/* <TweetBox />
-
-      <FlipMove>
-        {posts.map((post) => (
-          <Post
-            key={post.text}
-            displayName={post.displayName}
-            username={post.username}
-            verified={post.verified}
-            text={post.text}
-            avatar={post.avatar}
-            image={post.image}
-          />
-        ))}
-      </FlipMove> */}
+      <div className="feedContainer">
+        {feedData &&
+          feedData.map((post) => {
+            return (
+              <div>
+                {post[0]}
+                <br />
+                <br />
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }
