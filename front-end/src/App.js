@@ -18,6 +18,9 @@ import Login from "./Login";
 import Register from "./Register";
 import Song from "./Song";
 import Header from "./Header";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const [authState, setAuthState] = useState(false);
   const [userID, setUserID] = useState(false);
@@ -85,6 +88,7 @@ const Root = () => {
       <Header />
       <Sidebar />
       <Outlet />
+      <ToastContainer />
     </>
   );
 };

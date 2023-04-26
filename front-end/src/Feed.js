@@ -2,29 +2,21 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Feed.css";
 import { AuthContext } from "./helpers/AuthContext";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function Feed() {
   const { userID, authState } = useContext(AuthContext);
   const [feedData, setFeedData] = useState([]);
+  const [notified, setNotified] = useState(false);
 
-  function getFeedData() {
-    if (authState == true) {
-      axios
-        .get(`http://localhost:5051/getFeed?userID=${userID}`, {
-          headers: {
-            accessToken: localStorage.getItem("accessToken"),
-          },
-        })
-        .then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            console.log(response.data);
-            setFeedData(response.data);
-          }
-        });
-    } else {
-      axios.get(`http://localhost:5051/getFeedGeneric`).then((response) => {
+  async function getFeed() {
+    await axios
+      .get(`http://localhost:5051/getFeed?userID=${userID}`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
@@ -32,15 +24,38 @@ function Feed() {
           setFeedData(response.data);
         }
       });
+  }
+
+  async function getGenericFeed() {
+    await axios.get(`http://localhost:5051/getFeedGeneric`).then((response) => {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        console.log(response.data);
+        setFeedData(response.data);
+      }
+    });
+  }
+
+  async function getFeedData() {
+    if (authState == true) {
+      getFeed();
+    } else {
+      getGenericFeed();
     }
   }
 
-  useEffect(() => {
-    getFeedData();
-  }, []);
+  // useEffect(() => {
+  //   getFeedData();
+  // }, []);
 
   useEffect(() => {
     getFeedData();
+    if (authState && notified == false && feedData.length === 0) {
+      setNotified(true);
+      notify();
+      getGenericFeed();
+    }
   }, [authState]);
 
   function timeSince(date) {
@@ -90,7 +105,9 @@ function Feed() {
 
         <div className="userRating">
           <div className="profilecard userPostProfile">
-            <div data-initials={result[3].charAt(0).toUpperCase()}></div>
+            <div
+              data-initials={result[3] && result[3].charAt(0).toUpperCase()}
+            ></div>
             <div className="postUser">{result[3]}</div>
           </div>
 
@@ -117,11 +134,17 @@ function Feed() {
     );
   }
 
+  const notify = () => {
+    toast("You are not following anyone!");
+  };
+
   return (
     <div className="feed">
       <div className="feed__header">
         <h2>Home</h2>
       </div>
+
+      {/* {feedData.length === 0 && <div>You are not following anyone</div>} */}
 
       <div className="feedContainer">
         {feedData &&
@@ -129,7 +152,13 @@ function Feed() {
             return (
               <div className="search-result-links">
                 {authState == true ? (
-                  <ListPost result={post} />
+                  <>
+                    {notified ? (
+                      <GenericPost result={post} />
+                    ) : (
+                      <ListPost result={post} />
+                    )}
+                  </>
                 ) : (
                   <GenericPost result={post} />
                 )}

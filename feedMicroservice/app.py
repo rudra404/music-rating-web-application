@@ -16,7 +16,7 @@ def getFeed():
 
        headers = {"accessToken": accessToken}
 
-       followings = (requests.post('http://localhost:3002/followings/getFollowings', 
+       followings = (requests.post('http://userMicroservice_c:3002/followings/getFollowings', 
                                  json={"userID": userID}, 
                                  headers=headers)).json()
        
@@ -32,12 +32,12 @@ def getFeed():
        for i in range (len(followingsID)):
           id = int(followingsID[i]) # person your followings ID
           # followerRatings = that users all ratings for all songs
-          followerRatings = (requests.get(f'http://localhost:5050/all_ratings?userID={id}')).json()
-          user = (requests.post(f'http://localhost:3002/auth/getUser', json={"userID": id}, headers=headers)).json()
+          followerRatings = (requests.get(f'http://musicMicroservice_c:5050/all_ratings?userID={id}')).json()
+          user = (requests.post(f'http://userMicroservice_c:3002/auth/getUser', json={"userID": id}, headers=headers)).json()
           name = (user['username'])
 
           for j in range (len(followerRatings)):
-             song = (requests.get(f'http://localhost:5050/search_id/{followerRatings[j][0]}')).json()
+             song = (requests.get(f'http://musicMicroservice_c:5050/search_id/{followerRatings[j][0]}')).json()
              song.append(followerRatings[j][1])
              song.append(followerRatings[j][2])
              song.append(name)
@@ -48,9 +48,9 @@ def getFeed():
 @app.route('/getFeedGeneric')
 def getFeedGeneric():
    feed = []
-   topRatings = (requests.get('http://localhost:5050/top_ratings/')).json()
+   topRatings = (requests.get('http://musicMicroservice_c:5050/top_ratings/')).json()
    for i in range(len(topRatings)):
-      song = (requests.get(f'http://localhost:5050/search_id/{topRatings[i][0]}')).json()
+      song = (requests.get(f'http://musicMicroservice_c:5050/search_id/{topRatings[i][0]}')).json()
       song.append(topRatings[i][1])
       feed.append(song)
    return feed

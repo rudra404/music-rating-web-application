@@ -6,7 +6,7 @@ COPY . /app
 
 RUN pip install flask==2.2.3
 RUN pip install flask-cors
-RUN pip install requests
+RUN pip install requests==2.28.2
 
 EXPOSE 5051
 
