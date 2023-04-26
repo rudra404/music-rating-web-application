@@ -69,6 +69,7 @@ function App() {
         value={{ authState, setAuthState, logout, userID, setUserID }}
       >
         <RouterProvider router={router} />
+        {console.log(authState)}
       </AuthContext.Provider>
       {/* <Sidebar /> */}
       {/* <Feed />

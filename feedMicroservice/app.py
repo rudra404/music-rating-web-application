@@ -7,7 +7,7 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-   return 'musicMicroservice is running on port 5051'
+   return 'feedMicroservice is running on port 5051'
 
 @app.route('/getFeed', methods=['GET'])
 def getFeed():
