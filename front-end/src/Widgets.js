@@ -120,7 +120,7 @@ export default function Widgets() {
                       key={index}
                       className="search-result-links"
                     >
-                      <ListArtist result={artist} />
+                      <ListSong result={artist} />
                     </Link>
                   ))}
                 </ul>
@@ -138,7 +138,7 @@ export default function Widgets() {
                       key={index}
                       className="search-result-links"
                     >
-                      <ListAlbum result={album} />
+                      <ListSong result={album} />
                     </Link>
                   ))}
                 </ul>
