@@ -45,9 +45,15 @@ def getFeed():
              ratingsFeed.append(song)   
        sortedFeed = sorted(ratingsFeed, key=lambda x: x[2], reverse=True)
        return sortedFeed
-@app.route('/getFeedGeneric', methods=['GET'])
+@app.route('/getFeedGeneric')
 def getFeedGeneric():
-   return
+   feed = []
+   topRatings = (requests.get('http://localhost:5050/top_ratings/')).json()
+   for i in range(len(topRatings)):
+      song = (requests.get(f'http://localhost:5050/search_id/{topRatings[i][0]}')).json()
+      song.append(topRatings[i][1])
+      feed.append(song)
+   return feed
 
 
 
