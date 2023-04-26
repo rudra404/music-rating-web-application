@@ -7,7 +7,7 @@ function Feed() {
   const { userID, authState } = useContext(AuthContext);
   const [feedData, setFeedData] = useState([]);
 
-  useEffect(() => {
+  function getFeedData() {
     if (authState == true) {
       axios
         .get(`http://localhost:5051/getFeed?userID=${userID}`, {
@@ -33,6 +33,14 @@ function Feed() {
         }
       });
     }
+  }
+
+  useEffect(() => {
+    getFeedData();
+  }, []);
+
+  useEffect(() => {
+    getFeedData();
   }, [authState]);
 
   function timeSince(date) {
