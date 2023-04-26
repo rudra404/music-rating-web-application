@@ -116,7 +116,7 @@ export default function Widgets() {
                 <ul>
                   {searchResults.artists.map((artist, index) => (
                     <Link
-                      to={`/artist/${artist[0]}`}
+                      to={`/song/${artist[0]}`}
                       key={index}
                       className="search-result-links"
                     >
@@ -134,7 +134,7 @@ export default function Widgets() {
                 <ul>
                   {searchResults.albums.map((album, index) => (
                     <Link
-                      to={`/album/${album[0]}`}
+                      to={`/song/${album[0]}`}
                       key={index}
                       className="search-result-links"
                     >
