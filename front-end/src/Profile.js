@@ -13,7 +13,7 @@ function Profile() {
   async function getFollowers() {
     const data = { userID: userID };
     axios
-      .post("http://localhost:3002/followings/getFollowings", data, {
+      .post("http://localhost:3002/followings/getFollowers", data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

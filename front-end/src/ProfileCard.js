@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./ProfileCard.css";
 import { Button } from "@material-ui/core";
+import { useNavigate } from "react-router";
 
 export default function ProfileCard(props) {
+  const navigate = useNavigate();
   const numOfFolowers = props.followers.length;
   const user = props.user;
   return (
@@ -14,7 +16,9 @@ export default function ProfileCard(props) {
         <div>
           <h3>{user && user.username}</h3>
           <div className="email">{user && user.email}</div>
-          <div className="followers">{numOfFolowers}</div>
+          <div className="followers" onClick={() => navigate("/followers")}>
+            {numOfFolowers}
+          </div>
           <div>Followers</div>
         </div>
       </div>
