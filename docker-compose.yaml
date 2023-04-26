@@ -38,6 +38,19 @@ services:
     depends_on:
       - postgres
 
+  feed-microservice:
+    build:
+      context: feedMicroservice
+      dockerfile: Dockerfile
+    ports:
+      - "5051:5051"
+    container_name: feedMicroservice_c
+    restart: unless-stopped
+    volumes:
+      - ./feedMicroservice:/app
+    depends_on:
+      - user-microservice
+
   front-end:
     build:
       context: front-end

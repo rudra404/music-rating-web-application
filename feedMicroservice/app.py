@@ -1,7 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS 
 import requests
-import json
 app = Flask(__name__)
 CORS(app)
 
@@ -45,6 +44,7 @@ def getFeed():
              ratingsFeed.append(song)   
        sortedFeed = sorted(ratingsFeed, key=lambda x: x[2], reverse=True)
        return sortedFeed
+
 @app.route('/getFeedGeneric')
 def getFeedGeneric():
    feed = []
@@ -54,8 +54,6 @@ def getFeedGeneric():
       song.append(topRatings[i][1])
       feed.append(song)
    return feed
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5051)
