@@ -5,6 +5,7 @@ import "./Home.css";
 import { AuthContext } from "./helpers/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 function Home() {
   const navigate = useNavigate();
