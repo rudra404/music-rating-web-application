@@ -1,5 +1,6 @@
 .widgets {
   flex: 0.3;
+  height: 80vh;
 }
 
 .widgets__input {

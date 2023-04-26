@@ -101,7 +101,7 @@ function Feed() {
         <h2>Home</h2>
       </div>
 
-      <div className="feedcontainer">
+      <div className="feedContainer">
         {feedData &&
           feedData.map((post) => {
             return (
