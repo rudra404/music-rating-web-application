@@ -10,6 +10,7 @@ function Feed() {
   const [notified, setNotified] = useState(false);
 
   async function getFeed() {
+    setNotified(false);
     await axios
       .get(`http://localhost:5051/getFeed?userID=${userID}`, {
         headers: {
@@ -37,25 +38,26 @@ function Feed() {
     });
   }
 
-  async function getFeedData() {
-    if (authState == true) {
-      getFeed();
+  async function generateFeedData() {
+    if (authState) {
+      await getFeed(); // logged in
+      // if logged in and have no feed
+      console.log(feedData.length);
     } else {
-      getGenericFeed();
+      await getGenericFeed(); // not logged in
     }
   }
 
-  // useEffect(() => {
-  //   getFeedData();
-  // }, []);
-
   useEffect(() => {
-    getFeedData();
-    if (authState && notified == false && feedData.length === 0) {
+    if (feedData.length === 0 && authState && notified === false) {
       setNotified(true);
       notify();
       getGenericFeed();
     }
+  }, [feedData]);
+
+  useEffect(() => {
+    generateFeedData();
   }, [authState]);
 
   function timeSince(date) {
