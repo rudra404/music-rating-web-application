@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "./helpers/AuthContext";
 import Widgets from "./Widgets";
-import { useNavigate } from "react-router";
 import axios from "axios";
 import "./Followers.css";
+import { Link } from "react-router-dom";
 
 export default function Followings() {
-  const navigate = useNavigate();
   const { userID, authState } = useContext(AuthContext);
   const [followings, setFollowings] = useState([]);
   const [numOfFolowings, setNumOfFolowings] = useState([]);
 
   async function getFollowers() {
+    setFollowings([]);
     const data = { userID: userID };
     await axios
       .post("http://localhost:3002/followings/getFollowings", data, {
@@ -55,21 +55,17 @@ export default function Followings() {
     let content = [];
     for (let user of users) {
       content.push(
-        <div
-          className="search-result-links"
-          key={user.id}
-          onClick={() => navigate(`user/${user.id}`)}
-        >
+        <Link to={`/user/${user.id}`} className="search-result-links">
           <div className="followerUser">{user.username}</div>
-        </div>
+        </Link>
       );
     }
     return content;
   }
 
-  // useEffect(() => {
-  //   getFollowers();
-  // }, []);
+  useEffect(() => {
+    getFollowers();
+  }, []);
 
   useEffect(() => {
     getFollowers();
@@ -79,7 +75,7 @@ export default function Followings() {
     <div className="home">
       <div className="profile">
         <div className="profile__header">
-          <h2>Followers</h2>
+          <h2>Followings</h2>
           <h4>{numOfFolowings}</h4>
         </div>
 

@@ -4,6 +4,7 @@ import Widgets from "./Widgets";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import "./Followers.css";
+import { Link } from "react-router-dom";
 
 export default function Followers() {
   const navigate = useNavigate();
@@ -55,13 +56,9 @@ export default function Followers() {
     let content = [];
     for (let user of users) {
       content.push(
-        <div
-          className="search-result-links"
-          key={user.id}
-          onClick={() => navigate(`user/${user.id}`)}
-        >
+        <Link to={`/user/${user.id}`} className="search-result-links">
           <div className="followerUser">{user.username}</div>
-        </div>
+        </Link>
       );
     }
     return content;
