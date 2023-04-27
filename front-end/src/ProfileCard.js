@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 export default function ProfileCard(props) {
   const navigate = useNavigate();
   const numOfFolowers = props.followers.length;
+  const numOfFolowings = props.followings.length;
   const user = props.user;
   return (
     <div className="container">
@@ -16,10 +17,23 @@ export default function ProfileCard(props) {
         <div>
           <h3>{user && user.username}</h3>
           <div className="email">{user && user.email}</div>
-          <div className="followers" onClick={() => navigate("/followers")}>
-            {numOfFolowers}
+          <div className="userFollowList">
+            <div className="followList">
+              <div className="followers" onClick={() => navigate("/followers")}>
+                {numOfFolowers}
+              </div>
+              <div>Followers</div>
+            </div>
+            <div className="followList">
+              <div
+                className="followers"
+                onClick={() => navigate("/followings")}
+              >
+                {numOfFolowings}
+              </div>
+              <div>Following</div>
+            </div>
           </div>
-          <div>Followers</div>
         </div>
       </div>
       {/* <Button

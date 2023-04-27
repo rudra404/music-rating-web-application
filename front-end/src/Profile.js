@@ -8,12 +8,31 @@ import Widgets from "./Widgets";
 function Profile() {
   const { userID } = useContext(AuthContext);
   const [followers, setFollowers] = useState([]);
+  const [followings, setFollowings] = useState([]);
   const [user, setUser] = useState();
 
   async function getFollowers() {
     const data = { userID: userID };
     axios
       .post("http://localhost:3002/followings/getFollowers", data, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          setFollowers(response.data);
+          console.log(response.data);
+        }
+      });
+  }
+
+  async function getFollowings() {
+    const data = { userID: userID };
+    axios
+      .post("http://localhost:3002/followings/getFollowings", data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -64,6 +83,7 @@ function Profile() {
   }
 
   useEffect(() => {
+    getFollowings();
     getFollowers();
     getUser();
   }, [userID]);
@@ -74,7 +94,11 @@ function Profile() {
         <div className="profile__header">
           <h2>My profile</h2>
         </div>
-        <ProfileCard user={user} followers={followers} />
+        <ProfileCard
+          user={user}
+          followers={followers}
+          followings={followings}
+        />
       </div>
 
       <Widgets className="widgets" />

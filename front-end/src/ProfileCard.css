@@ -45,3 +45,13 @@
 .followers:hover {
   cursor: pointer;
 }
+
+.userFollowList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.followList {
+  padding: 0 10px;
+}
