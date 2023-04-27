@@ -41,7 +41,7 @@ function Profile() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          setFollowers(response.data);
+          setFollowings(response.data);
           console.log(response.data);
         }
       });

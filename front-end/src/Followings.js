@@ -5,16 +5,16 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import "./Followers.css";
 
-export default function Followers() {
+export default function Followings() {
   const navigate = useNavigate();
   const { userID, authState } = useContext(AuthContext);
-  const [followers, setFollowers] = useState([]);
-  const [numOfFolowers, setNumOfFolowers] = useState([]);
+  const [followings, setFollowings] = useState([]);
+  const [numOfFolowings, setNumOfFolowings] = useState([]);
 
   async function getFollowers() {
     const data = { userID: userID };
     await axios
-      .post("http://localhost:3002/followings/getFollowers", data, {
+      .post("http://localhost:3002/followings/getFollowings", data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -26,16 +26,16 @@ export default function Followers() {
           //   setFollowers(response.data);
 
           response.data.forEach((follower) => {
-            getUser(follower.followerID);
+            getUser(follower.userID);
           });
           //   console.log(response.data);
-          setNumOfFolowers(response.data.length);
+          setNumOfFolowings(response.data.length);
         }
       });
   }
 
-  async function getUser(followerID) {
-    const data = { userID: followerID };
+  async function getUser(userID) {
+    const data = { userID: userID };
     await axios
       .post("http://localhost:3002/auth/getUser", data, {
         headers: {
@@ -46,7 +46,7 @@ export default function Followers() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          setFollowers((current) => [...current, response.data]);
+          setFollowings((current) => [...current, response.data]);
         }
       });
   }
@@ -80,10 +80,10 @@ export default function Followers() {
       <div className="profile">
         <div className="profile__header">
           <h2>Followers</h2>
-          <h4>{numOfFolowers}</h4>
+          <h4>{numOfFolowings}</h4>
         </div>
 
-        <div className="followersList">{userFollower(followers)}</div>
+        <div className="followersList">{userFollower(followings)}</div>
       </div>
 
       <Widgets className="widgets" />

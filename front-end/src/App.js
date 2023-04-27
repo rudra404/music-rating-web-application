@@ -22,6 +22,7 @@ import Header from "./Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Followers from "./Followers";
+import Followings from "./Followings";
 
 function App() {
   const [authState, setAuthState] = useState(false);
@@ -64,6 +65,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/followers" element={<Followers />} />
+        <Route path="/followings" element={<Followings />} />
         <Route path="/song/:id" element={<Song />} />
         <Route path="/user/:id" element={<User />} />
       </Route>
