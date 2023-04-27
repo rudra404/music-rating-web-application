@@ -4,6 +4,7 @@ const { Users, Passwords } = require("../models");
 const crypto = require("crypto");
 const secret = "oSeRxVnEwc0e1DaHtzw7xvddolbDu08u"; //32 char secret
 const { validateToken } = require("../middlewares/AuthMiddleware");
+const { Op } = require("sequelize");
 
 const { sign } = require("jsonwebtoken");
 
@@ -137,6 +138,29 @@ router.post("/changeUsername", validateToken, async (req, res) => {
     }
   } else {
     res.json({ error: "Username already in use" });
+  }
+});
+
+router.post("/searchUsers", validateToken, async (req, res) => {
+  const { username } = req.body;
+  const users = await Users.findAll({
+    where: {
+      username: {
+        [Op.like]: `%${username}%`,
+      },
+    },
+  });
+  const checkUsername = await Users.count({
+    where: {
+      username: {
+        [Op.like]: `%${username}%`,
+      },
+    },
+  });
+  if (checkUsername > 0) {
+    res.json(users);
+  } else {
+    res.json({ error: "No users found" });
   }
 });
 

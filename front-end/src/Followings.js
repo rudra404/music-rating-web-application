@@ -63,9 +63,9 @@ export default function Followings() {
     return content;
   }
 
-  useEffect(() => {
-    getFollowers();
-  }, []);
+  // useEffect(() => {
+  //   getFollowers();
+  // }, []);
 
   useEffect(() => {
     getFollowers();

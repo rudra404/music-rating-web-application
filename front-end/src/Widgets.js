@@ -11,12 +11,14 @@ export default function Widgets() {
     artists: [],
     albums: [],
   });
+  const [userSearchResults, setUserSearchResults] = useState([]);
 
-  function search(searchValue) {
+  async function search(searchValue) {
     setSearchValue(searchValue);
-    if (searchValue.trim() !== "") {
+    searchUser(searchValue);
+    if (searchValue.trim()) {
       // Check if searchValue is not blank
-      axios
+      await axios
         .get(`http://localhost:5050/search2/?search=${searchValue}`)
         .then((response) => {
           setSearchResults({
@@ -31,15 +33,24 @@ export default function Widgets() {
     }
   }
 
-  function SearchResultItem({ result }) {
-    return (
-      <div>
-        <p>
-          {result[1]}, {result[2]}, {result[3]}
-        </p>
-        {/* Add any other fields you want to display here */}
-      </div>
-    );
+  async function searchUser(searchValue) {
+    const data = { username: searchValue };
+    if (searchValue.trim()) {
+      // Check if searchValue is not blank
+      await axios
+        .post(`http://localhost:3002/auth/searchUsers`, data, {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setUserSearchResults(response.data);
+        });
+    } else {
+      // If searchValue is blank, clear the search results
+      setUserSearchResults([]);
+    }
   }
 
   function ListSong({ result }) {
@@ -54,21 +65,26 @@ export default function Widgets() {
     );
   }
 
-  function ListArtist({ result }) {
-    return (
-      <div className="songtitle">
-        {result[2]}
-        {/* Add any other fields you want to display here */}
-      </div>
-    );
+  function getUsers(users) {
+    let content = [];
+    for (let user of users) {
+      content.push(
+        <Link to={`/user/${user.id}`} className="search-result-links">
+          <div className="followerUser">{user.username}</div>
+        </Link>
+      );
+    }
+    console.log(content);
+    return content;
   }
 
-  function ListAlbum({ result }) {
+  function ListUser({ username }) {
     return (
-      <div className="songtitle">
-        {result[3]}
-        {/* Add any other fields you want to display here */}
-      </div>
+      <>
+        <div className="songtitle">
+          <h4>{username}</h4>
+        </div>
+      </>
     );
   }
 
@@ -83,10 +99,20 @@ export default function Widgets() {
           type="text"
         />
       </div>
-      {searchResults.songs.length > 0 ||
+      {console.log(userSearchResults)}
+      {userSearchResults.length > 0 ||
+      searchResults.songs.length > 0 ||
       searchResults.artists.length > 0 ||
       searchResults.albums.length > 0 ? (
         <div className="widgets__widgetContainer">
+          {userSearchResults && userSearchResults.length > 0 && (
+            <>
+              <h2>Profiles</h2>
+              <div className="widget_container">
+                <ul>{getUsers(userSearchResults)}</ul>
+              </div>
+            </>
+          )}
           {searchResults.songs.length > 0 && (
             <>
               <h2>Songs</h2>
