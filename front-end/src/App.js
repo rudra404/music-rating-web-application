@@ -14,6 +14,7 @@ import Home from "./Home";
 import Messages from "./Messages";
 import MyRates from "./MyRates";
 import Profile from "./Profile";
+import User from "./User";
 import Login from "./Login";
 import Register from "./Register";
 import Song from "./Song";
@@ -64,6 +65,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/followers" element={<Followers />} />
         <Route path="/song/:id" element={<Song />} />
+        <Route path="/user/:id" element={<User />} />
       </Route>
     )
   );
