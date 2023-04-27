@@ -105,6 +105,32 @@ export default function User() {
       </>
     );
   }
+  async function followUser() {
+    const { followerID } = useContext(AuthContext);
+    const userData = { userID: followerID };
+    const follower = []
+    await axios
+      .post("http://localhost:3002/auth/getUser", userData, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          follower = response.data.username;
+        }
+      });
+    const data = {user: user.username, follower: follower}
+    axios
+      .post("http://localhost:3002/followings/follow", data, {
+       headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    })
+    alert("User followed!");
+  }
 
   useEffect(() => {
     getUser();
