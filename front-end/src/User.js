@@ -7,9 +7,10 @@ import ProfileCard from "./ProfileCard";
 import Widgets from "./Widgets";
 import { Link } from "react-router-dom";
 
-function Profile() {
+export default function User() {
   const { id } = useParams();
   const [followers, setFollowers] = useState([]);
+  const [followings, setFollowings] = useState([]);
   const [user, setUser] = useState();
   const [allRatings, setAllRatings] = useState({ ratings: [] });
 
@@ -30,6 +31,7 @@ function Profile() {
         }
       });
   }
+
   function getFollowers() {
     const data = { userID: id };
     axios
@@ -47,6 +49,25 @@ function Profile() {
         }
       });
   }
+
+  async function getFollowings() {
+    const data = { userID: id };
+    axios
+      .post("http://localhost:3002/followings/getFollowings", data, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          setFollowings(response.data);
+          console.log(response.data);
+        }
+      });
+  }
+
   async function getRatings() {
     const response = await axios.get(
       `http://localhost:5050/all_ratings/?userID=${id}`
@@ -72,6 +93,7 @@ function Profile() {
       ratings: updatedRatings,
     });
   }
+
   function ListSong({ result }) {
     return (
       <>
@@ -83,8 +105,10 @@ function Profile() {
       </>
     );
   }
+
   useEffect(() => {
     getUser();
+    getFollowings();
     getFollowers();
     getRatings();
   }, [id]);
@@ -95,7 +119,12 @@ function Profile() {
         <div className="profile__header">
           <h2>Profile</h2>
         </div>
-        <ProfileCard user={user} followers={followers} />
+        <ProfileCard
+          user={user}
+          followers={followers}
+          followings={followings}
+          functional={false}
+        />
         <h2>Their ratings:</h2>
         <div className="myRatings">
           <div className="ratingHeadings">
@@ -118,13 +147,11 @@ function Profile() {
               </Link>
               <div className="rating">{rating[4]}</div>
             </div>
-            ))}
-            </div>
+          ))}
+        </div>
       </div>
 
       <Widgets className="widgets" />
     </div>
   );
 }
-
-export default Profile;

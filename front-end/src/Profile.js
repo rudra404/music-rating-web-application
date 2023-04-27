@@ -98,6 +98,7 @@ function Profile() {
           user={user}
           followers={followers}
           followings={followings}
+          functional={true}
         />
       </div>
 
