@@ -13,7 +13,7 @@ export default function User() {
   const [followings, setFollowings] = useState([]);
   const [user, setUser] = useState();
   const [allRatings, setAllRatings] = useState({ ratings: [] });
-
+  const { userID } = useContext(AuthContext);
   function getUser() {
     const data = { userID: id };
     axios
@@ -106,8 +106,7 @@ export default function User() {
     );
   }
   async function followUser() {
-    const { followerID } = useContext(AuthContext);
-    const userData = { userID: followerID };
+    const userData = { userID: userID };
     const follower = []
     await axios
       .post("http://localhost:3002/auth/getUser", userData, {
