@@ -5,6 +5,7 @@ import { AuthContext } from "./helpers/AuthContext";
 import { useParams } from "react-router-dom";
 import ProfileCard from "./ProfileCard";
 import Widgets from "./Widgets";
+import { Link } from "react-router-dom";
 
 function Profile() {
   const { id } = useParams();
@@ -24,7 +25,7 @@ function Profile() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          console.log(response);
+          response.data.email = [];
           setUser(response.data);
         }
       });
@@ -71,6 +72,17 @@ function Profile() {
       ratings: updatedRatings,
     });
   }
+  function ListSong({ result }) {
+    return (
+      <>
+        <div className="songtitle">
+          <h4>{result[1]}</h4>
+        </div>
+        <div className="artist">By {result[2]}</div>
+        <div className="album">{result[3]}</div>
+      </>
+    );
+  }
   useEffect(() => {
     getUser();
     getFollowers();
@@ -84,6 +96,30 @@ function Profile() {
           <h2>Profile</h2>
         </div>
         <ProfileCard user={user} followers={followers} />
+        <h2>Their ratings:</h2>
+        <div className="myRatings">
+          <div className="ratingHeadings">
+            <h3>Songs</h3>
+            <h3>Ratings</h3>
+          </div>
+
+          {allRatings.ratings.map((rating, index) => (
+            <div className="listRatings">
+              <Link
+                to={`/song/${rating[0]}`}
+                key={index}
+                className="search-result-links"
+              >
+                <ListSong result={rating} />
+                {/* <SearchResultItem
+                        result={song}
+                        className="search-result-items"
+                      /> */}
+              </Link>
+              <div className="rating">{rating[4]}</div>
+            </div>
+            ))}
+            </div>
       </div>
 
       <Widgets className="widgets" />
