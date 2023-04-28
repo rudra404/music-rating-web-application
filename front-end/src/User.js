@@ -14,7 +14,7 @@ export default function User() {
   const [isFollowing, setIsFollowing] = useState(false);
   const [user, setUser] = useState();
   const [allRatings, setAllRatings] = useState({ ratings: [] });
-  const { userID } = useContext(AuthContext);
+  const { userID, authState } = useContext(AuthContext);
   function getUser() {
     const data = { userID: id };
     axios
@@ -206,7 +206,7 @@ export default function User() {
           followUser={followUser}
         />
         <div className="followButton">
-          {isFollowing ? (
+          {authState && isFollowing ? (
             <button className="bubble-button" onClick={() => unfollowUser()}>
               Unfollow
             </button>
