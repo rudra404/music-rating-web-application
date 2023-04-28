@@ -8,19 +8,7 @@
 
 version: "3.8"
 services:
-  postgres:
-    image: postgres:11.5
-    restart: always
-    environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=best-listens
-    ports:
-      - "${PORT}:5432" # changed to dynamic port
-    container_name: postgresDB_c
-    volumes:
-      #- ./userMicroservice/postgres-db:/var/lib/postgresql
-      # suggested to not hardcode and use this instead ?
-      - postgresDB_c:/var/lib/postgresql/data
+
     #networks:
     #  - app_net
   music-microservice:

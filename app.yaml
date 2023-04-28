@@ -2,29 +2,17 @@ runtime: custom
 env: flex
 
 handlers:
-  - url: /.*
-    script: auto
+- url: /.*
+  script: auto
 
 # Microservice 1: userMicroservice
 - url: /user
   script: auto
-  # env_variables:
-    # - PGUSER=[DATABASE-USER]
-    # - PGHOST=[DATABASE-HOST]
-    # - PGPORT=[DATABASE-PORT]
-    # - PGDATABASE=[DATABASE-NAME]
-    # - PGPASSWORD=[DATABASE-PASSWORD]
   instance_class: F1
 
 # Microservice 2: feedMicroservice
 - url: /feed
   script: auto
-  # env_variables:
-  #   - PGUSER=[DATABASE-USER]
-  #   - PGHOST=[DATABASE-HOST]
-  #   - PGPORT=[DATABASE-PORT]
-  #   - PGDATABASE=[DATABASE-NAME]
-  #   - PGPASSWORD=[DATABASE-PASSWORD]
   instance_class: F1
 
 # Microservice 3: musicMicroservice
@@ -43,6 +31,6 @@ handlers:
 # Database service (PostgreSQL)
 - name: postgres
   env_variables:
-    - POSTGRES_PASSWORD=password
-    - POSTGRES_DB=best-listens
+    POSTGRES_PASSWORD: password
+    POSTGRES_DB: best-listens
   instance_class: F1
