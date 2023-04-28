@@ -107,7 +107,7 @@ export default function User() {
   }
   async function followUser() {
     const userData = { userID: userID };
-    const follower = []
+    var follower = []
     await axios
       .post("http://localhost:3002/auth/getUser", userData, {
         headers: {
@@ -122,7 +122,7 @@ export default function User() {
         }
       });
     const data = {user: user.username, follower: follower}
-    axios
+    await axios
       .post("http://localhost:3002/followings/follow", data, {
        headers: {
         accessToken: localStorage.getItem("accessToken"),
@@ -150,6 +150,7 @@ export default function User() {
           followings={followings}
           functional={false}
         />
+         <button className="bubble-button" onClick={followUser}>Follow User</button>
         <h2>Their ratings:</h2>
         <div className="myRatings">
           <div className="ratingHeadings">
