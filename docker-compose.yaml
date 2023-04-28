@@ -1,3 +1,11 @@
+# recommendation is to remove all ports as we do not need to 
+# expose them to the outside world. just need to expose the 
+# front-end. add networks here so the containers can communicate 
+# within themselves using this docker network.
+
+# networks:
+#   app_net:
+
 version: "3.8"
 services:
   postgres:
@@ -7,23 +15,28 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=best-listens
     ports:
-      - "5432:5432"
+      - "${PORT}:5432" # changed to dynamic port
     container_name: postgresDB_c
     volumes:
       - ./userMicroservice/postgres-db:/var/lib/postgresql
-
+      # suggested to not hardcode and use this instead ?
+      #- postgresDB_c:/var/lib/postgresql/data
+    #networks:
+    #  - app_net
   music-microservice:
     build:
       context: musicMicroservice
       dockerfile: Dockerfile
     ports:
-      - "5050:5050"
+      - "${PORT}:5050" # changed to dynamic port
     container_name: musicMicroservice_c
     restart: unless-stopped
     volumes:
       - ./musicMicroservice:/app
     depends_on:
       - postgres
+    #networks:
+    #  - app_net
 
   user-microservice:
     build:
@@ -32,24 +45,28 @@ services:
     restart: unless-stopped
     container_name: userMicroservice_c
     ports:
-      - "3002:3002"
+      - "${PORT}:3002" # changed to dynamic port
     volumes:
       - ./userMicroservice:/app
     depends_on:
       - postgres
+    #networks:
+    #  - app_net
 
   feed-microservice:
     build:
       context: feedMicroservice
       dockerfile: Dockerfile
     ports:
-      - "5051:5051"
+      - "${PORT}:5051" # changed to dynamic port
     container_name: feedMicroservice_c
     restart: unless-stopped
     volumes:
       - ./feedMicroservice:/app
     depends_on:
       - user-microservice
+    #networks:
+    #  - app_net
 
   front-end:
     build:
@@ -58,8 +75,25 @@ services:
     container_name: front-end_c
     restart: always
     ports:
-      - "3000:3000"
-    stdin_open: true
-    tty: true
+      - "${PORT}:3000" # changed to dynamic port
+    stdin_open: true # GCP does not support might remove
+    tty: true # GCP does not support might remove
     depends_on:
       - user-microservice
+    #networks:
+    #  - app_net
+
+volumes:
+  postgresDB_c:
+  musicMicroservice_c:
+  userMicroservice_c:
+  feedMicroservice_c:
+#These are named volumes, which can be used to persist data between
+#container restarts and even between deployments. Each named volume
+#is associated with a specific microservice, and allows that microservice
+#to store and access data that is specific to it.
+#For example, the named volume "postgresDB_c" is associated with
+#the PostgreSQL service and is used to store the PostgreSQL database data.
+#Similarly, the named volume "userMicroservice_c" is associated with the User
+#microservice and is used to store any data that the User microservice needs
+#to persist between container restarts.
