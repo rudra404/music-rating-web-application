@@ -3,6 +3,7 @@
   border-right: 1px solid var(--twitter-background);
   min-width: 40vw;
   caret-color: transparent;
+  justify-content: center;
 }
 
 .profile__header {
@@ -64,4 +65,22 @@
 
 .myRatings {
   margin: 10px;
+}
+
+.bubble-button {
+  display: flex;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background-color: var(--twitter-color);
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.bubble-button:hover {
+  background-color: var(--twitter-color-light);
 }
