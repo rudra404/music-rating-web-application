@@ -16,7 +16,6 @@ export default function ProfileCard(props) {
         ></div>
         <div>
           <h3>{user && user.username}</h3>
-          <div className="email">{user && user.email}</div>
           <div className="userFollowList">
             <div className="followList">
               <div

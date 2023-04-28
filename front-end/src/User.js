@@ -129,7 +129,7 @@ export default function User() {
         accessToken: localStorage.getItem("accessToken"),
       },
     });
-    alert("User followed!");
+    checkFollowing();
   }
 
   async function unfollowUser() {
@@ -154,7 +154,7 @@ export default function User() {
         accessToken: localStorage.getItem("accessToken"),
       },
     });
-    alert("User unfollowed!");
+    checkFollowing();
   }
 
   async function checkFollowing() {
@@ -184,6 +184,12 @@ export default function User() {
     checkFollowing();
   }, [id]);
 
+  useEffect(() => {
+    checkFollowing();
+    getFollowings();
+    getFollowers();
+  }, [isFollowing]);
+
   return (
     <div className="home">
       <div className="profile">
@@ -195,16 +201,21 @@ export default function User() {
           followers={followers}
           followings={followings}
           functional={false}
+          isFollowing={isFollowing}
+          unfollowUser={unfollowUser}
+          followUser={followUser}
         />
-        {isFollowing ? (
-          <button className="bubble-button" onClick={() => followUser()}>
-            Follow
-          </button>
-        ) : (
-          <button className="bubble-button" onClick={() => unfollowUser()}>
-            Unfollow
-          </button>
-        )}
+        <div className="followButton">
+          {isFollowing ? (
+            <button className="bubble-button" onClick={() => unfollowUser()}>
+              Unfollow
+            </button>
+          ) : (
+            <button className="bubble-button" onClick={() => followUser()}>
+              Follow
+            </button>
+          )}
+        </div>
         <h2>Their ratings:</h2>
         <div className="myRatings">
           <div className="ratingHeadings">
