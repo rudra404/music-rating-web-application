@@ -10,6 +10,8 @@ COPY package.json .
 COPY package-lock.json .
 
 RUN npm install
+# RUN npm install --only=production
+# for installing only production dependencies
 
 COPY . .
 
@@ -18,3 +20,4 @@ EXPOSE 3002
 
 # RUN npm start
 CMD ["npm", "run", "dev"]
+#CMD ["npm", "start"] ??
