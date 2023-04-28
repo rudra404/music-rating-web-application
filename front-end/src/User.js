@@ -11,6 +11,7 @@ export default function User() {
   const { id } = useParams();
   const [followers, setFollowers] = useState([]);
   const [followings, setFollowings] = useState([]);
+  const [isFollowing, setIsFollowing] = useState(false);
   const [user, setUser] = useState();
   const [allRatings, setAllRatings] = useState({ ratings: [] });
   const { userID } = useContext(AuthContext);
@@ -105,9 +106,10 @@ export default function User() {
       </>
     );
   }
+
   async function followUser() {
     const userData = { userID: userID };
-    var follower = []
+    var follower = [];
     await axios
       .post("http://localhost:3002/auth/getUser", userData, {
         headers: {
@@ -121,14 +123,57 @@ export default function User() {
           follower = response.data.username;
         }
       });
-    const data = {user: user.username, follower: follower}
-    await axios
-      .post("http://localhost:3002/followings/follow", data, {
-       headers: {
+    const data = { user: user.username, follower: follower };
+    await axios.post("http://localhost:3002/followings/follow", data, {
+      headers: {
         accessToken: localStorage.getItem("accessToken"),
       },
-    })
+    });
     alert("User followed!");
+  }
+
+  async function unfollowUser() {
+    const userData = { userID: userID };
+    var follower = [];
+    await axios
+      .post("http://localhost:3002/auth/getUser", userData, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          follower = response.data.username;
+        }
+      });
+    const data = { user: user.username, follower: follower };
+    await axios.post("http://localhost:3002/followings/unfollow", data, {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    });
+    alert("User unfollowed!");
+  }
+
+  async function checkFollowing() {
+    const data = { userID: userID, follower: user.username };
+    await axios
+      .post("http://localhost:3002/followings/checkFollowing", data, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          // alert(response.data.error);
+        } else {
+          console.log(response.data);
+          setIsFollowing(response.data);
+          // return response.data;
+        }
+      });
   }
 
   useEffect(() => {
@@ -136,6 +181,7 @@ export default function User() {
     getFollowings();
     getFollowers();
     getRatings();
+    checkFollowing();
   }, [id]);
 
   return (
@@ -150,7 +196,15 @@ export default function User() {
           followings={followings}
           functional={false}
         />
-         <button className="bubble-button" onClick={followUser}>Follow User</button>
+        {isFollowing ? (
+          <button className="bubble-button" onClick={() => followUser()}>
+            Follow
+          </button>
+        ) : (
+          <button className="bubble-button" onClick={() => unfollowUser()}>
+            Unfollow
+          </button>
+        )}
         <h2>Their ratings:</h2>
         <div className="myRatings">
           <div className="ratingHeadings">
