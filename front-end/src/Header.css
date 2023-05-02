@@ -21,7 +21,7 @@
 
 .header_content:hover {
   cursor: pointer;
-  color: var(--twitter-color-light);
+  color: var(--bestListen-color-light);
 }
 
 .header_content img {
@@ -40,7 +40,7 @@
 .login__button {
   background-color: white !important;
   border: none !important;
-  color: var(--twitter-color) !important;
+  color: var(--bestListen-color) !important;
   font-weight: 900 !important;
   text-transform: inherit !important;
   border-radius: 30px !important;
@@ -51,5 +51,5 @@
 }
 
 .login__button:hover {
-  background-color: var(--twitter-color-light) !important;
+  background-color: var(--bestListen-color-light) !important;
 }

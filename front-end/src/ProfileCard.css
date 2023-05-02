@@ -8,7 +8,7 @@
 }
 
 .profilecard {
-  background-color: var(--twitter-color-light);
+  background-color: var(--bestListen-color-light);
   width: 90%;
   max-width: 320px;
   text-align: center;
@@ -17,7 +17,7 @@
 }
 
 [data-initials]:before {
-  background: var(--twitter-color);
+  background: var(--bestListen-color);
   color: white;
   opacity: 1;
   content: attr(data-initials);

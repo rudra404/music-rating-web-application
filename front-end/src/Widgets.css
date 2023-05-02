@@ -6,7 +6,7 @@
 .widgets__input {
   display: flex;
   align-items: center;
-  background-color: var(--twitter-background);
+  background-color: var(--bestListen-background);
   padding: 10px;
   border-radius: 20px;
   margin-top: 10px;
@@ -15,7 +15,7 @@
 
 .widgets__input > input {
   border: none;
-  background-color: var(--twitter-background);
+  background-color: var(--bestListen-background);
 }
 
 .widgets__searchIcon {
@@ -26,7 +26,7 @@
   margin-top: 15px;
   margin-left: 20px;
   padding: 5px;
-  background-color: var(--twitter-background);
+  background-color: var(--bestListen-background);
   border-radius: 20px;
 }
 
@@ -39,7 +39,7 @@
 .widget_container {
   height: 150px; /* Set the height of the container to the desired value */
   overflow-y: scroll; /* Enable vertical scrolling */
-  /* background-color: var(--twitter-background); */
+  /* background-color: var(--bestListen-background); */
   color: white;
   border-radius: 20px;
   margin-bottom: 10px;
@@ -52,8 +52,8 @@
   height: 30px;
   width: 100px;
   margin-top: 5px;
-  /* background-color: var(--twitter-color-light); */
-  color: var(--twitter-color);
+  /* background-color: var(--bestListen-color-light); */
+  color: var(--bestListen-color);
   border-radius: 15px;
   display: flex;
   /* justify-content: center; */
@@ -67,7 +67,7 @@
 }
 
 .search-result-links {
-  background-color: var(--twitter-color-light);
+  background-color: var(--bestListen-color-light);
   border-radius: 10px;
   width: 90%;
   font-weight: 300;

@@ -1,5 +1,5 @@
 .sidebar {
-  border-right: 1px solid var(--twitter-background);
+  border-right: 1px solid var(--bestListen-background);
   flex: 0.3;
   /* min-width: 250px; */
   margin-top: 70px;
@@ -8,15 +8,15 @@
   height: 80vh;
 }
 
-.sidebar__twitterIcon {
-  color: var(--twitter-color);
+.sidebar__bestListenIcon {
+  color: var(--bestListen-color);
   font-size: 30px !important;
   margin-left: 20px;
   margin-bottom: 20px;
 }
 
 .bestButton {
-  background-color: var(--twitter-color) !important;
+  background-color: var(--bestListen-color) !important;
   border: none !important;
   color: white !important;
   font-weight: 900 !important;
@@ -27,14 +27,14 @@
 }
 
 .bestButton:hover {
-  background-color: var(--twitter-color-light) !important;
-  color: var(--twitter-color) !important;
+  background-color: var(--bestListen-color-light) !important;
+  color: var(--bestListen-color) !important;
 }
 
 .bestButtonLight {
-  background-color: var(--twitter-color-background) !important;
+  background-color: var(--bestListen-color-background) !important;
   border: none !important;
-  color: var(--twitter-color-light) !important;
+  color: var(--bestListen-color-light) !important;
   font-weight: 900 !important;
   text-transform: inherit !important;
   border-radius: 30px !important;
@@ -43,6 +43,6 @@
 }
 
 .bestButtonLight:hover {
-  background-color: var(--twitter-color) !important;
+  background-color: var(--bestListen-color) !important;
   color: white !important;
 }

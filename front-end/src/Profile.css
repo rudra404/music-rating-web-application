@@ -1,6 +1,6 @@
 .profile {
   flex: 0.4;
-  border-right: 1px solid var(--twitter-background);
+  border-right: 1px solid var(--bestListen-background);
   min-width: 40vw;
   caret-color: transparent;
 }
@@ -10,7 +10,7 @@
   top: 0;
   background-color: white;
   z-index: 10;
-  border: 1px solid var(--twitter-background);
+  border: 1px solid var(--bestListen-background);
   padding: 15px 20px;
 }
 

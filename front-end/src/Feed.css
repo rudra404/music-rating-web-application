@@ -1,6 +1,6 @@
 .feed {
   flex: 0.4;
-  border-right: 1px solid var(--twitter-background);
+  border-right: 1px solid var(--bestListen-background);
   min-width: fit-content;
   overflow-y: scroll;
   height: 80vh;
@@ -22,7 +22,7 @@
   top: 0;
   background-color: white;
   z-index: 10;
-  border: 1px solid var(--twitter-background);
+  border: 1px solid var(--bestListen-background);
   padding: 15px 20px;
 }
 
@@ -69,7 +69,7 @@
   margin: 10px;
   height: 80vh; /* Set the height of the container to the desired value */
   overflow-y: scroll; /* Enable vertical scrolling */
-  /* background-color: var(--twitter-background); */
+  /* background-color: var(--bestListen-background); */
   color: white;
   border-radius: 10px;
 }

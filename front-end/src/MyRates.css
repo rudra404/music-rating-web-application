@@ -1,6 +1,6 @@
 .myrates {
   flex: 0.4;
-  border-right: 1px solid var(--twitter-background);
+  border-right: 1px solid var(--bestListen-background);
   min-width: 40vw;
 }
 
@@ -9,7 +9,7 @@
   top: 0;
   background-color: white;
   z-index: 100;
-  border: 1px solid var(--twitter-background);
+  border: 1px solid var(--bestListen-background);
   padding: 15px 20px;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .rating {
-  background-color: var(--twitter-color-light);
+  background-color: var(--bestListen-color-light);
   text-align: center;
   border-radius: 50px;
   margin-left: 5px;

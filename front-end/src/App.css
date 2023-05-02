@@ -1,7 +1,7 @@
 body {
-  --twitter-color: #5d40eb;
-  --twitter-background: #f4f8fa;
-  --twitter-color-light: #c0c0ff;
+  --bestListen-color: #5d40eb;
+  --bestListen-background: #f4f8fa;
+  --bestListen-color-light: #c0c0ff;
 }
 
 .app {
@@ -24,5 +24,5 @@ body {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background-color: var(--twitter-color);
+  background-color: var(--bestListen-color);
 }
