@@ -1,0 +1,25 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - docker-compose build
+
+sast:
+  stage: test
+  image: registry.gitlab.com/gitlab-org/security-products/sast:latest
+  dependencies:
+    - build
+  script:
+    - docker-compose up -d
+    - /app/bin/run -o /code/output gl-sast --format=gl-container --debug --fail-on=high,unknown
+
+  after_script:
+    - docker-compose down
