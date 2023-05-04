@@ -6,7 +6,7 @@ import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 import { Link } from "react-router-dom";
 
-function MyRates() {
+export default function MyRates() {
   const { userID } = useContext(AuthContext);
   const [allRatings, setAllRatings] = useState({ ratings: [] });
 
@@ -71,16 +71,9 @@ function MyRates() {
                 className="search-result-links"
               >
                 <ListSong result={rating} />
-                {/* <SearchResultItem
-                        result={song}
-                        className="search-result-items"
-                      /> */}
               </Link>
               <div className="rating">{rating[4]}</div>
             </div>
-            // <li key={index}>
-            //   {rating[0]} - {rating[1]} - {rating[2]} | Rating: {rating[3]}
-            // </li>
           ))}
         </div>
       </div>
@@ -88,5 +81,3 @@ function MyRates() {
     </div>
   );
 }
-
-export default MyRates;

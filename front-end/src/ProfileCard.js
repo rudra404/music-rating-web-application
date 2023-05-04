@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./ProfileCard.css";
-import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router";
 
 export default function ProfileCard(props) {
@@ -8,6 +7,7 @@ export default function ProfileCard(props) {
   const numOfFolowers = props.followers && props.followers.length;
   const numOfFolowings = props.followings && props.followings.length;
   const user = props.user;
+  
   return (
     <div className="container">
       <div className="profilecard">
@@ -43,15 +43,6 @@ export default function ProfileCard(props) {
           </div>
         </div>
       </div>
-      {/* <Button
-        variant="outlined"
-        className="bestButtonLight"
-        fullWidth
-        input
-        type="submit"
-      >
-        Change username
-      </Button> */}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { AuthContext } from "./helpers/AuthContext";
 import ProfileCard from "./ProfileCard";
 import Widgets from "./Widgets";
 
-function Profile() {
+export default function Profile() {
   const { userID } = useContext(AuthContext);
   const [followers, setFollowers] = useState([]);
   const [followings, setFollowings] = useState([]);
@@ -24,7 +24,6 @@ function Profile() {
           alert(response.data.error);
         } else {
           setFollowers(response.data);
-          console.log(response.data);
         }
       });
   }
@@ -106,5 +105,3 @@ function Profile() {
     </div>
   );
 }
-
-export default Profile;

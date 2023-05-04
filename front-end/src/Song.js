@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 
-function Song() {
+export default function Song() {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState({
     title: [],
@@ -72,7 +72,6 @@ function Song() {
           `http://localhost:5050/add_rating?songID=${id}&rating=${rate}&userID=${userID}`
         )
         .then((response) => {
-          console.log(response);
           setSubmitClicked(true);
         });
     }
@@ -89,7 +88,6 @@ function Song() {
     sendRating();
     getSongRating();
     checkUserRating();
-    // button();
   }
 
   useEffect(() => {
@@ -106,7 +104,6 @@ function Song() {
   return (
     <div className="home">
       <div className="song__header">
-        {/* <h2>Song</h2> */}
         <div className="song__container">
           <div className="song">
             <p className="ratesongtitle">{searchResults.title}</p>
@@ -123,13 +120,6 @@ function Song() {
                 <p>Average rating: {ratingResult.rating}</p>
               </>
             )}
-            {/* {authState && (
-              <>
-                {UserRatingResult.rating !== "Not rated yet" && (
-                  <p>Your rating: {UserRatingResult.rating}</p>
-                )}
-              </>
-            )} */}
             {authState && (
               <>
                 <p> Rate it: </p>
@@ -152,30 +142,6 @@ function Song() {
                 </div>
               </>
             )}
-            {/* <div className="star-rating">
-              {[...Array(5)].map((star, index) => {
-                index += 1;
-                return (
-                  <button
-                    type="button"
-                    key={index}
-                    className={index <= (hover || rating) ? "on" : "off"}
-                    onClick={() => setRating(index)}
-                    onMouseEnter={() => setHover(index)}
-                    onMouseLeave={() => setHover(rating)}
-                  >
-                    <span className="star">&#9733;</span>
-                  </button>
-                );
-              })}
-            </div>
-            <button
-              className="submit-button"
-              type="submit"
-              onClick={sendRating}
-            >
-              Submit Rating
-            </button> */}
           </div>
         </div>
       </div>
@@ -183,5 +149,3 @@ function Song() {
     </div>
   );
 }
-
-export default Song;

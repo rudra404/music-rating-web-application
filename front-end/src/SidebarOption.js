@@ -2,7 +2,7 @@ import React from "react";
 import "./SidebarOption.css";
 import { useNavigate } from "react-router-dom";
 
-function SidebarOption({ active, text, Icon, link }) {
+export default function SidebarOption({ active, text, Icon, link }) {
   const navigate = useNavigate();
   function handleClick() {
     if (link) {
@@ -20,5 +20,3 @@ function SidebarOption({ active, text, Icon, link }) {
     </div>
   );
 }
-
-export default SidebarOption;

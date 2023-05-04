@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Register.css";
 import "./Home.css";
 import { Button } from "@material-ui/core";
@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Register() {
+export default function Register() {
   const navigate = useNavigate();
   const initialValues = {
     username: "",
@@ -33,7 +33,6 @@ function Register() {
   });
 
   const validateUsername = (username) => {
-    console.log(username.replace(/ /g, ""));
     return username.replace(/ /g, "");
   };
 
@@ -56,10 +55,7 @@ function Register() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          console.log(response);
-          console.log("User added");
           addPassword(data.username, data.password);
-          console.log("Registration Complete");
           navigate("/login");
         }
       });
@@ -112,7 +108,6 @@ function Register() {
                 name="email"
                 component="span"
               />
-              {/* <label>Email: </label> */}
               <Field
                 autoComplete="off"
                 id="email"
@@ -174,5 +169,3 @@ function Register() {
     </div>
   );
 }
-
-export default Register;
