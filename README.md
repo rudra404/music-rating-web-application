@@ -6,21 +6,26 @@ This is the version of Best Listens with user auth containerized within docker.
 
 Ensure you have [Docker Desktop downloaded](https://docs.docker.com/compose/install/#:~:text=Scenario%20one%3A%20Install%20Docker%20Desktop,Linux) and open to connect containers and images
 
-`pip install flask`
-
-`pip install -U flask-cors`
-
-You will need Flask library installed for python (pip install flask)
-
 ## Start the app using Docker
 Within the root directory, use the following command to start the applications:
 
 ### `$ docker-compose up`
+
+Ensure that docker desktop is running 
 
 Runs the app in the dockerized mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Starts the following containers in order:
 - postgres
+- musicMicroservice
 - userMicroservice
+- feedMicroservice
 - front-end
+
+## Test the app
+Login details for test user
+username: tester
+password: Water123
+
+After logging in, the feed will generate with the most recent ratings of the followers you follow.
