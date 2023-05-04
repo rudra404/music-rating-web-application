@@ -24,8 +24,8 @@ Starts the following containers in order:
 - front-end
 
 ## Test the app
-Login details for test user
-username: tester
-password: Water123
+Login details for test user<br />
+username: tester<br />
+password: Water123<br />
 
 After logging in, the feed will generate with the most recent ratings of the followers you follow.
