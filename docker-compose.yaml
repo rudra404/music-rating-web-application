@@ -10,7 +10,7 @@ services:
       - "5432:5432"
     container_name: postgresDB_c
     volumes:
-      - ./userMicroservice/postgres-db:/var/lib/postgresql
+      - ./userMicroservice/postgres-db:/var/lib/postgresql/data
 
   music-microservice:
     build:
@@ -49,6 +49,7 @@ services:
     volumes:
       - ./feedMicroservice:/app
     depends_on:
+      - postgres
       - user-microservice
 
   front-end:
@@ -62,4 +63,5 @@ services:
     stdin_open: true
     tty: true
     depends_on:
+      - postgres
       - user-microservice
