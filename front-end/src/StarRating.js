@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-// import axios from "axios";
 
-const StarRating = () => {
+export default function StarRating() {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
 
@@ -25,5 +24,3 @@ const StarRating = () => {
     </div>
   );
 };
-
-export default StarRating;

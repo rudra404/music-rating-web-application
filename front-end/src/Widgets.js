@@ -44,7 +44,6 @@ export default function Widgets() {
           },
         })
         .then((response) => {
-          console.log(response.data);
           setUserSearchResults(response.data);
         });
     } else {
@@ -74,7 +73,6 @@ export default function Widgets() {
         </Link>
       );
     }
-    console.log(content);
     return content;
   }
 
@@ -99,7 +97,6 @@ export default function Widgets() {
           type="text"
         />
       </div>
-      {console.log(userSearchResults)}
       {userSearchResults.length > 0 ||
       searchResults.songs.length > 0 ||
       searchResults.artists.length > 0 ||
@@ -125,10 +122,6 @@ export default function Widgets() {
                       className="search-result-links"
                     >
                       <ListSong result={song} />
-                      {/* <SearchResultItem
-                        result={song}
-                        className="search-result-items"
-                      /> */}
                     </Link>
                   ))}
                 </ul>

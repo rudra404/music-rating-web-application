@@ -15,6 +15,7 @@ export default function User() {
   const [user, setUser] = useState();
   const [allRatings, setAllRatings] = useState({ ratings: [] });
   const { userID, authState } = useContext(AuthContext);
+  
   function getUser() {
     const data = { userID: id };
     axios
@@ -46,7 +47,6 @@ export default function User() {
           alert(response.data.error);
         } else {
           setFollowers(response.data);
-          console.log(response.data);
         }
       });
   }
@@ -64,7 +64,6 @@ export default function User() {
           alert(response.data.error);
         } else {
           setFollowings(response.data);
-          console.log(response.data);
         }
       });
   }
@@ -167,11 +166,8 @@ export default function User() {
       })
       .then((response) => {
         if (response.data.error) {
-          // alert(response.data.error);
         } else {
-          console.log(response.data);
           setIsFollowing(response.data);
-          // return response.data;
         }
       });
   }
@@ -231,10 +227,6 @@ export default function User() {
                 className="search-result-links"
               >
                 <ListSong result={rating} />
-                {/* <SearchResultItem
-                        result={song}
-                        className="search-result-items"
-                      /> */}
               </Link>
               <div className="rating">{rating[4]}</div>
             </div>
