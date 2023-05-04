@@ -1,6 +1,6 @@
-## Best Listens Dockerized App
+## Best Listens 
 
-This is the version of Best Listens with user auth containerized within docker.
+Best Listens is a social music rating app where you and your friends can rate songs and see what your community rates popular songs.
 
 ## Pre-requisites
 
