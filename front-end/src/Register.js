@@ -99,6 +99,7 @@ export default function Register() {
                 type="text"
                 placeholder="john123"
               />
+              <br />
               <label for="email">
                 <b>Email</b>
               </label>
@@ -115,6 +116,7 @@ export default function Register() {
                 type="email"
                 placeholder="me@example.com"
               />
+              <br />
               <label for="password">
                 <b>Password</b>
               </label>
@@ -131,6 +133,7 @@ export default function Register() {
                 name="password"
                 placeholder="********"
               />
+              <br />
               <label for="passwordConfirm">
                 <b>Confirm Password</b>
               </label>
