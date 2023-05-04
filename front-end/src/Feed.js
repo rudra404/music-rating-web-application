@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Feed.css";
 import { AuthContext } from "./helpers/AuthContext";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
-function Feed() {
+export default function Feed() {
   const { userID, authState } = useContext(AuthContext);
   const [feedData, setFeedData] = useState([]);
   const [notified, setNotified] = useState(false);
@@ -21,7 +21,6 @@ function Feed() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          console.log(response.data);
           setFeedData(response.data);
         }
       });
@@ -32,7 +31,6 @@ function Feed() {
       if (response.data.error) {
         alert(response.data.error);
       } else {
-        console.log(response.data);
         setFeedData(response.data);
       }
     });
@@ -42,7 +40,6 @@ function Feed() {
     if (authState) {
       await getFeed(); // logged in
       // if logged in and have no feed
-      console.log(feedData.length);
     } else {
       await getGenericFeed(); // not logged in
     }
@@ -102,7 +99,6 @@ function Feed() {
   function ListPost({ result }) {
     return (
       <>
-        {/* <h4>{result[0]}</h4> */}
         <ListSong result={result[0]} />
 
         <div className="userRating">
@@ -125,7 +121,6 @@ function Feed() {
   function GenericPost({ result }) {
     return (
       <>
-        {/* <h4>{result[0]}</h4> */}
         <ListSong result={result[0]} />
 
         <div className="userRating">
@@ -145,8 +140,6 @@ function Feed() {
       <div className="feed__header">
         <h2>Home</h2>
       </div>
-
-      {/* {feedData.length === 0 && <div>You are not following anyone</div>} */}
 
       <div className="feedContainer">
         {feedData &&
@@ -171,5 +164,3 @@ function Feed() {
     </div>
   );
 }
-
-export default Feed;

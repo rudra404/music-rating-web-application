@@ -6,14 +6,10 @@ import { Button } from "@material-ui/core";
 import "./Login.css";
 import "./Home.css";
 
-function Login() {
+export default function Login() {
   const navigate = useNavigate();
-
-  // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
   const { authState, setAuthState, setUserID } = useContext(AuthContext);
 
   const login = (username, password) => {
@@ -22,7 +18,6 @@ function Login() {
       if (response.data.error) {
         alert(response.data.error);
       } else {
-        console.log(response.data);
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("userID", response.data.userID);
         setAuthState(true);
@@ -56,8 +51,6 @@ function Login() {
           <input
             type="text"
             name="uname"
-            // value={username}
-            // onChange={(event) => setUsername(event.target.value)}
             required
           />
           {renderErrorMessage("uname")}
@@ -67,8 +60,6 @@ function Login() {
           <input
             type="password"
             name="pass"
-            // value={password}
-            // onChange={(event) => setPassword(event.target.value)}
             required
           />
           {renderErrorMessage("pass")}
@@ -87,12 +78,10 @@ function Login() {
             Don't have an account? <a href="/register">Register</a>.
           </p>
         </div>
-        {/* <div className="button-container">
-          <input type="submit" />
-        </div> */}
       </form>
     </div>
   );
+
   return (
     <div className="home">
       {authState ? (
@@ -118,5 +107,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

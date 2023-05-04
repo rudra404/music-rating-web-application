@@ -3,14 +3,12 @@ import "./Header.css";
 import logo from "./logo.png";
 import { Button } from "@material-ui/core";
 import { AuthContext } from "./helpers/AuthContext";
-
 import { useNavigate } from "react-router-dom";
-// import "./Sidebar.css";
 
-function Header() {
+export default function Header() {
   const navigate = useNavigate();
-  const pathname = window.location.pathname; //returns the current url minus the domain name
   const { authState, logout } = useContext(AuthContext);
+
   function handleLogout() {
     logout();
     navigate("/login");
@@ -22,11 +20,9 @@ function Header() {
         <img className="logo" src={logo} alt="BestListens logo" />
         <h1>BestListens</h1>
       </div>
-      {/* <div>Other header content here</div> */}
 
       {authState ? (
         <Button
-          // href="/login"
           variant="outlined"
           className="login__button"
           onClick={handleLogout}
@@ -48,4 +44,3 @@ function Header() {
   );
 }
 
-export default Header;

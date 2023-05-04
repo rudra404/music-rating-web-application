@@ -11,7 +11,6 @@ import {
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 import Home from "./Home";
-import Messages from "./Messages";
 import MyRates from "./MyRates";
 import Profile from "./Profile";
 import User from "./User";
@@ -19,7 +18,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Song from "./Song";
 import Header from "./Header";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Followers from "./Followers";
 import Followings from "./Followings";
@@ -59,7 +58,6 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         <Route index element={<Home />} />
-        <Route path="/messages" element={<Messages />} />
         <Route path="/myRates" element={<MyRates />} />
         <Route path="/myProfile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
@@ -81,9 +79,6 @@ function App() {
         <RouterProvider router={router} />
         {console.log(authState)}
       </AuthContext.Provider>
-      {/* <Sidebar /> */}
-      {/* <Feed />
-      <Widgets /> */}
     </div>
   );
 }

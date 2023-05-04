@@ -23,12 +23,9 @@ export default function Followings() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          //   setFollowers(response.data);
-
           response.data.forEach((follower) => {
             getUser(follower.userID);
           });
-          //   console.log(response.data);
           setNumOfFolowings(response.data.length);
         }
       });
@@ -62,10 +59,6 @@ export default function Followings() {
     }
     return content;
   }
-
-  // useEffect(() => {
-  //   getFollowers();
-  // }, []);
 
   useEffect(() => {
     getFollowers();

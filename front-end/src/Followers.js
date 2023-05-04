@@ -1,13 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "./helpers/AuthContext";
 import Widgets from "./Widgets";
-import { useNavigate } from "react-router";
 import axios from "axios";
 import "./Followers.css";
 import { Link } from "react-router-dom";
 
 export default function Followers() {
-  const navigate = useNavigate();
   const { userID, authState } = useContext(AuthContext);
   const [followers, setFollowers] = useState([]);
   const [numOfFolowers, setNumOfFolowers] = useState([]);
@@ -24,12 +22,9 @@ export default function Followers() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          //   setFollowers(response.data);
-
           response.data.forEach((follower) => {
             getUser(follower.followerID);
           });
-          //   console.log(response.data);
           setNumOfFolowers(response.data.length);
         }
       });
@@ -63,10 +58,6 @@ export default function Followers() {
     }
     return content;
   }
-
-  // useEffect(() => {
-  //   getFollowers();
-  // }, []);
 
   useEffect(() => {
     getFollowers();
