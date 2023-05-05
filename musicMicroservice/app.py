@@ -76,7 +76,8 @@ def get_average_rating(track_id):
     conn.close()
     if average_rating == None:
         average_rating = 'Not rated yet'
-
+    else:
+        average_rating = round(average_rating,1)
     return str(average_rating)
 
 
