@@ -1,6 +1,7 @@
 FROM node:14 as Production
 
 ENV NODE_ENV=development
+ENV PORT=3002
 
 WORKDIR /app
 
@@ -15,9 +16,11 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3002
+EXPOSE $PORT
 # required for docker desktop port mapping
 
 # RUN npm start
-CMD ["npm", "run", "dev"]
-#CMD ["npm", "start"] ??
+#CMD ["npm", "run", "dev"]
+# CMD ["npm", "start"]
+CMD npm start
+

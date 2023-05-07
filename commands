@@ -1,0 +1,20 @@
+❯ docker build -t gcr.io/best-listens-385813/postgres:11.5 .
+❯ docker build -t gcr.io/best-listens-385813/best-listens-music-microservice:latest .
+❯ docker build -t gcr.io/best-listens-385813/best-listens-feed-microservice:latest .  
+❯ docker build -t gcr.io/best-listens-385813/best-listens-user-microservice:latest .
+❯ docker build -t gcr.io/best-listens-385813/best-listens-front-end:latest .
+
+❯ docker push gcr.io/best-listens-385813/postgres:11.5
+❯ docker push gcr.io/best-listens-385813/best-listens-music-microservice:latest     
+❯ docker push gcr.io/best-listens-385813/best-listens-feed-microservice:latest                      
+❯ docker push gcr.io/best-listens-385813/best-listens-user-microservice:latest                      
+❯ docker push gcr.io/best-listens-385813/best-listens-front-end:latest                              
+
+gcloud run deploy best-listens-user-microservice --image gcr.io/best-listens-385813/best-listens-user-microservice:latest --platform managed --allow-unauthenticated
+gcloud run deploy best-listens-feed-microservice --image gcr.io/best-listens-385813/best-listens-feed-microservice:latest --platform managed --allow-unauthenticated
+gcloud run deploy best-listens-music-microservice --image gcr.io/best-listens-385813/best-listens-music-microservice:latest --platform managed --allow-unauthenticated
+gcloud run deploy best-listens-front-end --image gcr.io/best-listens-385813/best-listens-front-end:latest --platform managed --allow-unauthenticated
+
+gcloud run deploy best-listens-postgres --image postgres:11.5 --set-env-vars POSTGRES_PASSWORD=password,POSTGRES_DB=best-listens --port 5432 --platform managed --allow-unauthenticated
+
+❯ docker build --platform linux/amd64 -t gcr.io/best-listens-385813/best-listens-music-microservice:latest .

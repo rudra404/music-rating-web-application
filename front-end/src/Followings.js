@@ -5,6 +5,8 @@ import axios from "axios";
 import "./Followers.css";
 import { Link } from "react-router-dom";
 
+const userMicroserviceUrl = process.env.USERMICROSERVICE_URL || "http://localhost:3002";
+
 export default function Followings() {
   const { userID, authState } = useContext(AuthContext);
   const [followings, setFollowings] = useState([]);
@@ -14,7 +16,7 @@ export default function Followings() {
     setFollowings([]);
     const data = { userID: userID };
     await axios
-      .post("http://localhost:3002/followings/getFollowings", data, {
+      .post(`${userMicroserviceUrl}/followings/getFollowings`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -37,7 +39,7 @@ export default function Followings() {
   async function getUser(userID) {
     const data = { userID: userID };
     await axios
-      .post("http://localhost:3002/auth/getUser", data, {
+      .post(`${userMicroserviceUrl}/auth/getUser`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

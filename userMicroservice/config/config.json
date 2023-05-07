@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "password",
     "database": "best-listens",
-    "host": "postgres",
+    "host": "best-listens-postgres-bsui3euuva-nw.a.run.app",
     "dialect": "postgres",
     "port": "5432"
   }

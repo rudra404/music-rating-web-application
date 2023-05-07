@@ -18,4 +18,5 @@ EXPOSE $PORT
 
 #CMD ["python", "app.py"]
 # idk if this is correct, will have to try deploying it
-CMD ["gunicorn", "-b", "0.0.0.0:${PORT}", "app:app"]
+# CMD ["gunicorn", "-b", "0.0.0.0:${PORT}", "app:app"]
+CMD gunicorn -b 0.0.0.0:$PORT app:app

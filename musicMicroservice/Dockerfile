@@ -16,4 +16,5 @@ ENV PORT=5050
 EXPOSE $PORT 
 
 #CMD ["python", "app.py"]
-CMD ["gunicorn", "-b", "0.0.0.0:${PORT}", "app:app"]
+# CMD ["gunicorn", "-b", "0.0.0.0:${PORT}", "app:app"]
+CMD gunicorn -b 0.0.0.0:$PORT app:app

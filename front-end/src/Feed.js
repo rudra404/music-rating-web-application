@@ -4,6 +4,8 @@ import { AuthContext } from "./helpers/AuthContext";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
+const feedMicroserviceUrl = process.env.FEEDMICROSERVICE_URL || "http://localhost:5051";
+
 function Feed() {
   const { userID, authState } = useContext(AuthContext);
   const [feedData, setFeedData] = useState([]);
@@ -12,7 +14,7 @@ function Feed() {
   async function getFeed() {
     setNotified(false);
     await axios
-      .get(`http://localhost:5051/getFeed?userID=${userID}`, {
+      .get(`${feedMicroserviceUrl}/getFeed?userID=${userID}`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -28,7 +30,7 @@ function Feed() {
   }
 
   async function getGenericFeed() {
-    await axios.get(`http://localhost:5051/getFeedGeneric`).then((response) => {
+    await axios.get(`${feedMicroserviceUrl}/getFeedGeneric`).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
       } else {

@@ -5,6 +5,8 @@ import { AuthContext } from "./helpers/AuthContext";
 import ProfileCard from "./ProfileCard";
 import Widgets from "./Widgets";
 
+const userMicroserviceUrl = process.env.USERMICROSERVICE_URL || "http://localhost:3002";
+
 function Profile() {
   const { userID } = useContext(AuthContext);
   const [followers, setFollowers] = useState([]);
@@ -14,7 +16,7 @@ function Profile() {
   async function getFollowers() {
     const data = { userID: userID };
     axios
-      .post("http://localhost:3002/followings/getFollowers", data, {
+      .post(`${userMicroserviceUrl}/followings/getFollowers`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -32,7 +34,7 @@ function Profile() {
   async function getFollowings() {
     const data = { userID: userID };
     axios
-      .post("http://localhost:3002/followings/getFollowings", data, {
+      .post(`${userMicroserviceUrl}/followings/getFollowings`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -50,7 +52,7 @@ function Profile() {
   async function changeUsername() {
     const data = { userID: userID, username: "newUsername" };
     axios
-      .post("http://localhost:3002/auth/changeUsername", data, {
+      .post(`${userMicroserviceUrl}/auth/changeUsername`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -67,7 +69,7 @@ function Profile() {
   async function getUser() {
     const data = { userID: userID };
     axios
-      .post("http://localhost:3002/auth/getUser", data, {
+      .post(`${userMicroserviceUrl}/auth/getUser`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

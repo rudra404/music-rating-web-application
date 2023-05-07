@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const userMicroserviceUrl = process.env.USERMICROSERVICE_URL || "http://localhost:3002";
+
 function Register() {
   const navigate = useNavigate();
   const initialValues = {
@@ -51,7 +53,7 @@ function Register() {
 
   async function addUser(data) {
     await axios
-      .post("http://localhost:3002/auth/createUser", data)
+      .post(`${userMicroserviceUrl}/auth/createUser`, data)
       .then((response) => {
         if (response.data.error) {
           alert(response.data.error);
@@ -68,7 +70,7 @@ function Register() {
   async function addPassword(username, password) {
     let userPassword = { username: username, password: password };
     await axios
-      .post("http://localhost:3002/auth/addPassword", userPassword)
+      .post(`${userMicroserviceUrl}/auth/addPassword`, userPassword)
       .then((response) => {
         console.log(response);
       });

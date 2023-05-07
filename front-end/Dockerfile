@@ -21,4 +21,6 @@ RUN npm run build
 
 # start the application
 #CMD ["serve", "-s", "build"]
-CMD ["serve", "-s", "build", "-l", "tcp://0.0.0.0:${PORT}"]
+# CMD ["serve", "-s", "build", "-l", "tcp://0.0.0.0:${PORT}"]
+CMD serve -s build -l tcp://0.0.0.0:$PORT
+

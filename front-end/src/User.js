@@ -7,6 +7,9 @@ import ProfileCard from "./ProfileCard";
 import Widgets from "./Widgets";
 import { Link } from "react-router-dom";
 
+const userMicroserviceUrl = process.env.USERMICROSERVICE_URL || "http://localhost:3002";
+const musicMicroserviceUrl = process.env.MUSICMICROSERVICE_URL || "http://localhost:5050";
+
 export default function User() {
   const { id } = useParams();
   const [followers, setFollowers] = useState([]);
@@ -17,7 +20,7 @@ export default function User() {
   function getUser() {
     const data = { userID: id };
     axios
-      .post("http://localhost:3002/auth/getUser", data, {
+      .post(`${userMicroserviceUrl}/auth/getUser`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -35,7 +38,7 @@ export default function User() {
   function getFollowers() {
     const data = { userID: id };
     axios
-      .post("http://localhost:3002/followings/getFollowers", data, {
+      .post(`${userMicroserviceUrl}/followings/getFollowers`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -53,7 +56,7 @@ export default function User() {
   async function getFollowings() {
     const data = { userID: id };
     axios
-      .post("http://localhost:3002/followings/getFollowings", data, {
+      .post(`${userMicroserviceUrl}/followings/getFollowings`, data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -70,7 +73,7 @@ export default function User() {
 
   async function getRatings() {
     const response = await axios.get(
-      `http://localhost:5050/all_ratings/?userID=${id}`
+      `${musicMicroserviceUrl}/all_ratings/?userID=${id}`
     );
     const ratings = response.data || [];
     const updatedRatings = [];
@@ -78,7 +81,7 @@ export default function User() {
       const id = ratings[i][0];
       const rating = ratings[i][1];
       const songInfoResponse = await axios.get(
-        `http://localhost:5050/search_id/${id}`
+        `${musicMicroserviceUrl}/search_id/${id}`
       );
       const songInfo = songInfoResponse.data[0];
       updatedRatings.push([
@@ -109,7 +112,7 @@ export default function User() {
     const userData = { userID: userID };
     var follower = []
     await axios
-      .post("http://localhost:3002/auth/getUser", userData, {
+      .post(`${userMicroserviceUrl}/auth/getUser`, userData, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -123,7 +126,7 @@ export default function User() {
       });
     const data = {user: user.username, follower: follower}
     await axios
-      .post("http://localhost:3002/followings/follow", data, {
+      .post(`${userMicroserviceUrl}/followings/follow`, data, {
        headers: {
         accessToken: localStorage.getItem("accessToken"),
       },

@@ -3,6 +3,8 @@ from flask_cors import CORS
 import sqlite3
 from sqlite3 import Error
 from flask import jsonify
+import os
+
 app = Flask(__name__)
 CORS(app)
 
@@ -145,4 +147,5 @@ def top_ratings():
     return jsonify(top_tracks)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=5050)
+    # app.run(host='0.0.0.0',port=5050)
+    app.run(host='0.0.0.0',port=int(os.environ.get('PORT', 5050)))

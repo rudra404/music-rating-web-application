@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 
+const musicMicroserviceUrl = process.env.MUSICMICROSERVICE_URL || "http://localhost:5050";
+
 function Song() {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState({
@@ -23,7 +25,7 @@ function Song() {
   const { authState, userID } = useContext(AuthContext);
 
   function getSongInfo() {
-    axios.get(`http://localhost:5050/search_id/${id}`).then((response) => {
+    axios.get(`${musicMicroserviceUrl}/search_id/${id}`).then((response) => {
       setSearchResults({
         title: response.data[0][1] || [],
         artist: response.data[0][2] || [],
@@ -34,7 +36,7 @@ function Song() {
   }
 
   function getSongRating() {
-    axios.get(`http://localhost:5050/av_rating/${id}`).then((response) => {
+    axios.get(`${musicMicroserviceUrl}/av_rating/${id}`).then((response) => {
       setRatingResult({
         rating: response.data || [],
       });
@@ -50,7 +52,7 @@ function Song() {
     } else {
       axios
         .get(
-          `http://localhost:5050/check_rating/?songID=${id}&userID=${userID}`
+          `${musicMicroserviceUrl}/check_rating/?songID=${id}&userID=${userID}`
         )
         .then((response) => {
           setUserRatingResult({
@@ -69,7 +71,7 @@ function Song() {
     } else {
       axios
         .get(
-          `http://localhost:5050/add_rating?songID=${id}&rating=${rate}&userID=${userID}`
+          `${musicMicroserviceUrl}/add_rating?songID=${id}&rating=${rate}&userID=${userID}`
         )
         .then((response) => {
           console.log(response);

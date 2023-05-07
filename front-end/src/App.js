@@ -24,13 +24,15 @@ import "react-toastify/dist/ReactToastify.css";
 import Followers from "./Followers";
 import Followings from "./Followings";
 
+const userMicroserviceUrl = process.env.USERMICROSERVICE_URL || "http://localhost:3002";
+
 function App() {
   const [authState, setAuthState] = useState(false);
   const [userID, setUserID] = useState(false);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/auth/auth", {
+      .get(`${userMicroserviceUrl}/auth/auth`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

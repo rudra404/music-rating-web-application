@@ -6,13 +6,15 @@ import axios from "axios";
 import { AuthContext } from "./helpers/AuthContext";
 import { Link } from "react-router-dom";
 
+const musicMicroserviceUrl = process.env.MUSICMICROSERVICE_URL || "http://localhost:5050";
+
 function MyRates() {
   const { userID } = useContext(AuthContext);
   const [allRatings, setAllRatings] = useState({ ratings: [] });
 
   async function getRatings() {
     const response = await axios.get(
-      `http://localhost:5050/all_ratings/?userID=${userID}`
+      `${musicMicroserviceUrl}/all_ratings/?userID=${userID}`
     );
     const ratings = response.data || [];
     const updatedRatings = [];
@@ -20,7 +22,7 @@ function MyRates() {
       const id = ratings[i][0];
       const rating = ratings[i][1];
       const songInfoResponse = await axios.get(
-        `http://localhost:5050/search_id/${id}`
+        `${musicMicroserviceUrl}/search_id/${id}`
       );
       const songInfo = songInfoResponse.data[0];
       updatedRatings.push([

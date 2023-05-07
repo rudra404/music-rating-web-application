@@ -6,6 +6,8 @@ import { Button } from "@material-ui/core";
 import "./Login.css";
 import "./Home.css";
 
+const userMicroserviceUrl = process.env.USERMICROSERVICE_URL || "http://localhost:3002";
+
 function Login() {
   const navigate = useNavigate();
 
@@ -18,7 +20,7 @@ function Login() {
 
   const login = (username, password) => {
     const data = { username: username, password: password };
-    axios.post("http://localhost:3002/auth/login", data).then((response) => {
+    axios.post(`${userMicroserviceUrl}/auth/login`, data).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
       } else {

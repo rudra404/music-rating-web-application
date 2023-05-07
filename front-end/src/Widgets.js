@@ -4,6 +4,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const userMicroserviceUrl = process.env.USERMICROSERVICE_URL || "http://localhost:3002";
+const musicMicroserviceUrl = process.env.MUSICMICROSERVICE_URL || "http://localhost:5050";
+
 export default function Widgets() {
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState({
@@ -19,7 +22,7 @@ export default function Widgets() {
     if (searchValue.trim()) {
       // Check if searchValue is not blank
       await axios
-        .get(`http://localhost:5050/search2/?search=${searchValue}`)
+        .get(`${musicMicroserviceUrl}/search2/?search=${searchValue}`)
         .then((response) => {
           setSearchResults({
             songs: response.data[0] || [],
@@ -38,7 +41,7 @@ export default function Widgets() {
     if (searchValue.trim()) {
       // Check if searchValue is not blank
       await axios
-        .post(`http://localhost:3002/auth/searchUsers`, data, {
+        .post(`${userMicroserviceUrl}/auth/searchUsers`, data, {
           headers: {
             accessToken: localStorage.getItem("accessToken"),
           },
