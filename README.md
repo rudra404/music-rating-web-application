@@ -1,6 +1,8 @@
-## Best Listens 
+# Best Listens 
 
 Best Listens is a social music rating app where you and your friends can rate songs and see what your community rates popular songs.
+
+This project is a proof-of-concept to explore the benefits of a microservice architecture. More details can be found in 'report.pdf'.
 
 ## Pre-requisites
 
