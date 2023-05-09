@@ -10,6 +10,12 @@ The application is designed to be scalable, maintainable, and easily extensible.
 
 More details can be found in 'report.pdf'.
 
+## Quick look
+
+The first gif shows registration, authentication, login functionality. <br />
+The second gif shows what the app looks like after logging in. <br />
+![](screencaps/login.gif) ![](screencaps/appfunctions.gif)
+
 ## Pre-requisites
 
 Ensure you have [Docker Desktop downloaded](https://docs.docker.com/compose/install/#:~:text=Scenario%20one%3A%20Install%20Docker%20Desktop,Linux) and running on your machine to connect containers and images
