@@ -12,10 +12,10 @@ More details can be found in 'report.pdf'.
 
 ## Quick look
 
-Registration, authentication, login functionality. <br />
-![](screencaps/login.gif) <br />
-What the app looks like after logging in. <br />
-![](screencaps/appfunctions.gif) <br />
+Registration, authentication, login functionality. <br /><br />
+![](screencaps/login.gif) <br /><br />
+What the app looks like after logging in. <br /><br />
+![](screencaps/appfunctions.gif) <br /><br />
 
 ## Pre-requisites
 
