@@ -12,9 +12,10 @@ More details can be found in 'report.pdf'.
 
 ## Quick look
 
-The first gif shows registration, authentication, login functionality. <br />
-The second gif shows what the app looks like after logging in. <br />
-![](screencaps/login.gif) ![](screencaps/appfunctions.gif)
+Registration, authentication, login functionality. <br />
+![](screencaps/login.gif) <br />
+What the app looks like after logging in. <br />
+![](screencaps/appfunctions.gif) <br />
 
 ## Pre-requisites
 
